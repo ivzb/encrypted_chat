@@ -1,0 +1,90 @@
+package com.ivzb.encrypted_chat.auth.ui;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+
+import com.ivzb.encrypted_chat._base.data.Result;
+import com.ivzb.encrypted_chat._base.data.callbacks.SaveCallback;
+import com.ivzb.encrypted_chat._base.ui.DefaultPresenter;
+import com.ivzb.encrypted_chat.auth.data.AuthDataSource;
+import com.ivzb.encrypted_chat.auth.data.AuthEntity;
+
+import org.w3c.dom.UserDataHandler;
+
+import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
+
+public class AuthPresenter
+        extends DefaultPresenter<AuthContract.View>
+        implements AuthContract.Presenter {
+
+    private final AuthDataSource mDataSource;
+
+    AuthPresenter(
+            @NonNull Context context,
+            @NonNull AuthContract.View view,
+            @NonNull AuthDataSource dataSource) {
+
+        mContext = checkNotNull(context, "context cannot be null");
+        mView = checkNotNull(view, "view cannot be null");
+        mDataSource = checkNotNull(dataSource, "dataSource cannot be null");
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void login(String email, String password) {
+        mView.showLoading(true);
+
+        // todo: add validation
+
+        AuthEntity auth = new AuthEntity(email, password);
+
+        mDataSource.login(auth, new SaveCallback<String>() {
+            @Override
+            public void onSuccess(Result<String> data) {
+                if (!mView.isActive()) return;
+
+                mView.navigateToHome();
+                mView.showLoading(false);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                if (!mView.isActive()) return;
+
+                mView.showLoading(false);
+                mView.showErrorMessage(message);
+            }
+        });
+    }
+
+    @Override
+    public void register(String email, String password) {
+        mView.showLoading(true);
+
+        // todo: add validation
+
+        AuthEntity auth = new AuthEntity(email, password);
+
+        mDataSource.register(auth, new SaveCallback<String>() {
+            @Override
+            public void onSuccess(Result<String> data) {
+                if (!mView.isActive()) return;
+
+                mView.navigateToHome();
+                mView.showLoading(false);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                if (!mView.isActive()) return;
+
+                mView.showLoading(false);
+                mView.showErrorMessage(message);
+            }
+        });
+    }
+}
