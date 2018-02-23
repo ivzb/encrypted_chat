@@ -7,5 +7,7 @@ public class EncryptedChatApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        DataSources.createInstance(new RemoteStrategy());
     }
 }
