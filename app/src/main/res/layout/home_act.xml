@@ -48,7 +48,7 @@ tools:openDrawer="start">
             android:src="@drawable/ic_add_user"
             app:fabSize="normal"
             app:layout_anchor="@id/view_pager"
-            app:layout_behavior="com.achievers.utils.ui.ScrollAwareFABBehavior"
+            app:layout_behavior="com.ivzb.encrypted_chat.utils.ui.ScrollAwareFABBehavior"
             app:layout_anchorGravity="bottom|right|end" />
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

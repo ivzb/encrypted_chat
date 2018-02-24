@@ -1,5 +1,6 @@
-package com.ivzb.encrypted_chat;
+package com.ivzb.encrypted_chat._base.data;
 
+import com.ivzb.encrypted_chat._base.data._contracts.strategies.BaseDataSourcesStrategy;
 import com.ivzb.encrypted_chat.auth.data.AuthDataSource;
 import com.ivzb.encrypted_chat.users.data.UsersDataSource;
 
@@ -10,17 +11,17 @@ import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
  * DataSources uses different strategies to return correct data source
  *
  */
-public class DataSources implements DataSourcesStrategy {
+public class DataSources implements BaseDataSourcesStrategy {
 
     private static DataSources sINSTANCE;
 
-    private DataSourcesStrategy mStrategy;
+    private BaseDataSourcesStrategy mStrategy;
 
     public static DataSources getInstance() {
         return checkNotNull(sINSTANCE);
     }
 
-    public static void createInstance(DataSourcesStrategy strategy) {
+    public static void createInstance(BaseDataSourcesStrategy strategy) {
         sINSTANCE = new DataSources(strategy);
     }
 
@@ -28,7 +29,7 @@ public class DataSources implements DataSourcesStrategy {
         sINSTANCE = null;
     }
 
-    private DataSources(DataSourcesStrategy strategy) {
+    private DataSources(BaseDataSourcesStrategy strategy) {
         mStrategy = strategy;
     }
 

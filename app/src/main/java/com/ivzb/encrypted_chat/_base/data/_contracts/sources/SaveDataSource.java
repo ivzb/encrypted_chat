@@ -1,4 +1,4 @@
-package com.ivzb.encrypted_chat._base.data._contracts;
+package com.ivzb.encrypted_chat._base.data._contracts.sources;
 
 import com.ivzb.encrypted_chat._base.data.callbacks.SaveCallback;
 

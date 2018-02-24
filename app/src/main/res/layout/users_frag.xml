@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.achievers.utils.ui.ScrollChildSwipeRefreshLayout
+    <com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,5 +12,5 @@
             android:id="@+id/rvUsers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </com.achievers.utils.ui.ScrollChildSwipeRefreshLayout>
+    </com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

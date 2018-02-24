@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.ivzb.encrypted_chat._base.data.Result;
-import com.ivzb.encrypted_chat._base.data._contracts.ReceiveDataSource;
+import com.ivzb.encrypted_chat._base.data._contracts.sources.ReceiveDataSource;
 import com.ivzb.encrypted_chat._base.data.callbacks.LoadCallback;
 import com.ivzb.encrypted_chat._base.ui.DefaultPresenter;
 import com.ivzb.encrypted_chat._base.ui._contracts.presenters.BaseEndlessAdapterPresenter;
@@ -12,7 +12,7 @@ import com.ivzb.encrypted_chat._base.ui._contracts.views.BaseEndlessAdapterView;
 
 import java.util.List;
 
-import static com.ivzb.encrypted_chat._base.DefaultConfig.PAGE;
+import static com.ivzb.encrypted_chat._base.data.config.DefaultConfig.PAGE;
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
 public abstract class DefaultEndlessAdapterPresenter<M, V extends BaseEndlessAdapterView, DS extends ReceiveDataSource<M>>

@@ -1,6 +1,5 @@
 package com.ivzb.encrypted_chat.users.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -10,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ivzb.encrypted_chat.DataSources;
+import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat.R;
 import com.ivzb.encrypted_chat._base.ui._contracts.action_handlers.BaseAdapterActionHandler;
 import com.ivzb.encrypted_chat._base.ui.views.DefaultEndlessScrollView;

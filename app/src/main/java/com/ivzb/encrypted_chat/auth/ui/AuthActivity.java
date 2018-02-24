@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
-import com.ivzb.encrypted_chat.DataSources;
+import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat.R;
 import com.ivzb.encrypted_chat._base.ui.DefaultActivity;
 import com.ivzb.encrypted_chat.utils.ActivityUtils;

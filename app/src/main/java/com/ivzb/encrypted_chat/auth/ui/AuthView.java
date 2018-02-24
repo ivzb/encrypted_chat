@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.ivzb.encrypted_chat.R;
@@ -20,6 +21,8 @@ public class AuthView
 
     private static final String EMAIL_STATE = "email_state";
 
+    private EditText mEtEmail;
+    private EditText mEtPassword;
     private Button mBtnLogin;
     private Button mBtnRegister;
     private ProgressBar mPbLoading;
@@ -30,16 +33,18 @@ public class AuthView
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.auth_frag, container, false);
 
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(EMAIL_STATE)) {
-                String email = savedInstanceState.getString(EMAIL_STATE);
-                mViewModel.setEmail(email);
-            }
-        }
-
+        mEtEmail = view.findViewById(R.id.etEmail);
+        mEtPassword = view.findViewById(R.id.etPassword);
         mBtnLogin = view.findViewById(R.id.btnLogin);
         mBtnRegister = view.findViewById(R.id.btnRegister);
         mPbLoading = view.findViewById(R.id.pbLoading);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(EMAIL_STATE)) {
+                String email = savedInstanceState.getString(EMAIL_STATE);
+                mEtEmail.setText(email);
+            }
+        }
 
         mBtnLogin.setOnClickListener(mLoginListener);
         mBtnRegister.setOnClickListener(mRegisterListener);
@@ -52,7 +57,7 @@ public class AuthView
         super.onSaveInstanceState(outState);
 
         if (mViewModel != null) {
-            outState.putString(EMAIL_STATE, mViewModel.getEmail());
+            outState.putString(EMAIL_STATE, mEtEmail.getText().toString());
         }
     }
 
@@ -75,6 +80,8 @@ public class AuthView
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            bindViewModel();
+
             mPresenter.login(
                     mViewModel.getEmail(),
                     mViewModel.getPassword());
@@ -84,9 +91,16 @@ public class AuthView
     private View.OnClickListener mRegisterListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            bindViewModel();
+
             mPresenter.register(
                     mViewModel.getEmail(),
                     mViewModel.getPassword());
         }
     };
+
+    private void bindViewModel() {
+        mViewModel.setEmail(mEtEmail.getText().toString());
+        mViewModel.setPassword(mEtPassword.getText().toString());
+    }
 }

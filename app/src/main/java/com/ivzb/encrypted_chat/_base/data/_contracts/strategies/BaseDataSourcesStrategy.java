@@ -1,9 +1,9 @@
-package com.ivzb.encrypted_chat;
+package com.ivzb.encrypted_chat._base.data._contracts.strategies;
 
 import com.ivzb.encrypted_chat.auth.data.AuthDataSource;
 import com.ivzb.encrypted_chat.users.data.UsersDataSource;
 
-public interface DataSourcesStrategy {
+public interface BaseDataSourcesStrategy {
 
     AuthDataSource auth();
 

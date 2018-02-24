@@ -33,6 +33,11 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -53,4 +58,7 @@ dependencies {
     // Parcelar
     implementation "org.parceler:parceler-api:1.1.9"
     annotationProcessor "org.parceler:parceler:1.1.9"
+
+    // Faker
+    implementation "com.github.blocoio:faker:1.2.5"
 }

@@ -53,12 +53,4 @@ public class UsersRemoteDataSource
         final Call<Result<List<UserEntity>>> call = mApiService.load(page);
         call.enqueue(loadCallback(page, callback));
     }
-
-    @Override
-    public void save(
-            @NonNull UserEntity user,
-            @NonNull SaveCallback<String> callback) {
-
-        callback.onFailure("save is not allowed");
-    }
 }
