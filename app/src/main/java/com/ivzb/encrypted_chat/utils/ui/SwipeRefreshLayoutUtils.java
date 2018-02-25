@@ -32,9 +32,9 @@ public class SwipeRefreshLayoutUtils {
             SwipeRefreshLayout.OnRefreshListener listener) {
 
         refreshLayout.setColorSchemeColors(
-                getColor(context, R.color.colorPrimary),
-                getColor(context, R.color.colorAccent),
-                getColor(context, R.color.colorPrimaryDark)
+                getColor(context, R.color.primary),
+                getColor(context, R.color.accent),
+                getColor(context, R.color.primaryDark)
         );
 
         refreshLayout.setScrollUpChild(scrollUpChild);

@@ -11,6 +11,7 @@ public class AuthContract {
 
         void showLoading(boolean loading);
         void navigateToHome();
+        void hideErrorMessage();
     }
 
     public interface Presenter extends BasePresenter {

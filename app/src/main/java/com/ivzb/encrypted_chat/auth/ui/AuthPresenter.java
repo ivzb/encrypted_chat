@@ -36,6 +36,7 @@ public class AuthPresenter
 
     @Override
     public void login(String email, String password) {
+        mView.hideErrorMessage();
         mView.showLoading(true);
 
         // todo: add validation
@@ -63,6 +64,7 @@ public class AuthPresenter
 
     @Override
     public void register(String email, String password) {
+        mView.hideErrorMessage();
         mView.showLoading(true);
 
         // todo: add validation

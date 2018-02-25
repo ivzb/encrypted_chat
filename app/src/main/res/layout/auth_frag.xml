@@ -18,7 +18,7 @@
             android:hint="@string/email"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primary"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_medium"
@@ -34,13 +34,33 @@
             android:hint="@string/password"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primary"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvError"
+            app:cardBackgroundColor="@color/errorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/etPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/errorPrimaryDark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:padding="@dimen/spacing_medium" />
+        </android.support.v7.widget.CardView>
 
         <Button
             android:id="@+id/btnLogin"

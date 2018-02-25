@@ -19,6 +19,7 @@ public class MockDataSourcesStrategy implements BaseDataSourcesStrategy {
     public MockDataSourcesStrategy() {
         DefaultGeneratorConfig.initialize(new Random(), new Faker());
         BaseSeed seed = new DefaultSeed(DefaultGeneratorConfig.getInstance());
+        seed.seed();
     }
 
     @Override

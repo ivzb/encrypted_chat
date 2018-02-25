@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
 import com.ivzb.encrypted_chat._base.ui.DefaultView;
@@ -23,8 +25,13 @@ public class AuthView
 
     private EditText mEtEmail;
     private EditText mEtPassword;
+
+    private CardView mCvError;
+    private TextView mTvError;
+
     private Button mBtnLogin;
     private Button mBtnRegister;
+
     private ProgressBar mPbLoading;
 
     @Nullable
@@ -35,8 +42,13 @@ public class AuthView
 
         mEtEmail = view.findViewById(R.id.etEmail);
         mEtPassword = view.findViewById(R.id.etPassword);
+
+        mCvError = view.findViewById(R.id.cvError);
+        mTvError = view.findViewById(R.id.tvError);
+
         mBtnLogin = view.findViewById(R.id.btnLogin);
         mBtnRegister = view.findViewById(R.id.btnRegister);
+
         mPbLoading = view.findViewById(R.id.pbLoading);
 
         if (savedInstanceState != null) {
@@ -46,6 +58,7 @@ public class AuthView
             }
         }
 
+        mCvError.setOnClickListener(mErrorListener);
         mBtnLogin.setOnClickListener(mLoginListener);
         mBtnRegister.setOnClickListener(mRegisterListener);
 
@@ -76,6 +89,25 @@ public class AuthView
         startActivity(intent);
         getActivity().finish();
     }
+
+    @Override
+    public void showErrorMessage(String message) {
+        mTvError.setText(message);
+        mCvError.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideErrorMessage() {
+        mTvError.setText("");
+        mCvError.setVisibility(View.GONE);
+    }
+
+    private View.OnClickListener mErrorListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            hideErrorMessage();
+        }
+    };
 
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
         @Override
