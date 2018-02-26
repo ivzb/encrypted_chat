@@ -8,18 +8,17 @@ public class AddUserContract {
 
     interface View extends BaseView<Presenter, ViewModel> {
 
-        void add(String userId);
         void finish();
     }
 
     interface Presenter extends BasePresenter {
 
-        void saveUser(String userId);
+        void saveUser(String email);
     }
 
     public interface ViewModel extends BaseViewModel {
 
-        String getUserId();
-        void setUserId(String userId);
+        String getEmail();
+        void setEmail(String email);
     }
 }
