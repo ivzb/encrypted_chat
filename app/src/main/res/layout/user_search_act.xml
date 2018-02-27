@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add_user.ui.AddUserActivity">
+    tools:context=".user_search.ui.UserSearchActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

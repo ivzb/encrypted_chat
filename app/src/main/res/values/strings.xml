@@ -6,6 +6,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="save">Save</string>
+    <string name="search">Search</string>
 
-    <string name="add_user">Add User</string>
+    <string name="search_user">Search User</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.ivzb.encrypted_chat.add_user.ui;
+package com.ivzb.encrypted_chat.user_search.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -9,14 +9,14 @@ import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat._base.ui.DefaultActivity;
 import com.ivzb.encrypted_chat.utils.ActivityUtils;
 
-public class AddUserActivity extends DefaultActivity {
+public class UserSearchActivity extends DefaultActivity {
 
     public static final int REQUEST_ADD_USER = 156;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_user_act);
+        setContentView(R.layout.user_search_act);
 
         // Set up the toolbar.
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -26,14 +26,14 @@ public class AddUserActivity extends DefaultActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(R.string.add_user);
+            actionBar.setTitle(R.string.search_user);
         }
 
-        AddUserView view =
-                (AddUserView) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        SearchUserView view =
+                (SearchUserView) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
 
         if (view == null) {
-            view = new AddUserView();
+            view = new SearchUserView();
 
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(),
@@ -47,8 +47,8 @@ public class AddUserActivity extends DefaultActivity {
             view.setArguments(extras);
         }
 
-        view.setViewModel(new AddUserViewModel());
-        view.setPresenter(new AddUserPresenter(
+        view.setViewModel(new SearchUserViewModel());
+        view.setPresenter(new SearchUserPresenter(
                 this,
                 view,
                 DataSources.getInstance().users()));
