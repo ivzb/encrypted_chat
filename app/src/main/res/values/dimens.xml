@@ -7,9 +7,10 @@
     <dimen name="spacing_large">16dp</dimen>
     <dimen name="spacing_xlarge">32dp</dimen>
 
-    <item name="guideline_small" format="float" type="dimen">0.15</item>
-    <item name="guideline_xsmall" format="float" type="dimen">0.2</item>
-    <item name="guideline_xlarge" format="float" type="dimen">0.9</item>
+    <item name="guideline_15" format="float" type="dimen">0.15</item>
+    <item name="guideline_20" format="float" type="dimen">0.20</item>
+    <item name="guideline_80" format="float" type="dimen">0.80</item>
+    <item name="guideline_90" format="float" type="dimen">0.90</item>
 
     <dimen name="fab_margin">12dp</dimen>
 

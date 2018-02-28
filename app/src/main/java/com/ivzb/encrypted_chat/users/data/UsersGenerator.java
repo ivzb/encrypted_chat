@@ -14,7 +14,8 @@ public class UsersGenerator
     public UserEntity instantiate() {
         String id = mConfig.getId();
         String email = mConfig.getEmail();
+        boolean isFriend = mConfig.getBoolean();
 
-        return new UserEntity(id, email);
+        return new UserEntity(id, email, isFriend);
     }
 }

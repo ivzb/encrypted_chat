@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
+import com.ivzb.encrypted_chat._base.ui._contracts.action_handlers.BaseAdapterActionHandler;
 import com.ivzb.encrypted_chat._base.ui.views.DefaultEndlessScrollView;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.users.ui.UsersAdapter;
@@ -63,7 +64,7 @@ public class SearchUserView
 
         super.setUpRecycler(
                 getContext(),
-                new UsersAdapter(getContext(), this),
+                new UsersAdapter(getContext(), mUserClickListener, mAddUserClickListener),
                 mRvUsers);
 
         SwipeRefreshLayoutUtils.setup(
@@ -99,8 +100,7 @@ public class SearchUserView
         switch (item.getItemId()) {
             case R.id.menu_search:
                 bindViewModel();
-                //mPresenter.searchUser(mViewModel.getEmail());
-                mPresenter.refresh(mViewModel.getEmail());
+                mPresenter.searchUser(mViewModel.getEmail());
                 break;
         }
 
@@ -111,14 +111,22 @@ public class SearchUserView
     public void showErrorMessage(String message) {
         mTvError.setText(message);
         mCvError.setVisibility(View.VISIBLE);
-        mRefreshLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void hideErrorMessage() {
         mTvError.setText("");
         mCvError.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showUsers() {
         mRefreshLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideUsers() {
+        mRefreshLayout.setVisibility(View.GONE);
     }
 
     private View.OnClickListener mErrorListener = new View.OnClickListener() {
@@ -133,8 +141,13 @@ public class SearchUserView
     }
 
     @Override
-    public void onAdapterEntityClick(UserEntity user) {
+    public void onUserClick(UserEntity user) {
         mPresenter.clickUser(user);
+    }
+
+    @Override
+    public void onAddUserClick(UserEntity user) {
+        mPresenter.clickAddUser(user);
     }
 
     @Override
@@ -143,4 +156,18 @@ public class SearchUserView
 
         SwipeRefreshLayoutUtils.setLoading(mRefreshLayout, active);
     }
+
+    private BaseAdapterActionHandler<UserEntity> mUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
+        @Override
+        public void onAdapterEntityClick(UserEntity user) {
+            onUserClick(user);
+        }
+    };
+
+    private BaseAdapterActionHandler<UserEntity> mAddUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
+        @Override
+        public void onAdapterEntityClick(UserEntity user) {
+            onAddUserClick(user);
+        }
+    };
 }

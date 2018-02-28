@@ -17,18 +17,21 @@ public class UserEntity implements BaseEntity {
     @SerializedName("public_key")
     String publicKey;
 
+    @SerializedName("is_friend")
+    boolean isFriend;
+
     public UserEntity() {
 
     }
 
     public UserEntity(
             String id,
-            String email) {
-            //String publicKey) {
+            String email,
+            boolean isFriend) {
 
         this.id = id;
         this.email = email;
-        //this.publicKey = publicKey;
+        this.isFriend = isFriend;
     }
 
     @Override
@@ -47,6 +50,10 @@ public class UserEntity implements BaseEntity {
 
     public String getPublicKey() {
         return publicKey;
+    }
+
+    public boolean isFriend() {
+        return isFriend;
     }
 
     @Override

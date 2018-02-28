@@ -31,4 +31,17 @@ public class SearchUserPresenter
     public void clickUser(UserEntity user) {
         // todo
     }
+
+    @Override
+    public void clickAddUser(UserEntity user) {
+        // todo
+    }
+
+    @Override
+    public void searchUser(String email) {
+        if (!mView.isActive()) return;
+
+        mView.showUsers();
+        refresh(email);
+    }
 }

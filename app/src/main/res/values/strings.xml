@@ -8,5 +8,6 @@
     <string name="save">Save</string>
     <string name="search">Search</string>
 
-    <string name="search_user">Search User</string>
+    <string name="search_user">Search user</string>
+    <string name="add_user">Add user</string>
 </resources>

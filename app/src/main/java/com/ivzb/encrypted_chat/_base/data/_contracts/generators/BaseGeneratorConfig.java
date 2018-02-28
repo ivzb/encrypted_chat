@@ -13,5 +13,7 @@ public interface BaseGeneratorConfig {
     int getNumber();
     int getNumber(int bound);
 
+    boolean getBoolean();
+
     <T extends Enum<T>> T getEnum(T[] types);
 }

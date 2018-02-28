@@ -79,6 +79,11 @@ public class DefaultGeneratorConfig implements BaseGeneratorConfig {
     }
 
     @Override
+    public boolean getBoolean() {
+        return mRandom.nextBoolean();
+    }
+
+    @Override
     public <T extends Enum<T>> T getEnum(T[] types) {
         int selected = mRandom.nextInt(types.length);
         return types[selected];
