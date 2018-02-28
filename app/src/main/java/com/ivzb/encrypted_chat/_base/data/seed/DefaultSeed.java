@@ -18,5 +18,6 @@ public class DefaultSeed implements BaseSeed {
     @Override
     public void seed() {
         ((SeedDataSource<UserEntity>)UsersMockDataSource.getInstance()).seed(null, mConfig.getNumber(30));
+        ((SeedDataSource<UserEntity>)UsersMockDataSource.getInstance()).seed(mConfig.getEmail(), mConfig.getNumber(30));
     }
 }

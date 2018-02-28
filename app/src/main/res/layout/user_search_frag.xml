@@ -7,9 +7,20 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+    <ImageView
+        android:id="@+id/ivEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/etEmail"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/email"
         android:maxLines="1"
@@ -20,7 +31,7 @@
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="@dimen/spacing_medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivEmail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout
@@ -41,6 +52,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout>
+
+    <ImageView
+        android:id="@+id/ivNoUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_sad"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+    <TextView
+        android:id="@+id/tvNoUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textAlignment="center"
+        android:text="@string/no_users_found"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivNoUsers" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cvError"
