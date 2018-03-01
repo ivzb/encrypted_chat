@@ -70,7 +70,7 @@ public class UsersView
 
         super.setUpRecycler(
                 getContext(),
-                new UsersAdapter(getContext(), this, null),
+                new UsersAdapter(getContext(), this, null, null),
                 mRvUsers);
 
         SwipeRefreshLayoutUtils.setup(

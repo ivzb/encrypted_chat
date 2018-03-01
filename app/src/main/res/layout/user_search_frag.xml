@@ -55,8 +55,8 @@
 
     <ImageView
         android:id="@+id/ivNoUsers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/ic_sad"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +70,7 @@
         android:layout_marginStart="8dp"
         android:textAlignment="center"
         android:text="@string/no_users_found"
+        android:textSize="30sp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

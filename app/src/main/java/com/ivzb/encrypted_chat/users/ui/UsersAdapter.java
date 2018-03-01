@@ -19,15 +19,18 @@ public class UsersAdapter
         extends DefaultActionHandlerAdapter<UserEntity> {
 
     private BaseAdapterActionHandler<UserEntity> mAddUserActionHandler;
+    private BaseAdapterActionHandler<UserEntity> mRemoveUserActionHandler;
 
     public UsersAdapter(
             Context context,
             BaseAdapterActionHandler<UserEntity> actionHandler,
-            BaseAdapterActionHandler<UserEntity> addUserActionHandler) {
+            BaseAdapterActionHandler<UserEntity> addUserActionHandler,
+            BaseAdapterActionHandler<UserEntity> removeUserActionHandler) {
 
         super(context, actionHandler);
 
         mAddUserActionHandler = addUserActionHandler;
+        mRemoveUserActionHandler = removeUserActionHandler;
     }
 
     @Override
@@ -54,6 +57,9 @@ public class UsersAdapter
                     case R.id.ibAddUser:
                         actionHandler = mAddUserActionHandler;
                         break;
+                    case R.id.ibRemoveUser:
+                        actionHandler = mRemoveUserActionHandler;
+                        break;
                     default:
                         actionHandler = mActionHandler;
                 }
@@ -66,9 +72,17 @@ public class UsersAdapter
         tvUser.setText(user.getEmail());
 
         ImageButton ibAddUser = binding.findViewById(R.id.ibAddUser);
+        ImageButton ibRemoveUser = binding.findViewById(R.id.ibRemoveUser);
+
+        int addUserVisibility = View.VISIBLE;
+        int removeUserVisibility = View.GONE;
 
         if (!user.isFriend()) {
-            ibAddUser.setVisibility(View.VISIBLE);
+            addUserVisibility = View.GONE;
+            removeUserVisibility = View.VISIBLE;
         }
+
+        ibAddUser.setVisibility(addUserVisibility);
+        ibRemoveUser.setVisibility(removeUserVisibility);
     }
 }

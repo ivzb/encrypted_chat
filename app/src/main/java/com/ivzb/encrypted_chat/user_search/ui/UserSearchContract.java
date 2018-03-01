@@ -13,6 +13,7 @@ class UserSearchContract {
 
         void onUserClick(UserEntity user);
         void onAddUserClick(UserEntity user);
+        void onRemoveUserClick(UserEntity user);
 
         void showUsers();
         void hideUsers();
@@ -21,8 +22,10 @@ class UserSearchContract {
     interface Presenter extends BaseEndlessAdapterPresenter<UserEntity> {
 
         void searchUser(String email);
+
         void clickUser(UserEntity user);
         void clickAddUser(UserEntity user);
+        void clickRemoveUser(UserEntity user);
     }
 
     public interface ViewModel extends BaseEndlessAdapterViewModel<UserEntity> {

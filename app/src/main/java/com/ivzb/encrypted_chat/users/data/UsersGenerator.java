@@ -15,8 +15,7 @@ public class UsersGenerator
         String id = mConfig.getId();
         String email = mConfig.getEmail();
         boolean isFriend = mConfig.getBoolean();
-        boolean isPending = isFriend && mConfig.getBoolean();
 
-        return new UserEntity(id, email, isFriend, isPending);
+        return new UserEntity(id, email, isFriend);
     }
 }

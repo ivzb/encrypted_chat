@@ -70,7 +70,11 @@ public class SearchUserView
 
         super.setUpRecycler(
                 getContext(),
-                new UsersAdapter(getContext(), mUserClickListener, mAddUserClickListener),
+                new UsersAdapter(
+                        getContext(),
+                        mUserClickListener,
+                        mAddUserClickListener,
+                        mRemoveUserClickListener),
                 mRvUsers);
 
         SwipeRefreshLayoutUtils.setup(
@@ -162,6 +166,11 @@ public class SearchUserView
     }
 
     @Override
+    public void onRemoveUserClick(UserEntity user) {
+        mPresenter.clickRemoveUser(user);
+    }
+
+    @Override
     public void setLoadingIndicator(boolean active) {
         if (!isActive()) return;
 
@@ -194,6 +203,13 @@ public class SearchUserView
         @Override
         public void onAdapterEntityClick(UserEntity user) {
             onAddUserClick(user);
+        }
+    };
+
+    private BaseAdapterActionHandler<UserEntity> mRemoveUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
+        @Override
+        public void onAdapterEntityClick(UserEntity user) {
+            onRemoveUserClick(user);
         }
     };
 }

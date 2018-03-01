@@ -38,6 +38,11 @@ public class SearchUserPresenter
     }
 
     @Override
+    public void clickRemoveUser(UserEntity user) {
+        // todo
+    }
+
+    @Override
     public void searchUser(String email) {
         if (!mView.isActive()) return;
 
