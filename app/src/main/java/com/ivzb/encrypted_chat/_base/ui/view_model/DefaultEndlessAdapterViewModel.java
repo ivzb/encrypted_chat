@@ -1,6 +1,5 @@
 package com.ivzb.encrypted_chat._base.ui.view_model;
 
-import com.ivzb.encrypted_chat._base.ui._contracts.adapters.BaseAdapter;
 import com.ivzb.encrypted_chat._base.ui._contracts.view_models.BaseEndlessAdapterViewModel;
 
 public abstract class DefaultEndlessAdapterViewModel<T>
@@ -8,7 +7,6 @@ public abstract class DefaultEndlessAdapterViewModel<T>
 
     private int mPage;
     private boolean mHasMore;
-    private BaseAdapter<T> mAdapter;
 
     public DefaultEndlessAdapterViewModel() {
         mHasMore = true;
@@ -32,15 +30,5 @@ public abstract class DefaultEndlessAdapterViewModel<T>
     @Override
     public void setMore(boolean more) {
         mHasMore = more;
-    }
-
-    @Override
-    public BaseAdapter<T> getAdapter() {
-        return mAdapter;
-    }
-
-    @Override
-    public void setAdapter(BaseAdapter<T> adapter) {
-        mAdapter = adapter;
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.ivzb.encrypted_chat._base.ui.DefaultView;
+import com.ivzb.encrypted_chat._base.ui._contracts.adapters.BaseAdapter;
 import com.ivzb.encrypted_chat._base.ui._contracts.presenters.BaseEndlessAdapterPresenter;
 import com.ivzb.encrypted_chat._base.ui._contracts.view_models.BaseEndlessAdapterViewModel;
 import com.ivzb.encrypted_chat._base.ui._contracts.views.BaseEndlessAdapterView;
@@ -18,6 +19,8 @@ public abstract class DefaultEndlessScrollView<M, P extends BaseEndlessAdapterPr
         extends DefaultView<P, VM>
         implements BaseEndlessAdapterView<M, P, VM> {
 
+    protected BaseAdapter<M> mAdapter;
+
     private DefaultEndlessRecyclerViewScrollListener mScrollListener;
 
     @Override
@@ -27,12 +30,12 @@ public abstract class DefaultEndlessScrollView<M, P extends BaseEndlessAdapterPr
 
     @Override
     public void show(List<M> entities) {
-        mViewModel.getAdapter().add(entities);
+        mAdapter.add(entities);
     }
 
     @Override
     public void clear() {
-        mViewModel.getAdapter().clear();
+        mAdapter.clear();
         mScrollListener.resetState();
     }
 
@@ -59,6 +62,10 @@ public abstract class DefaultEndlessScrollView<M, P extends BaseEndlessAdapterPr
     @Override
     public void setMore(boolean more) {
         mViewModel.setMore(more);
+
+        if (mAdapter.size() == 0) {
+            showEntities(false);
+        }
     }
 
     @Override
@@ -71,7 +78,7 @@ public abstract class DefaultEndlessScrollView<M, P extends BaseEndlessAdapterPr
             DefaultActionHandlerAdapter<M> adapter,
             final RecyclerView recyclerView) {
 
-        mViewModel.setAdapter(adapter);
+        mAdapter = adapter;
         LinearLayoutManager layoutManager = (LinearLayoutManager) instantiateLayoutManager(context);
 
         recyclerView.setAdapter(adapter);

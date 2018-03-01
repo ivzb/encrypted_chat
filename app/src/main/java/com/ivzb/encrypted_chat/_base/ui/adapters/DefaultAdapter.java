@@ -40,6 +40,11 @@ public abstract class DefaultAdapter<T>
     }
 
     @Override
+    public int size() {
+        return mEntities.size();
+    }
+
+    @Override
     public Parcelable onSaveInstanceState() {
         return Parcels.wrap(mEntities);
     }

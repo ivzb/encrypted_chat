@@ -29,5 +29,8 @@ class UserSearchContract {
 
         String getEmail();
         void setEmail(String email);
+
+        boolean isEmpty();
+        void setEmpty(boolean empty);
     }
 }

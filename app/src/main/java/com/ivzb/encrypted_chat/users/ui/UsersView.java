@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat.R;
@@ -23,12 +25,15 @@ public class UsersView
         BaseAdapterActionHandler<UserEntity>,
         SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String ACHIEVEMENTS_STATE = "achievements_state";
+    private static final String USERS_STATE = "users_state";
     private static final String LAYOUT_MANAGER_STATE = "layout_manager_state";
     private static final String PAGE_STATE = "page_state";
 
     private RecyclerView mRvUsers;
     private ScrollChildSwipeRefreshLayout mRefreshLayout;
+
+    private ImageView mIvNoUsers;
+    private TextView mTvNoUsers;
 
     public UsersView() {
 
@@ -60,6 +65,8 @@ public class UsersView
 
         mRvUsers = view.findViewById(R.id.rvUsers);
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
+        mIvNoUsers = view.findViewById(R.id.ivNoUsers);
+        mTvNoUsers = view.findViewById(R.id.tvNoUsers);
 
         super.setUpRecycler(
                 getContext(),
@@ -73,9 +80,9 @@ public class UsersView
                 this);
 
         if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(ACHIEVEMENTS_STATE)) {
-                Parcelable achievementsState = savedInstanceState.getParcelable(ACHIEVEMENTS_STATE);
-                mViewModel.getAdapter().onRestoreInstanceState(achievementsState);
+            if (savedInstanceState.containsKey(USERS_STATE)) {
+                Parcelable usersState = savedInstanceState.getParcelable(USERS_STATE);
+                mAdapter.onRestoreInstanceState(usersState);
             }
 
             if (savedInstanceState.containsKey(LAYOUT_MANAGER_STATE)) {
@@ -96,9 +103,9 @@ public class UsersView
         if (mViewModel != null) {
             outState.putInt(PAGE_STATE, mViewModel.getPage());
 
-            if (mViewModel.getAdapter() != null){
-                Parcelable achievementsState = mViewModel.getAdapter().onSaveInstanceState();
-                outState.putParcelable(ACHIEVEMENTS_STATE, achievementsState);
+            if (mAdapter != null) {
+                Parcelable usersState = mAdapter.onSaveInstanceState();
+                outState.putParcelable(USERS_STATE, usersState);
             }
         }
 
@@ -120,6 +127,21 @@ public class UsersView
         if (!isActive()) return;
 
         SwipeRefreshLayoutUtils.setLoading(mRefreshLayout, active);
+    }
+
+    @Override
+    public void showEntities(boolean show) {
+        int usersVisibility = View.VISIBLE;
+        int noUsersVisibility = View.GONE;
+
+        if (!show) {
+            usersVisibility = View.GONE;
+            noUsersVisibility = View.VISIBLE;
+        }
+
+        mRvUsers.setVisibility(usersVisibility);
+        mIvNoUsers.setVisibility(noUsersVisibility);
+        mTvNoUsers.setVisibility(noUsersVisibility);
     }
 
     @Override

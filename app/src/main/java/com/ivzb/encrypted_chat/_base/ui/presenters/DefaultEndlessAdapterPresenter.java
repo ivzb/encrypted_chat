@@ -79,6 +79,8 @@ public abstract class DefaultEndlessAdapterPresenter<M, V extends BaseEndlessAda
             mView.setLoadingIndicator(false);
 
             List<M> entities = result.getResults();
+
+            mView.showEntities(true);
             mView.show(entities);
         }
 

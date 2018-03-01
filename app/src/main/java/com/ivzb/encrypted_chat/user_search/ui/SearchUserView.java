@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
@@ -37,6 +38,9 @@ public class SearchUserView
     private ScrollChildSwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRvUsers;
 
+    private ImageView mIvNoUsers;
+    private TextView mTvNoUsers;
+
     public SearchUserView() {
 
     }
@@ -52,6 +56,8 @@ public class SearchUserView
         mCvError = view.findViewById(R.id.cvError);
         mTvError = view.findViewById(R.id.tvError);
         mRvUsers = view.findViewById(R.id.rvUsers);
+        mIvNoUsers = view.findViewById(R.id.ivNoUsers);
+        mTvNoUsers = view.findViewById(R.id.tvNoUsers);
 
         mCvError.setOnClickListener(mErrorListener);
 
@@ -108,6 +114,11 @@ public class SearchUserView
     }
 
     @Override
+    public void onRefresh() {
+        mPresenter.refresh(mViewModel.getEmail());
+    }
+
+    @Override
     public void showErrorMessage(String message) {
         mTvError.setText(message);
         mCvError.setVisibility(View.VISIBLE);
@@ -155,6 +166,21 @@ public class SearchUserView
         if (!isActive()) return;
 
         SwipeRefreshLayoutUtils.setLoading(mRefreshLayout, active);
+    }
+
+    @Override
+    public void showEntities(boolean show) {
+        int usersVisibility = View.VISIBLE;
+        int noUsersVisibility = View.GONE;
+
+        if (!show) {
+            usersVisibility = View.GONE;
+            noUsersVisibility = View.VISIBLE;
+        }
+
+        mRvUsers.setVisibility(usersVisibility);
+        mIvNoUsers.setVisibility(noUsersVisibility);
+        mTvNoUsers.setVisibility(noUsersVisibility);
     }
 
     private BaseAdapterActionHandler<UserEntity> mUserClickListener = new BaseAdapterActionHandler<UserEntity>() {

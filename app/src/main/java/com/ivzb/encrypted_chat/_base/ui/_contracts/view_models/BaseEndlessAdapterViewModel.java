@@ -12,8 +12,8 @@ public interface BaseEndlessAdapterViewModel<T>
     boolean hasMore();
     void setMore(boolean more);
 
-    BaseAdapter<T> getAdapter();
-    void setAdapter(BaseAdapter<T> adapter);
+//    BaseAdapter<T> getAdapter();
+//    void setAdapter(BaseAdapter<T> adapter);
 
     String getContainerId();
 }

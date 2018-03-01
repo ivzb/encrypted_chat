@@ -8,6 +8,11 @@ class SearchUserViewModel
         implements UserSearchContract.ViewModel {
 
     private String mEmail;
+    private boolean mIsEmpty;
+
+    public SearchUserViewModel() {
+        mIsEmpty = true;
+    }
 
     @Override
     public String getEmail() {
@@ -17,6 +22,16 @@ class SearchUserViewModel
     @Override
     public void setEmail(String email) {
         mEmail = email;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return mIsEmpty;
+    }
+
+    @Override
+    public void setEmpty(boolean isEmpty) {
+        mIsEmpty = isEmpty;
     }
 
     @Override

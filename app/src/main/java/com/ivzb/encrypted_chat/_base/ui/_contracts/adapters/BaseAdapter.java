@@ -8,6 +8,7 @@ public interface BaseAdapter<T> {
 
     void add(List<T> entities);
     void clear();
+    int size();
 
     Parcelable onSaveInstanceState();
     void onRestoreInstanceState(Parcelable parcelable);
