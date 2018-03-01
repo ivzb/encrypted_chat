@@ -20,6 +20,9 @@ public class UserEntity implements BaseEntity {
     @SerializedName("is_friend")
     boolean isFriend;
 
+    @SerializedName("is_pending")
+    boolean isPending;
+
     public UserEntity() {
 
     }
@@ -27,11 +30,13 @@ public class UserEntity implements BaseEntity {
     public UserEntity(
             String id,
             String email,
-            boolean isFriend) {
+            boolean isFriend,
+            boolean isPending) {
 
         this.id = id;
         this.email = email;
         this.isFriend = isFriend;
+        this.isPending = isPending;
     }
 
     @Override

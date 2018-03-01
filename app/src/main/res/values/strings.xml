@@ -10,5 +10,6 @@
 
     <string name="search_user">Search user</string>
     <string name="add_user">Add user</string>
+    <string name="remove_user">Remove user</string>
     <string name="no_users_found">No users found.</string>
 </resources>
