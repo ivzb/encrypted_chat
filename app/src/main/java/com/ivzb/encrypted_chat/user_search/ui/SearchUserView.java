@@ -168,6 +168,7 @@ public class SearchUserView
 
     @Override
     public void showNoEntities(boolean show) {
+        if (mViewModel.getPage() > 0) show = false; // don't show "no users" if already loaded entities
         int visibility = show ? View.VISIBLE : View.GONE;
 
         mViewModel.getIvNoUsers().setVisibility(visibility);

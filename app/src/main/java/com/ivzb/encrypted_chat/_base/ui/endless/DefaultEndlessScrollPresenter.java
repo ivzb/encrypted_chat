@@ -45,6 +45,7 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
     public void refresh(String id) {
         mView.clearEntities();
         mView.setMore(true);
+        mView.setPage(0);
 
         load(id, PAGE);
     }
@@ -101,7 +102,7 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
             mView.setLoadingIndicator(false);
             mView.setMore(false);
 
-            //mView.showNoEntities(true);
+            mView.showNoEntities(true);
         }
 
         @Override
