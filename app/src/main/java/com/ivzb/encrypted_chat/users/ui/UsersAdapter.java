@@ -48,31 +48,36 @@ public class UsersAdapter
         View binding = viewHolder.getBinding();
 
         CardView cvUser = binding.findViewById(R.id.cvUser);
-        cvUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseAdapterActionHandler<UserEntity> actionHandler;
-
-                switch (view.getId()) {
-                    case R.id.ibAddUser:
-                        actionHandler = mAddUserActionHandler;
-                        break;
-                    case R.id.ibRemoveUser:
-                        actionHandler = mRemoveUserActionHandler;
-                        break;
-                    default:
-                        actionHandler = mActionHandler;
-                }
-
-                actionHandler.onAdapterEntityClick(user);
-            }
-        });
+        cvUser.setOnClickListener(actionHandlerListener(mActionHandler, user));
 
         TextView tvUser = binding.findViewById(R.id.tvUser);
         tvUser.setText(user.getEmail());
 
         ImageButton ibAddUser = binding.findViewById(R.id.ibAddUser);
+        ibAddUser.setOnClickListener(actionHandlerListener(mAddUserActionHandler, user));
+
         ImageButton ibRemoveUser = binding.findViewById(R.id.ibRemoveUser);
+        ibRemoveUser.setOnClickListener(actionHandlerListener(mRemoveUserActionHandler, user));
+
+        updateUserButtonsVisibility(user, ibAddUser, ibRemoveUser);
+    }
+
+    private View.OnClickListener actionHandlerListener(
+            final BaseAdapterActionHandler<UserEntity> actionHandler,
+            final UserEntity user) {
+
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionHandler.onAdapterEntityClick(user);
+            }
+        };
+    }
+
+    private void updateUserButtonsVisibility(
+            final UserEntity user,
+            final ImageButton ibAddUser,
+            final ImageButton ibRemoveUser) {
 
         int addUserVisibility = View.VISIBLE;
         int removeUserVisibility = View.GONE;

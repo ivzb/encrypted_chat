@@ -1,49 +1,26 @@
 package com.ivzb.encrypted_chat.user_search.ui;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
 import com.ivzb.encrypted_chat._base.ui._contracts.action_handlers.BaseAdapterActionHandler;
 import com.ivzb.encrypted_chat._base.ui.views.DefaultEndlessScrollView;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
+import com.ivzb.encrypted_chat.users.ui.RemoveUserDialogFragment;
 import com.ivzb.encrypted_chat.users.ui.UsersAdapter;
-import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
 import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
 
 public class SearchUserView
         extends DefaultEndlessScrollView<UserEntity, UserSearchContract.Presenter, UserSearchContract.ViewModel>
         implements UserSearchContract.View {
-
-    //private static final String USERS_STATE = "users_state";
-    //private static final String LAYOUT_MANAGER_STATE = "layout_manager_state";
-    //private static final String PAGE_STATE = "page_state";
-
-    private EditText mEtEmail;
-
-    private CardView mCvError;
-    private TextView mTvError;
-
-    private ScrollChildSwipeRefreshLayout mRefreshLayout;
-    private RecyclerView mRvUsers;
-
-    private ImageView mIvNoUsers;
-    private TextView mTvNoUsers;
-
-    public SearchUserView() {
-
-    }
 
     @Nullable
     @Override
@@ -51,53 +28,45 @@ public class SearchUserView
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.user_search_frag, container, false);
 
-        mRefreshLayout = view.findViewById(R.id.refresh_layout);
-        mEtEmail = view.findViewById(R.id.etEmail);
-        mCvError = view.findViewById(R.id.cvError);
-        mTvError = view.findViewById(R.id.tvError);
-        mRvUsers = view.findViewById(R.id.rvUsers);
-        mIvNoUsers = view.findViewById(R.id.ivNoUsers);
-        mTvNoUsers = view.findViewById(R.id.tvNoUsers);
+        mViewModel.init(view);
+        mViewModel.setErrorClickListener(mErrorClickListener);
+        mViewModel.restoreInstanceState(savedInstanceState);
 
-        mCvError.setOnClickListener(mErrorListener);
-
-//        if (savedInstanceState != null) {
-//            if (savedInstanceState.containsKey(PAGE_STATE)) {
-//                int page = savedInstanceState.getInt(PAGE_STATE);
-//                setPage(page);
-//            }
-//        }
-
-        super.setUpRecycler(
+        initEndlessAdapter(
                 getContext(),
                 new UsersAdapter(
                         getContext(),
                         mUserClickListener,
                         mAddUserClickListener,
                         mRemoveUserClickListener),
-                mRvUsers);
+                mViewModel.getRvUsers());
+
+        mViewModel.setAdapter(mAdapter);
 
         SwipeRefreshLayoutUtils.setup(
                 getContext(),
-                mRefreshLayout,
-                mRvUsers,
+                mViewModel.getRefreshLayout(),
+                mViewModel.getRvUsers(),
                 this);
 
-//        if (savedInstanceState != null) {
-//            if (savedInstanceState.containsKey(USERS_STATE)) {
-//                Parcelable usersState = savedInstanceState.getParcelable(USERS_STATE);
-//                mViewModel.getAdapter().onRestoreInstanceState(usersState);
-//            }
-//
-//            if (savedInstanceState.containsKey(LAYOUT_MANAGER_STATE)) {
-//                Parcelable layoutManagerState = savedInstanceState.getParcelable(LAYOUT_MANAGER_STATE);
-//                mRvUsers.getLayoutManager().onRestoreInstanceState(layoutManagerState);
-//            }
-//        } else {
-//            mPresenter.refresh(mViewModel.getContainerId());
-//        }
+        if (savedInstanceState != null) {
+            Parcelable usersState = mViewModel.getUsersState();
+            mAdapter.onRestoreInstanceState(usersState);
+
+            Parcelable layoutManagerState = mViewModel.getLayoutManagerState();
+            mViewModel.getRvUsers().getLayoutManager().onRestoreInstanceState(layoutManagerState);
+        }
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mViewModel != null) {
+            mViewModel.saveInstanceState(outState);
+        }
     }
 
     @Override
@@ -109,8 +78,8 @@ public class SearchUserView
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_search:
-                bindViewModel();
-                mPresenter.searchUser(mViewModel.getEmail());
+                String email = mViewModel.getEtEmail().getText().toString();
+                mPresenter.searchUser(email);
                 break;
         }
 
@@ -119,77 +88,13 @@ public class SearchUserView
 
     @Override
     public void onRefresh() {
-        mPresenter.refresh(mViewModel.getEmail());
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
-        mTvError.setText(message);
-        mCvError.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideErrorMessage() {
-        mTvError.setText("");
-        mCvError.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showUsers() {
-        mRefreshLayout.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideUsers() {
-        mRefreshLayout.setVisibility(View.GONE);
-    }
-
-    private View.OnClickListener mErrorListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            hideErrorMessage();
-        }
-    };
-
-    private void bindViewModel() {
-        mViewModel.setEmail(mEtEmail.getText().toString());
+        String email = mViewModel.getEtEmail().getText().toString();
+        mPresenter.refresh(email);
     }
 
     @Override
     public void onUserClick(UserEntity user) {
         mPresenter.clickUser(user);
-    }
-
-    @Override
-    public void onAddUserClick(UserEntity user) {
-        mPresenter.clickAddUser(user);
-    }
-
-    @Override
-    public void onRemoveUserClick(UserEntity user) {
-        mPresenter.clickRemoveUser(user);
-    }
-
-    @Override
-    public void setLoadingIndicator(boolean active) {
-        if (!isActive()) return;
-
-        SwipeRefreshLayoutUtils.setLoading(mRefreshLayout, active);
-    }
-
-    @Override
-    public void showEntities(boolean show) {
-        int usersVisibility = View.VISIBLE;
-        int noUsersVisibility = View.GONE;
-
-        if (!show) {
-            usersVisibility = View.GONE;
-            noUsersVisibility = View.VISIBLE;
-        }
-
-        mRvUsers.setVisibility(usersVisibility);
-        mIvNoUsers.setVisibility(noUsersVisibility);
-        mTvNoUsers.setVisibility(noUsersVisibility);
     }
 
     private BaseAdapterActionHandler<UserEntity> mUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
@@ -199,6 +104,11 @@ public class SearchUserView
         }
     };
 
+    @Override
+    public void onAddUserClick(UserEntity user) {
+        mPresenter.clickAddUser(user);
+    }
+
     private BaseAdapterActionHandler<UserEntity> mAddUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
         @Override
         public void onAdapterEntityClick(UserEntity user) {
@@ -206,10 +116,71 @@ public class SearchUserView
         }
     };
 
+    @Override
+    public void onRemoveUserClick(UserEntity user) {
+        mPresenter.clickRemoveUser(user);
+    }
+
     private BaseAdapterActionHandler<UserEntity> mRemoveUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
         @Override
-        public void onAdapterEntityClick(UserEntity user) {
-            onRemoveUserClick(user);
+        public void onAdapterEntityClick(final UserEntity user) {
+            RemoveUserDialogFragment dialogFragment = new RemoveUserDialogFragment();
+
+            dialogFragment.setListener(new RemoveUserDialogFragment.NoticeDialogListener() {
+                @Override
+                public void onDialogPositiveClick() {
+                    onRemoveUserClick(user);
+                }
+
+                @Override
+                public void onDialogNegativeClick() {
+                    // no action needed
+                }
+            });
+
+            dialogFragment.show(getFragmentManager(), "remove_user_dialog");
         }
     };
+
+    @Override
+    public void onErrorClick() {
+        mPresenter.clickErrorMessage();
+    }
+
+    private View.OnClickListener mErrorClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onErrorClick();
+        }
+    };
+
+    @Override
+    public void setLoadingIndicator(boolean active) {
+        if (!isActive()) return;
+
+        SwipeRefreshLayoutUtils.setLoading(mViewModel.getRefreshLayout(), active);
+    }
+
+    @Override
+    public void showEntities(boolean show) {
+        mViewModel.getRvUsers().setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showNoEntities(boolean show) {
+        int visibility = show ? View.VISIBLE : View.GONE;
+
+        mViewModel.getIvNoUsers().setVisibility(visibility);
+        mViewModel.getTvNoUsers().setVisibility(visibility);
+    }
+
+    @Override
+    public void showErrorMessage(boolean show) {
+        mViewModel.getCvError().setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setErrorMessage(String message) {
+        mViewModel.getTvError().setText(message);
+    }
 }

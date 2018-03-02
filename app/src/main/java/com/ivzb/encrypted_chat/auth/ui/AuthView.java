@@ -91,9 +91,13 @@ public class AuthView
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void setErrorMessage(String message) {
         mTvError.setText(message);
-        mCvError.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showErrorMessage(boolean show) {
+        mCvError.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override

@@ -43,10 +43,17 @@ public class SearchUserPresenter
     }
 
     @Override
+    public void clickErrorMessage() {
+        if (!mView.isActive()) return;
+
+        mView.showErrorMessage(false);
+        mView.setErrorMessage("");
+    }
+
+    @Override
     public void searchUser(String email) {
         if (!mView.isActive()) return;
 
-        mView.showUsers();
         refresh(email);
     }
 }

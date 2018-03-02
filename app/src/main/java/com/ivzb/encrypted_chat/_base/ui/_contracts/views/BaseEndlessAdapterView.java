@@ -18,9 +18,10 @@ public interface BaseEndlessAdapterView<M, P extends BasePresenter, VM extends B
 
     void setLoadingIndicator(boolean active);
 
-    void show(List<M> entities);
+    void addEntities(List<M> entities);
     void showEntities(boolean show);
-    void clear();
+    void showNoEntities(boolean show);
+    void clearEntities();
 
     void openUi(M entity);
 

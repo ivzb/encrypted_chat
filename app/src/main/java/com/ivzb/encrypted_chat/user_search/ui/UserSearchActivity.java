@@ -11,8 +11,6 @@ import com.ivzb.encrypted_chat.utils.ActivityUtils;
 
 public class UserSearchActivity extends DefaultActivity {
 
-    public static final int REQUEST_ADD_USER = 156;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +37,6 @@ public class UserSearchActivity extends DefaultActivity {
                     getSupportFragmentManager(),
                     view,
                     R.id.contentFrame);
-        }
-
-        Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            view.setArguments(extras);
         }
 
         view.setViewModel(new SearchUserViewModel());

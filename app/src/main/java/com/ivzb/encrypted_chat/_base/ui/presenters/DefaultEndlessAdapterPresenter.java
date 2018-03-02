@@ -43,8 +43,9 @@ public abstract class DefaultEndlessAdapterPresenter<M, V extends BaseEndlessAda
 
     @Override
     public void refresh(String id) {
-        mView.clear();
+        mView.clearEntities();
         mView.setMore(true);
+
         load(id, PAGE);
     }
 
@@ -63,14 +64,15 @@ public abstract class DefaultEndlessAdapterPresenter<M, V extends BaseEndlessAda
         if (!mView.isActive()) return;
 
         if (entity == null) {
-            mView.showErrorMessage("Missing achievement");
+            mView.setErrorMessage("Missing entity.");
+            mView.showErrorMessage(true);
             return;
         }
 
         mView.openUi(entity);
     }
 
-    protected LoadCallback<M> mLoadCallback = new LoadCallback<M>() {
+    private LoadCallback<M> mLoadCallback = new LoadCallback<M>() {
         @Override
         public void onSuccess(Result<List<M>> result, int page) {
             if (!mView.isActive()) return;
@@ -80,16 +82,26 @@ public abstract class DefaultEndlessAdapterPresenter<M, V extends BaseEndlessAda
 
             List<M> entities = result.getResults();
 
+            mView.showErrorMessage(false);
+            mView.setErrorMessage("");
+
+            mView.showNoEntities(false);
+
             mView.showEntities(true);
-            mView.show(entities);
+            mView.addEntities(entities);
         }
 
         @Override
         public void onNoMore() {
             if (!mView.isActive()) return;
 
+            mView.showErrorMessage(false);
+            mView.setErrorMessage("");
+
             mView.setLoadingIndicator(false);
             mView.setMore(false);
+
+            mView.showNoEntities(true);
         }
 
         @Override
@@ -98,7 +110,12 @@ public abstract class DefaultEndlessAdapterPresenter<M, V extends BaseEndlessAda
 
             mView.setLoadingIndicator(false);
             mView.setMore(false);
-            mView.showErrorMessage(message);
+
+            mView.showEntities(false);
+            mView.showNoEntities(false);
+
+            mView.setErrorMessage(message);
+            mView.showErrorMessage(true);
         }
     };
 }

@@ -21,6 +21,8 @@ public abstract class DefaultView<P extends BasePresenter, VM extends BaseViewMo
     protected P mPresenter;
     protected VM mViewModel;
 
+    private Snackbar mErrorMessage;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,13 +59,17 @@ public abstract class DefaultView<P extends BasePresenter, VM extends BaseViewMo
     }
 
     @Override
-    public void showSuccessfulMessage(String message) {
-        showMessage(message);
+    public void setErrorMessage(String message) {
+        if (getView() == null || !isActive()) return;
+
+        mErrorMessage = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG);
     }
 
     @Override
-    public void showErrorMessage(String message) {
-        showMessage(message);
+    public void showErrorMessage(boolean show) {
+        if (getView() == null || !isActive() || mErrorMessage == null) return;
+
+        mErrorMessage.show();
     }
 
     private void showMessage(String message) {

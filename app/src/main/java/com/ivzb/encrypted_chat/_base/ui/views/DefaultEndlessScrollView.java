@@ -29,12 +29,12 @@ public abstract class DefaultEndlessScrollView<M, P extends BaseEndlessAdapterPr
     }
 
     @Override
-    public void show(List<M> entities) {
+    public void addEntities(List<M> entities) {
         mAdapter.add(entities);
     }
 
     @Override
-    public void clear() {
+    public void clearEntities() {
         mAdapter.clear();
         mScrollListener.resetState();
     }
@@ -73,7 +73,7 @@ public abstract class DefaultEndlessScrollView<M, P extends BaseEndlessAdapterPr
         return new LinearLayoutManager(context);
     }
 
-    protected void setUpRecycler(
+    protected void initEndlessAdapter(
             Context context,
             DefaultActionHandlerAdapter<M> adapter,
             final RecyclerView recyclerView) {

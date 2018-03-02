@@ -57,7 +57,8 @@ public class AuthPresenter
                 if (!mView.isActive()) return;
 
                 mView.showLoading(false);
-                mView.showErrorMessage(message);
+                mView.setErrorMessage(message);
+                mView.showErrorMessage(true);
             }
         });
     }
@@ -85,7 +86,8 @@ public class AuthPresenter
                 if (!mView.isActive()) return;
 
                 mView.showLoading(false);
-                mView.showErrorMessage(message);
+                mView.setErrorMessage(message);
+                mView.showErrorMessage(true);
             }
         });
     }

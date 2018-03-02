@@ -68,7 +68,7 @@ public class UsersView
         mIvNoUsers = view.findViewById(R.id.ivNoUsers);
         mTvNoUsers = view.findViewById(R.id.tvNoUsers);
 
-        super.setUpRecycler(
+        initEndlessAdapter(
                 getContext(),
                 new UsersAdapter(getContext(), this, null, null),
                 mRvUsers);
@@ -131,17 +131,14 @@ public class UsersView
 
     @Override
     public void showEntities(boolean show) {
-        int usersVisibility = View.VISIBLE;
-        int noUsersVisibility = View.GONE;
+        mRvUsers.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
 
-        if (!show) {
-            usersVisibility = View.GONE;
-            noUsersVisibility = View.VISIBLE;
-        }
-
-        mRvUsers.setVisibility(usersVisibility);
-        mIvNoUsers.setVisibility(noUsersVisibility);
-        mTvNoUsers.setVisibility(noUsersVisibility);
+    @Override
+    public void showNoEntities(boolean show) {
+        int visibility = show ? View.VISIBLE : View.GONE;
+        mIvNoUsers.setVisibility(visibility);
+        mTvNoUsers.setVisibility(visibility);
     }
 
     @Override

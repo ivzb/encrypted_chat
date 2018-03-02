@@ -41,7 +41,6 @@
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="@dimen/spacing_medium"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail"
@@ -50,7 +49,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvUsers"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="gone" />
     </com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout>
 
     <ImageView
