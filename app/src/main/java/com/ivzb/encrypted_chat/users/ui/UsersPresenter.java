@@ -3,12 +3,12 @@ package com.ivzb.encrypted_chat.users.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.ivzb.encrypted_chat._base.ui.presenters.DefaultEndlessAdapterPresenter;
+import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollPresenter;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.users.data.UsersDataSource;
 
 public class UsersPresenter
-        extends DefaultEndlessAdapterPresenter<UserEntity, UsersContract.View, UsersDataSource>
+        extends DefaultEndlessScrollPresenter<UserEntity, UsersContract.View, UsersDataSource>
         implements UsersContract.Presenter {
 
     UsersPresenter(

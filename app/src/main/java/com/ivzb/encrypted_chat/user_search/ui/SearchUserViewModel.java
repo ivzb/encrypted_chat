@@ -10,15 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
-import com.ivzb.encrypted_chat._base.ui._contracts.adapters.BaseAdapter;
-import com.ivzb.encrypted_chat._base.ui.view_model.DefaultEndlessAdapterViewModel;
+import com.ivzb.encrypted_chat._base.ui._contracts.BaseAdapter;
+import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollViewModel;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
 
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
 class SearchUserViewModel
-        extends DefaultEndlessAdapterViewModel<UserEntity>
+        extends DefaultEndlessScrollViewModel<UserEntity>
         implements UserSearchContract.ViewModel {
 
     private static final String EMAIL_TEXT_STATE = "email_text_state";

@@ -1,7 +1,6 @@
 package com.ivzb.encrypted_chat.user_search.ui;
 
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,17 +8,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ivzb.encrypted_chat._base.ui._contracts.adapters.BaseAdapter;
-import com.ivzb.encrypted_chat._base.ui._contracts.presenters.BaseEndlessAdapterPresenter;
-import com.ivzb.encrypted_chat._base.ui._contracts.view_models.BaseEndlessAdapterViewModel;
-import com.ivzb.encrypted_chat._base.ui._contracts.views.BaseEndlessAdapterView;
-import com.ivzb.encrypted_chat._base.ui.adapters.DefaultActionHandlerAdapter;
+import com.ivzb.encrypted_chat._base.ui._contracts.BaseAdapter;
+import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollPresenter;
+import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollViewModel;
+import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollView;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
 
 class UserSearchContract {
 
-    interface View extends BaseEndlessAdapterView<UserEntity, Presenter, ViewModel> {
+    interface View extends BaseEndlessScrollView<UserEntity, Presenter, ViewModel> {
 
         void onUserClick(UserEntity user);
         void onAddUserClick(UserEntity user);
@@ -27,7 +25,7 @@ class UserSearchContract {
         void onErrorClick();
     }
 
-    interface Presenter extends BaseEndlessAdapterPresenter<UserEntity> {
+    interface Presenter extends BaseEndlessScrollPresenter<UserEntity> {
 
         void searchUser(String email);
 
@@ -38,7 +36,7 @@ class UserSearchContract {
         void clickErrorMessage();
     }
 
-    public interface ViewModel extends BaseEndlessAdapterViewModel<UserEntity> {
+    public interface ViewModel extends BaseEndlessScrollViewModel<UserEntity> {
 
         void init(android.view.View view);
 

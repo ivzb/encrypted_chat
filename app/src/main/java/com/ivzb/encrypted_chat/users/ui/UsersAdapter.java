@@ -9,23 +9,21 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
-import com.ivzb.encrypted_chat._base.ui._contracts.action_handlers.BaseAdapterActionHandler;
-import com.ivzb.encrypted_chat._base.ui.adapters.DefaultActionHandlerAdapter;
+import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
+import com.ivzb.encrypted_chat._base.ui.DefaultActionHandlerAdapter;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
-
-import org.w3c.dom.Text;
 
 public class UsersAdapter
         extends DefaultActionHandlerAdapter<UserEntity> {
 
-    private BaseAdapterActionHandler<UserEntity> mAddUserActionHandler;
-    private BaseAdapterActionHandler<UserEntity> mRemoveUserActionHandler;
+    private BaseEntityActionHandler<UserEntity> mAddUserActionHandler;
+    private BaseEntityActionHandler<UserEntity> mRemoveUserActionHandler;
 
     public UsersAdapter(
             Context context,
-            BaseAdapterActionHandler<UserEntity> actionHandler,
-            BaseAdapterActionHandler<UserEntity> addUserActionHandler,
-            BaseAdapterActionHandler<UserEntity> removeUserActionHandler) {
+            BaseEntityActionHandler<UserEntity> actionHandler,
+            BaseEntityActionHandler<UserEntity> addUserActionHandler,
+            BaseEntityActionHandler<UserEntity> removeUserActionHandler) {
 
         super(context, actionHandler);
 
@@ -63,7 +61,7 @@ public class UsersAdapter
     }
 
     private View.OnClickListener actionHandlerListener(
-            final BaseAdapterActionHandler<UserEntity> actionHandler,
+            final BaseEntityActionHandler<UserEntity> actionHandler,
             final UserEntity user) {
 
         return new View.OnClickListener() {

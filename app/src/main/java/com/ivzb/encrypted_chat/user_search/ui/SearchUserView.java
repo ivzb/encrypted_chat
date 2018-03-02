@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ivzb.encrypted_chat.R;
-import com.ivzb.encrypted_chat._base.ui._contracts.action_handlers.BaseAdapterActionHandler;
-import com.ivzb.encrypted_chat._base.ui.views.DefaultEndlessScrollView;
+import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
+import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.users.ui.RemoveUserDialogFragment;
 import com.ivzb.encrypted_chat.users.ui.UsersAdapter;
@@ -97,7 +97,7 @@ public class SearchUserView
         mPresenter.clickUser(user);
     }
 
-    private BaseAdapterActionHandler<UserEntity> mUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
+    private BaseEntityActionHandler<UserEntity> mUserClickListener = new BaseEntityActionHandler<UserEntity>() {
         @Override
         public void onAdapterEntityClick(UserEntity user) {
             onUserClick(user);
@@ -109,7 +109,7 @@ public class SearchUserView
         mPresenter.clickAddUser(user);
     }
 
-    private BaseAdapterActionHandler<UserEntity> mAddUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
+    private BaseEntityActionHandler<UserEntity> mAddUserClickListener = new BaseEntityActionHandler<UserEntity>() {
         @Override
         public void onAdapterEntityClick(UserEntity user) {
             onAddUserClick(user);
@@ -121,7 +121,7 @@ public class SearchUserView
         mPresenter.clickRemoveUser(user);
     }
 
-    private BaseAdapterActionHandler<UserEntity> mRemoveUserClickListener = new BaseAdapterActionHandler<UserEntity>() {
+    private BaseEntityActionHandler<UserEntity> mRemoveUserClickListener = new BaseEntityActionHandler<UserEntity>() {
         @Override
         public void onAdapterEntityClick(final UserEntity user) {
             RemoveUserDialogFragment dialogFragment = new RemoveUserDialogFragment();

@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat.R;
-import com.ivzb.encrypted_chat._base.ui._contracts.action_handlers.BaseAdapterActionHandler;
-import com.ivzb.encrypted_chat._base.ui.views.DefaultEndlessScrollView;
+import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
+import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
 import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
@@ -22,7 +22,7 @@ import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
 public class UsersView
         extends DefaultEndlessScrollView<UserEntity, UsersContract.Presenter, UsersContract.ViewModel>
         implements UsersContract.View,
-        BaseAdapterActionHandler<UserEntity>,
+        BaseEntityActionHandler<UserEntity>,
         SwipeRefreshLayout.OnRefreshListener {
 
     private static final String USERS_STATE = "users_state";
