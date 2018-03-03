@@ -11,5 +11,5 @@ public interface BaseEndlessScrollPresenter<M>
 
     void click(M entity);
 
-    void result(int requestCode, int resultCode);
+    void result(int requestCode, int resultCode, String message);
 }

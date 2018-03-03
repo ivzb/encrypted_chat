@@ -24,7 +24,7 @@ public abstract class DefaultEndlessScrollView<M, P extends BaseEndlessScrollPre
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mPresenter.result(requestCode, resultCode);
+        mPresenter.result(requestCode, resultCode, null);
     }
 
     @Override

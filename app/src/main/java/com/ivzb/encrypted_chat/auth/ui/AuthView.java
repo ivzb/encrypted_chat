@@ -38,7 +38,7 @@ public class AuthView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.auth_frag, container, false);
+        View view = inflateFragment(inflater, container);
 
         mEtEmail = view.findViewById(R.id.etEmail);
         mEtPassword = view.findViewById(R.id.etPassword);
@@ -63,6 +63,11 @@ public class AuthView
         mBtnRegister.setOnClickListener(mRegisterListener);
 
         return view;
+    }
+
+    @Override
+    public View inflateFragment(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.auth_frag, container, false);
     }
 
     @Override

@@ -12,9 +12,13 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.ivzb.encrypted_chat.R;
+import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat._base.ui.DefaultActivity;
 import com.ivzb.encrypted_chat.user_search.ui.UserSearchActivity;
+import com.ivzb.encrypted_chat.users.ui.UsersContract;
+import com.ivzb.encrypted_chat.users.ui.UsersPresenter;
 import com.ivzb.encrypted_chat.users.ui.UsersView;
+import com.ivzb.encrypted_chat.users.ui.UsersViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,13 +73,16 @@ public class HomeActivity
     private ViewPagerMetadata initMetadata() {
         ViewPagerMetadata metadata = new ViewPagerMetadata(2);
 
-        metadata.add(
-                new UsersView(),
-                "Users",
-                R.drawable.ic_users);
+        UsersView usersView = new UsersView();
+
+        usersView.setViewModel(new UsersViewModel());
+        usersView.setPresenter(new UsersPresenter(
+                this,
+                usersView,
+                DataSources.getInstance().users()));
 
         metadata.add(
-                new UsersView(),
+                usersView,
                 "Users",
                 R.drawable.ic_users);
 

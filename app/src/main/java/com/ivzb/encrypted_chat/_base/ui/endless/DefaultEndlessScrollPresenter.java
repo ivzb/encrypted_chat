@@ -12,7 +12,7 @@ import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollView
 
 import java.util.List;
 
-import static com.ivzb.encrypted_chat._base.data.config.DefaultConfig.PAGE;
+import static com.ivzb.encrypted_chat._base.data.config.DefaultConfig.INITIAL_PAGE;
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
 public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScrollView, DS extends ReceiveDataSource<M>>
@@ -37,7 +37,7 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
     }
 
     @Override
-    public void result(int requestCode, int resultCode) {
+    public void result(int requestCode, int resultCode, String message) {
 
     }
 
@@ -47,7 +47,7 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
         mView.setMore(true);
         mView.setPage(0);
 
-        load(id, PAGE);
+        load(id, INITIAL_PAGE);
     }
 
     @Override

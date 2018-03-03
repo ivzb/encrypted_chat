@@ -5,12 +5,14 @@ import android.support.annotation.NonNull;
 
 import com.ivzb.encrypted_chat._base.data.Result;
 import com.ivzb.encrypted_chat._base.data.callbacks.SaveCallback;
+import com.ivzb.encrypted_chat._base.data.config.DefaultConfig;
 import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollPresenter;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.users.data.UsersDataSource;
+import com.ivzb.encrypted_chat.users.ui.UsersPresenter;
 
 public class UserSearchPresenter
-        extends DefaultEndlessScrollPresenter<UserEntity, UserSearchContract.View, UsersDataSource>
+        extends UsersPresenter
         implements UserSearchContract.Presenter {
 
     UserSearchPresenter(
@@ -22,39 +24,22 @@ public class UserSearchPresenter
     }
 
     @Override
-    public void start() {
-
+    public void result(int requestCode, int resultCode, String message) {
+        if (requestCode == REQUEST_USER_SAVE && resultCode == RESULT_OK) {
+            ((UserSearchView) mView).finish(message);
+        }
     }
 
     @Override
-    public void clickUser(UserEntity user) {
-        // todo
-    }
+    public void refresh(String id) {
+        if (id.equals(DefaultConfig.NO_ID)) {
+            mView.showEntities(false);
+            mView.showErrorMessage(false);
+            mView.showNoEntities(false);
+            return;
+        }
 
-    @Override
-    public void clickAddUser(UserEntity user) {
-        if (!mView.isActive()) return;
-
-        mView.setLoadingIndicator(true);
-
-        mDataSource.add(user.getId(), mUserSaveCallback);
-    }
-
-    @Override
-    public void clickRemoveUser(UserEntity user) {
-        if (!mView.isActive()) return;
-
-        mView.setLoadingIndicator(true);
-
-        mDataSource.remove(user.getId(), mUserSaveCallback);
-    }
-
-    @Override
-    public void clickErrorMessage() {
-        if (!mView.isActive()) return;
-
-        mView.showErrorMessage(false);
-        mView.setErrorMessage("");
+        super.refresh(id);
     }
 
     @Override
@@ -63,34 +48,4 @@ public class UserSearchPresenter
 
         refresh(email);
     }
-
-    private SaveCallback<Boolean> mUserSaveCallback = new SaveCallback<Boolean>() {
-        @Override
-        public void onSuccess(Result<Boolean> result) {
-            if (!mView.isActive()) return;
-
-            mView.setLoadingIndicator(false);
-
-            Boolean added = result.getResults();
-
-            if (!added) {
-                mView.setErrorMessage(result.getMessage());
-                mView.showErrorMessage(true);
-
-                return;
-            }
-
-            mView.finish(result.getMessage());
-        }
-
-        @Override
-        public void onFailure(String message) {
-            if (!mView.isActive()) return;
-
-            mView.setLoadingIndicator(false);
-
-            mView.setErrorMessage(message);
-            mView.showErrorMessage(true);
-        }
-    };
 }

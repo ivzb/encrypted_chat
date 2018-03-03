@@ -13,87 +13,62 @@ import android.widget.TextView;
 
 import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat.R;
+import com.ivzb.encrypted_chat._base.data.config.DefaultConfig;
 import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
 import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
 
+import static com.ivzb.encrypted_chat._base.data.config.DefaultConfig.INITIAL_PAGE;
+
 public class UsersView
         extends DefaultEndlessScrollView<UserEntity, UsersContract.Presenter, UsersContract.ViewModel>
-        implements UsersContract.View,
-        BaseEntityActionHandler<UserEntity>,
-        SwipeRefreshLayout.OnRefreshListener {
-
-    private static final String USERS_STATE = "users_state";
-    private static final String LAYOUT_MANAGER_STATE = "layout_manager_state";
-    private static final String PAGE_STATE = "page_state";
-
-    private RecyclerView mRvUsers;
-    private ScrollChildSwipeRefreshLayout mRefreshLayout;
-
-    private ImageView mIvNoUsers;
-    private TextView mTvNoUsers;
-
-    public UsersView() {
-
-    }
+        implements UsersContract.View {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.users_frag, container, false);
+        View view = inflateFragment(inflater, container);
 
-        if (mViewModel == null) {
-            mViewModel = new UsersViewModel();
-        }
-
-        if (mPresenter == null) {
-            mPresenter = new UsersPresenter(
-                    getContext(),
-                    this,
-                    DataSources.getInstance().users());
-        }
-
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(PAGE_STATE)) {
-                int page = savedInstanceState.getInt(PAGE_STATE);
-                setPage(page);
-            }
-        }
-
-        mRvUsers = view.findViewById(R.id.rvUsers);
-        mRefreshLayout = view.findViewById(R.id.refresh_layout);
-        mIvNoUsers = view.findViewById(R.id.ivNoUsers);
-        mTvNoUsers = view.findViewById(R.id.tvNoUsers);
+        mViewModel.init(view);
+        mViewModel.setErrorClickListener(mErrorClickListener);
+        mViewModel.restoreInstanceState(savedInstanceState);
 
         initEndlessAdapter(
                 getContext(),
-                new UsersAdapter(getContext(), this, null, null),
-                mRvUsers);
+                new UsersAdapter(
+                        getContext(),
+                        mUserClickListener,
+                        mAddUserClickListener,
+                        mRemoveUserClickListener),
+                mViewModel.getRvUsers());
+
+        mViewModel.setAdapter(mAdapter);
 
         SwipeRefreshLayoutUtils.setup(
                 getContext(),
-                mRefreshLayout,
-                mRvUsers,
+                mViewModel.getRefreshLayout(),
+                mViewModel.getRvUsers(),
                 this);
 
         if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(USERS_STATE)) {
-                Parcelable usersState = savedInstanceState.getParcelable(USERS_STATE);
-                mAdapter.onRestoreInstanceState(usersState);
-            }
+            Parcelable usersState = mViewModel.getUsersState();
+            mAdapter.onRestoreInstanceState(usersState);
 
-            if (savedInstanceState.containsKey(LAYOUT_MANAGER_STATE)) {
-                Parcelable layoutManagerState = savedInstanceState.getParcelable(LAYOUT_MANAGER_STATE);
-                mRvUsers.getLayoutManager().onRestoreInstanceState(layoutManagerState);
-            }
-        } else {
-            mPresenter.refresh(mViewModel.getContainerId());
+            Parcelable layoutManagerState = mViewModel.getLayoutManagerState();
+            mViewModel.getRvUsers().getLayoutManager().onRestoreInstanceState(layoutManagerState);
         }
 
+        mPresenter.refresh(DefaultConfig.NO_ID);
+
         return view;
+    }
+
+    @Override
+    public View inflateFragment(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.users_frag, container, false);
     }
 
     @Override
@@ -101,17 +76,7 @@ public class UsersView
         super.onSaveInstanceState(outState);
 
         if (mViewModel != null) {
-            outState.putInt(PAGE_STATE, mViewModel.getPage());
-
-            if (mAdapter != null) {
-                Parcelable usersState = mAdapter.onSaveInstanceState();
-                outState.putParcelable(USERS_STATE, usersState);
-            }
-        }
-
-        if (mRvUsers != null && mRvUsers.getLayoutManager() != null) {
-            Parcelable layoutManagerState = mRvUsers.getLayoutManager().onSaveInstanceState();
-            outState.putParcelable(LAYOUT_MANAGER_STATE, layoutManagerState);
+            mViewModel.saveInstanceState(outState);
         }
     }
 
@@ -123,26 +88,100 @@ public class UsersView
     }
 
     @Override
-    public void setLoadingIndicator(final boolean active) {
+    public void onRefresh() {
+        mPresenter.refresh(DefaultConfig.NO_ID);
+    }
+
+    @Override
+    public void onUserClick(UserEntity user) {
+        mPresenter.clickUser(user);
+    }
+
+    private BaseEntityActionHandler<UserEntity> mUserClickListener = new BaseEntityActionHandler<UserEntity>() {
+        @Override
+        public void onAdapterEntityClick(UserEntity user) {
+            onUserClick(user);
+        }
+    };
+
+    @Override
+    public void onAddUserClick(UserEntity user) {
+        mPresenter.clickAddUser(user);
+    }
+
+    private BaseEntityActionHandler<UserEntity> mAddUserClickListener = new BaseEntityActionHandler<UserEntity>() {
+        @Override
+        public void onAdapterEntityClick(UserEntity user) {
+            onAddUserClick(user);
+        }
+    };
+
+    @Override
+    public void onRemoveUserClick(UserEntity user) {
+        mPresenter.clickRemoveUser(user);
+    }
+
+    private BaseEntityActionHandler<UserEntity> mRemoveUserClickListener = new BaseEntityActionHandler<UserEntity>() {
+        @Override
+        public void onAdapterEntityClick(final UserEntity user) {
+            RemoveUserDialogFragment dialogFragment = new RemoveUserDialogFragment();
+
+            dialogFragment.setListener(new RemoveUserDialogFragment.NoticeDialogListener() {
+                @Override
+                public void onDialogPositiveClick() {
+                    onRemoveUserClick(user);
+                }
+
+                @Override
+                public void onDialogNegativeClick() {
+                    // no action needed
+                }
+            });
+
+            dialogFragment.show(getFragmentManager(), "remove_user_dialog");
+        }
+    };
+
+    @Override
+    public void onErrorClick() {
+        mPresenter.clickErrorMessage();
+    }
+
+    private View.OnClickListener mErrorClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onErrorClick();
+        }
+    };
+
+    @Override
+    public void setLoadingIndicator(boolean active) {
         if (!isActive()) return;
 
-        SwipeRefreshLayoutUtils.setLoading(mRefreshLayout, active);
+        SwipeRefreshLayoutUtils.setLoading(mViewModel.getRefreshLayout(), active);
     }
 
     @Override
     public void showEntities(boolean show) {
-        mRvUsers.setVisibility(show ? View.VISIBLE : View.GONE);
+        mViewModel.getRvUsers().setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void showNoEntities(boolean show) {
+        show &= !(mViewModel.getPage() > INITIAL_PAGE); // don't show "no users" if already loaded entities
         int visibility = show ? View.VISIBLE : View.GONE;
-        mIvNoUsers.setVisibility(visibility);
-        mTvNoUsers.setVisibility(visibility);
+
+        mViewModel.getIvNoUsers().setVisibility(visibility);
+        mViewModel.getTvNoUsers().setVisibility(visibility);
     }
 
     @Override
-    public void onAdapterEntityClick(UserEntity user) {
-        mPresenter.click(user);
+    public void showErrorMessage(boolean show) {
+        mViewModel.getCvError().setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setErrorMessage(String message) {
+        mViewModel.getTvError().setText(message);
     }
 }

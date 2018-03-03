@@ -65,8 +65,6 @@ public abstract class DefaultAdapter<T>
         private T mBinding;
 
         public ViewHolder(T binding) {
-            // todo: inspect this later
-            //super(binding.getRoot());
             super(binding);
             mBinding = binding;
         }
