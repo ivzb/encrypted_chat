@@ -82,12 +82,12 @@ public class DefaultRemoteDataSource<M, API> {
         };
     }
 
-    protected Callback<Result<String>> saveCallback(
-            final SaveCallback<String> callback) {
+    protected <T> Callback<Result<T>> saveCallback(
+            final SaveCallback<T> callback) {
 
-        return new Callback<Result<String>>() {
+        return new Callback<Result<T>>() {
             @Override
-            public void onResponse(Call<Result<String>> call, Response<Result<String>> response) {
+            public void onResponse(Call<Result<T>> call, Response<Result<T>> response) {
                 int statusCode = response.code();
 
                 if (statusCode != 200) {
@@ -99,7 +99,7 @@ public class DefaultRemoteDataSource<M, API> {
             }
 
             @Override
-            public void onFailure(Call<Result<String>> call, Throwable t) {
+            public void onFailure(Call<Result<T>> call, Throwable t) {
                 callback.onFailure(sNetworkError);
             }
         };

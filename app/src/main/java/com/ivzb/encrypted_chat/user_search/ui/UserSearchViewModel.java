@@ -17,7 +17,7 @@ import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
 
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
-class SearchUserViewModel
+class UserSearchViewModel
         extends DefaultEndlessScrollViewModel<UserEntity>
         implements UserSearchContract.ViewModel {
 

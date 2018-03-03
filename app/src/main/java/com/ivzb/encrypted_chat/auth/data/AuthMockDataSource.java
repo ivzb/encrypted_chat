@@ -40,7 +40,9 @@ public class AuthMockDataSource implements AuthDataSource {
 
         if (emailMatches && passwordMatches) {
             String token = mConfig.getAuthenticationToken();
-            Result<String> result = new Result<>(token);
+            String message = "auth_token created";
+
+            Result<String> result = new Result<>(token, message);
             callback.onSuccess(result);
             return;
         }
@@ -51,7 +53,9 @@ public class AuthMockDataSource implements AuthDataSource {
     @Override
     public void register(AuthEntity auth, SaveCallback<String> callback) {
         String token = mConfig.getAuthenticationToken();
-        Result<String> result = new Result<>(token);
+        String message = "user created";
+
+        Result<String> result = new Result<>(token, message);
         callback.onSuccess(result);
     }
 }

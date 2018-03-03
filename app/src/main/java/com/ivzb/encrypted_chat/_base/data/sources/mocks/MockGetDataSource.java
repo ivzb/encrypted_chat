@@ -44,7 +44,9 @@ public abstract class MockGetDataSource<T extends BaseEntity>
             return;
         }
 
-        Result<T> result = new Result<>(mEntitiesById.get(id));
+        String message = "entity found";
+
+        Result<T> result = new Result<>(mEntitiesById.get(id), message);
         callback.onSuccess(result);
     }
 

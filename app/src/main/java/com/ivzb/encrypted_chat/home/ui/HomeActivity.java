@@ -1,9 +1,11 @@
 package com.ivzb.encrypted_chat.home.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -11,6 +13,7 @@ import android.view.View;
 
 import com.ivzb.encrypted_chat.R;
 import com.ivzb.encrypted_chat._base.ui.DefaultActivity;
+import com.ivzb.encrypted_chat.user_search.ui.UserSearchActivity;
 import com.ivzb.encrypted_chat.users.ui.UsersView;
 
 import java.util.ArrayList;
@@ -48,8 +51,19 @@ public class HomeActivity
 
     @Override
     public void onClick(View v) {
-        //Intent intent = new Intent(this, AddUserActivity.class);
-        //startActivityForResult(intent, AddUserActivity.REQUEST_ADD_USER);
+        Intent intent = new Intent(this, UserSearchActivity.class);
+        startActivityForResult(intent, UserSearchActivity.REQUEST_ADD_USER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == UserSearchActivity.REQUEST_ADD_USER && resultCode == Activity.RESULT_OK) {
+            String message = data.getStringExtra(UserSearchActivity.MESSAGE_EXTRA);
+
+            if (message == null || message.equals("")) return;
+
+            Snackbar.make(findViewById(R.id.fabAddUser), message, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     private ViewPagerMetadata initMetadata() {

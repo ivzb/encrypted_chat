@@ -1,5 +1,7 @@
 package com.ivzb.encrypted_chat.user_search.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -18,7 +20,7 @@ import com.ivzb.encrypted_chat.users.ui.RemoveUserDialogFragment;
 import com.ivzb.encrypted_chat.users.ui.UsersAdapter;
 import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
 
-public class SearchUserView
+public class UserSearchView
         extends DefaultEndlessScrollView<UserEntity, UserSearchContract.Presenter, UserSearchContract.ViewModel>
         implements UserSearchContract.View {
 
@@ -183,5 +185,14 @@ public class SearchUserView
     @Override
     public void setErrorMessage(String message) {
         mViewModel.getTvError().setText(message);
+    }
+
+    @Override
+    public void finish(String message) {
+        Intent intent = new Intent();
+        intent.putExtra(UserSearchActivity.MESSAGE_EXTRA, message);
+
+        getActivity().setResult(Activity.RESULT_OK, intent);
+        getActivity().finish();
     }
 }

@@ -23,6 +23,8 @@ class UserSearchContract {
         void onAddUserClick(UserEntity user);
         void onRemoveUserClick(UserEntity user);
         void onErrorClick();
+
+        void finish(String message);
     }
 
     interface Presenter extends BaseEndlessScrollPresenter<UserEntity> {

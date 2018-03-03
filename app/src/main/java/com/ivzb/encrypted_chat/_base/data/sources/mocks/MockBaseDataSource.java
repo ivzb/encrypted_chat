@@ -44,8 +44,9 @@ public abstract class MockBaseDataSource<T extends BaseEntity>
         }
 
         mEntitiesByContainerId.get(entity.getContainerId()).add(entity);
+        String message = "entity saved";
 
-        Result<String> result = new Result<>(entity.getId());
+        Result<String> result = new Result<>(entity.getId(), message);
         callback.onSuccess(result);
     }
 }

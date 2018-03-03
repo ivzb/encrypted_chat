@@ -59,7 +59,9 @@ public abstract class MockReceiveDataSource<T extends BaseEntity>
         }
 
         List<T> data = entities.subList(start, end);
-        Result<List<T>> result = new Result<>(data);
+        String message = "entities found";
+
+        Result<List<T>> result = new Result<>(data, message);
 
         callback.onSuccess(result, page);
     }

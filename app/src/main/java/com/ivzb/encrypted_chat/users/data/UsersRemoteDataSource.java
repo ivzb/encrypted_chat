@@ -53,4 +53,16 @@ public class UsersRemoteDataSource
         final Call<Result<List<UserEntity>>> call = mApiService.load(page);
         call.enqueue(loadCallback(page, callback));
     }
+
+    @Override
+    public void add(String id, SaveCallback<Boolean> callback) {
+        final Call<Result<Boolean>> call = mApiService.add(id);
+        call.enqueue(saveCallback(callback));
+    }
+
+    @Override
+    public void remove(String id, SaveCallback<Boolean> callback) {
+        final Call<Result<Boolean>> call = mApiService.remove(id);
+        call.enqueue(saveCallback(callback));
+    }
 }

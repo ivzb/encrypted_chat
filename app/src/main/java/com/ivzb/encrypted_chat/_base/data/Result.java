@@ -10,8 +10,9 @@ public class Result<T> {
     @SerializedName("results")
     T results;
 
-    public Result(T results) {
+    public Result(T results, String message) {
         this.results = results;
+        this.message = message;
     }
 
     public String getMessage() {

@@ -11,6 +11,9 @@ import com.ivzb.encrypted_chat.utils.ActivityUtils;
 
 public class UserSearchActivity extends DefaultActivity {
 
+    public static final int REQUEST_ADD_USER = 128;
+    public static final String MESSAGE_EXTRA = "message_extra";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +30,11 @@ public class UserSearchActivity extends DefaultActivity {
             actionBar.setTitle(R.string.search_user);
         }
 
-        SearchUserView view =
-                (SearchUserView) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        UserSearchView view =
+                (UserSearchView) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
 
         if (view == null) {
-            view = new SearchUserView();
+            view = new UserSearchView();
 
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(),
@@ -39,8 +42,8 @@ public class UserSearchActivity extends DefaultActivity {
                     R.id.contentFrame);
         }
 
-        view.setViewModel(new SearchUserViewModel());
-        view.setPresenter(new SearchUserPresenter(
+        view.setViewModel(new UserSearchViewModel());
+        view.setPresenter(new UserSearchPresenter(
                 this,
                 view,
                 DataSources.getInstance().users()));
