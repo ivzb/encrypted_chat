@@ -16,6 +16,8 @@ import com.ivzb.encrypted_chat.R;
 import com.ivzb.encrypted_chat._base.data.config.DefaultConfig;
 import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollView;
+import com.ivzb.encrypted_chat._base.ui.prompt.DialogListener;
+import com.ivzb.encrypted_chat._base.ui.prompt.PromptDialogFragment;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
 import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
@@ -124,19 +126,19 @@ public class UsersView
     private BaseEntityActionHandler<UserEntity> mRemoveUserClickListener = new BaseEntityActionHandler<UserEntity>() {
         @Override
         public void onAdapterEntityClick(final UserEntity user) {
-            RemoveUserDialogFragment dialogFragment = new RemoveUserDialogFragment();
+            PromptDialogFragment dialogFragment = new PromptDialogFragment()
+                .setTitle(getResources().getString(R.string.remove_user))
+                .setListener(new DialogListener() {
+                    @Override
+                    public void onDialogPositiveClick() {
+                                                              onRemoveUserClick(user);
+                                                                                      }
 
-            dialogFragment.setListener(new RemoveUserDialogFragment.NoticeDialogListener() {
-                @Override
-                public void onDialogPositiveClick() {
-                    onRemoveUserClick(user);
-                }
-
-                @Override
-                public void onDialogNegativeClick() {
-                    // no action needed
-                }
-            });
+                    @Override
+                    public void onDialogNegativeClick() {
+                        // no action needed
+                    }
+                });
 
             dialogFragment.show(getFragmentManager(), "remove_user_dialog");
         }

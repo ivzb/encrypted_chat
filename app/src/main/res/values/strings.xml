@@ -12,6 +12,10 @@
     <string name="add_user">Add user</string>
     <string name="remove_user">Remove user</string>
     <string name="no_users_found">No users found.</string>
+
+    <string name="remove_conversation">Remove conversation.</string>
+    <string name="no_conversations_found">No conversations found.</string>
+
     <string name="remove">Remove</string>
     <string name="cancel">Cancel</string>
 </resources>

@@ -13,13 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ivzb.encrypted_chat.R;
-import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
-import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollView;
-import com.ivzb.encrypted_chat.users.data.UserEntity;
-import com.ivzb.encrypted_chat.users.ui.RemoveUserDialogFragment;
-import com.ivzb.encrypted_chat.users.ui.UsersAdapter;
 import com.ivzb.encrypted_chat.users.ui.UsersView;
-import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
 
 public class UserSearchView
         extends UsersView

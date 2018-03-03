@@ -1,4 +1,4 @@
-package com.ivzb.encrypted_chat.users.ui;
+package com.ivzb.encrypted_chat._base.ui.prompt;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -8,21 +8,25 @@ import android.support.v7.app.AlertDialog;
 
 import com.ivzb.encrypted_chat.R;
 
-public class RemoveUserDialogFragment extends DialogFragment {
+public class PromptDialogFragment extends DialogFragment {
 
-    public interface NoticeDialogListener {
-        void onDialogPositiveClick();
-        void onDialogNegativeClick();
+    private String mTitle;
+    private DialogListener mListener;
+
+    public PromptDialogFragment() {
+        mTitle = "Are you sure?";
     }
 
-    private NoticeDialogListener mListener;
+    public PromptDialogFragment setTitle(String title) {
+        mTitle = title;
 
-    public RemoveUserDialogFragment() {
-
+        return this;
     }
 
-    public void setListener(NoticeDialogListener listener) {
+    public PromptDialogFragment setListener(DialogListener listener) {
         mListener = listener;
+
+        return this;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class RemoveUserDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder
-                .setTitle(R.string.remove_user)
+                .setTitle(mTitle)
                 .setPositiveButton(R.string.remove, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (mListener != null) mListener.onDialogPositiveClick();
@@ -45,3 +49,4 @@ public class RemoveUserDialogFragment extends DialogFragment {
         return builder.create();
     }
 }
+
