@@ -1,5 +1,7 @@
 package com.ivzb.encrypted_chat._base.data._contracts.generators;
 
+import java.util.List;
+
 public interface BaseGeneratorConfig {
 
     String getId();
@@ -8,6 +10,7 @@ public interface BaseGeneratorConfig {
     String getAuthenticationToken();
 
     String getWord();
+    List<String> getWords(int size);
     String getSentence();
 
     int getNumber();

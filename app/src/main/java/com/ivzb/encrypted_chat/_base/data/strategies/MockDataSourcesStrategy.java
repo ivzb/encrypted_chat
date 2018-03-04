@@ -7,6 +7,8 @@ import com.ivzb.encrypted_chat._base.data.generators.DefaultGeneratorConfig;
 import com.ivzb.encrypted_chat._base.data.seed.DefaultSeed;
 import com.ivzb.encrypted_chat.auth.data.AuthDataSource;
 import com.ivzb.encrypted_chat.auth.data.AuthMockDataSource;
+import com.ivzb.encrypted_chat.conversations.data.ConversationsDataSource;
+import com.ivzb.encrypted_chat.conversations.data.ConversationsMockDataSource;
 import com.ivzb.encrypted_chat.users.data.UsersDataSource;
 import com.ivzb.encrypted_chat.users.data.UsersMockDataSource;
 
@@ -30,5 +32,10 @@ public class MockDataSourcesStrategy implements BaseDataSourcesStrategy {
     @Override
     public UsersDataSource users() {
         return UsersMockDataSource.getInstance();
+    }
+
+    @Override
+    public ConversationsDataSource conversations() {
+        return ConversationsMockDataSource.getInstance();
     }
 }

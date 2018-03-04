@@ -42,8 +42,8 @@ public class ConversationsContract {
 
         void setAdapter(BaseAdapter<ConversationEntity> adapter);
 
-        Parcelable getConversationState();
-        void setConversationState(Parcelable state);
+        Parcelable getConversationsState();
+        void setConversationsState(Parcelable state);
 
         Parcelable getLayoutManagerState();
         void setLayoutManagerState(Parcelable state);

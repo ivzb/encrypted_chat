@@ -3,6 +3,7 @@ package com.ivzb.encrypted_chat._base.data.generators;
 import com.ivzb.encrypted_chat._base.data._contracts.generators.BaseGeneratorConfig;
 import com.ivzb.encrypted_chat._base.data.config.MockConfig;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -61,6 +62,11 @@ public class DefaultGeneratorConfig implements BaseGeneratorConfig {
     @Override
     public String getWord() {
         return mFaker.lorem.word();
+    }
+
+    @Override
+    public List<String> getWords(int size) {
+        return mFaker.lorem.words(size);
     }
 
     @Override

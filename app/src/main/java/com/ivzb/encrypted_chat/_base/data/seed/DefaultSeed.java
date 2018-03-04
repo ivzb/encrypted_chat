@@ -4,6 +4,8 @@ import com.ivzb.encrypted_chat._base.data._contracts.generators.BaseGeneratorCon
 import com.ivzb.encrypted_chat._base.data._contracts.seed.BaseSeed;
 import com.ivzb.encrypted_chat._base.data._contracts.sources.mocks.SeedDataSource;
 import com.ivzb.encrypted_chat._base.data.generators.DefaultGeneratorConfig;
+import com.ivzb.encrypted_chat.conversations.data.ConversationEntity;
+import com.ivzb.encrypted_chat.conversations.data.ConversationsMockDataSource;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.users.data.UsersMockDataSource;
 
@@ -19,5 +21,7 @@ public class DefaultSeed implements BaseSeed {
     public void seed() {
         ((SeedDataSource<UserEntity>)UsersMockDataSource.getInstance()).seed(null, mConfig.getNumber(30));
         ((SeedDataSource<UserEntity>)UsersMockDataSource.getInstance()).seed(mConfig.getEmail(), mConfig.getNumber(30));
+
+        ((SeedDataSource<ConversationEntity>) ConversationsMockDataSource.getInstance()).seed(null, mConfig.getNumber(30));
     }
 }

@@ -2,6 +2,7 @@ package com.ivzb.encrypted_chat._base.data;
 
 import com.ivzb.encrypted_chat._base.data._contracts.strategies.BaseDataSourcesStrategy;
 import com.ivzb.encrypted_chat.auth.data.AuthDataSource;
+import com.ivzb.encrypted_chat.conversations.data.ConversationsDataSource;
 import com.ivzb.encrypted_chat.users.data.UsersDataSource;
 
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
@@ -41,5 +42,10 @@ public class DataSources implements BaseDataSourcesStrategy {
     @Override
     public UsersDataSource users() {
         return mStrategy.users();
+    }
+
+    @Override
+    public ConversationsDataSource conversations() {
+        return mStrategy.conversations();
     }
 }

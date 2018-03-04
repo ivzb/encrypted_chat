@@ -14,6 +14,9 @@ import android.view.View;
 import com.ivzb.encrypted_chat.R;
 import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat._base.ui.DefaultActivity;
+import com.ivzb.encrypted_chat.conversations.ui.ConversationsPresenter;
+import com.ivzb.encrypted_chat.conversations.ui.ConversationsView;
+import com.ivzb.encrypted_chat.conversations.ui.ConversationsViewModel;
 import com.ivzb.encrypted_chat.user_search.ui.UserSearchActivity;
 import com.ivzb.encrypted_chat.users.ui.UsersContract;
 import com.ivzb.encrypted_chat.users.ui.UsersPresenter;
@@ -73,6 +76,20 @@ public class HomeActivity
     private ViewPagerMetadata initMetadata() {
         ViewPagerMetadata metadata = new ViewPagerMetadata(2);
 
+        metadata.add(
+                initUsersView(),
+                "Users",
+                R.drawable.ic_users);
+
+        metadata.add(
+                initConversationsView(),
+                "Conversations",
+                R.drawable.ic_chat);
+
+        return metadata;
+    }
+
+    private Fragment initUsersView() {
         UsersView usersView = new UsersView();
 
         usersView.setViewModel(new UsersViewModel());
@@ -81,17 +98,19 @@ public class HomeActivity
                 usersView,
                 DataSources.getInstance().users()));
 
-        metadata.add(
-                usersView,
-                "Users",
-                R.drawable.ic_users);
+        return usersView;
+    }
 
-        //metadata.add(
-        //        new ConversationsView(),
-        //        "Conversations",
-        //        R.drawable.ic_conversations);
+    private Fragment initConversationsView() {
+        ConversationsView conversationsView = new ConversationsView();
 
-        return metadata;
+        conversationsView.setViewModel(new ConversationsViewModel());
+        conversationsView.setPresenter(new ConversationsPresenter(
+                this,
+                conversationsView,
+                DataSources.getInstance().conversations()));
+
+        return conversationsView;
     }
 
     private class ViewPagerMetadata {
