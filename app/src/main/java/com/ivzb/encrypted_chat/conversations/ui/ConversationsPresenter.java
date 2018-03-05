@@ -33,8 +33,10 @@ public class ConversationsPresenter
     }
 
     @Override
-    public void clickConversation(ConversationEntity user) {
-        // todo
+    public void clickConversation(ConversationEntity conversation) {
+        if (!mView.isActive()) return;
+
+        mView.openConversation(conversation);
     }
 
     @Override

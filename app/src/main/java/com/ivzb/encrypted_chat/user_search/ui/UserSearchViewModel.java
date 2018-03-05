@@ -1,22 +1,11 @@
 package com.ivzb.encrypted_chat.user_search.ui;
 
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
-import com.ivzb.encrypted_chat._base.ui._contracts.BaseAdapter;
-import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollViewModel;
-import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.users.ui.UsersViewModel;
-import com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout;
-
-import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
 class UserSearchViewModel
         extends UsersViewModel

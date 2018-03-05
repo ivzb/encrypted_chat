@@ -9,8 +9,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ivzb.encrypted_chat.R;
-import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.encrypted_chat._base.ui.DefaultActionHandlerAdapter;
+import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 
 public class UsersAdapter

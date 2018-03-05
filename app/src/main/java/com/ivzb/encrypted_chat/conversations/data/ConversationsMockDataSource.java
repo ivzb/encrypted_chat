@@ -4,12 +4,12 @@ import com.ivzb.encrypted_chat._base.data.Result;
 import com.ivzb.encrypted_chat._base.data._contracts.generators.BaseGeneratorConfig;
 import com.ivzb.encrypted_chat._base.data.callbacks.SaveCallback;
 import com.ivzb.encrypted_chat._base.data.generators.DefaultGeneratorConfig;
-import com.ivzb.encrypted_chat._base.data.sources.mocks.MockReceiveDataSource;
+import com.ivzb.encrypted_chat._base.data.sources.mocks.MockLoadDataSource;
 
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
 public class ConversationsMockDataSource
-        extends MockReceiveDataSource<ConversationEntity>
+        extends MockLoadDataSource<ConversationEntity>
         implements ConversationsDataSource {
 
     private static ConversationsDataSource sINSTANCE;

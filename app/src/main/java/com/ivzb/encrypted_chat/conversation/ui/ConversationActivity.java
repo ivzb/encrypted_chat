@@ -24,7 +24,7 @@ public class ConversationActivity extends DefaultActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(R.string.search_user);
+            actionBar.setTitle(R.string.conversation);
         }
 
         ConversationView view =
@@ -43,7 +43,7 @@ public class ConversationActivity extends DefaultActivity {
         view.setPresenter(new ConversationPresenter(
                 this,
                 view,
-                DataSources.getInstance().conversations()));
+                DataSources.getInstance().messages()));
     }
 }
 

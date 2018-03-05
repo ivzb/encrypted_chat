@@ -1,7 +1,7 @@
 package com.ivzb.encrypted_chat.conversations.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,7 @@ import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.encrypted_chat._base.ui.prompt.DialogListener;
 import com.ivzb.encrypted_chat._base.ui.prompt.PromptDialogFragment;
+import com.ivzb.encrypted_chat.conversation.ui.ConversationActivity;
 import com.ivzb.encrypted_chat.conversations.data.ConversationEntity;
 import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
 
@@ -25,37 +26,9 @@ public class ConversationsView
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflateFragment(inflater, container);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mViewModel.init(view);
-        mViewModel.setErrorClickListener(mErrorClickListener);
-        mViewModel.restoreInstanceState(savedInstanceState);
-
-        initEndlessAdapter(
-                getContext(),
-                new ConversationsAdapter(
-                        getContext(),
-                        mConversationClickListener,
-                        mRemoveConversationClickListener),
-                mViewModel.getRvConversations());
-
-        mViewModel.setAdapter(mAdapter);
-
-        SwipeRefreshLayoutUtils.setup(
-                getContext(),
-                mViewModel.getRefreshLayout(),
-                mViewModel.getRvConversations(),
-                this);
-
-        if (savedInstanceState != null) {
-            Parcelable conversationsState = mViewModel.getConversationsState();
-            mAdapter.onRestoreInstanceState(conversationsState);
-
-            Parcelable layoutManagerState = mViewModel.getLayoutManagerState();
-            mViewModel.getRvConversations().getLayoutManager().onRestoreInstanceState(layoutManagerState);
-        }
-
+        // todo: refresh with conversation id
         mPresenter.refresh(DefaultConfig.NO_ID);
 
         return view;
@@ -64,6 +37,17 @@ public class ConversationsView
     @Override
     public View inflateFragment(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.conversations_frag, container, false);
+    }
+
+    @Override
+    public void initEndlessAdapter() {
+        initEndlessAdapter(
+                getContext(),
+                new ConversationsAdapter(
+                        getContext(),
+                        mConversationClickListener,
+                        mRemoveConversationClickListener),
+                mViewModel.getRvConversations());
     }
 
     @Override
@@ -76,10 +60,10 @@ public class ConversationsView
     }
 
     @Override
-    public void openUi(ConversationEntity conversation) {
-        //Intent intent = new Intent(getContext(), ConversationActivity.class);
-        //intent.putExtra(ConversationActivity.EXTRA_USER_ID, conversation.getId());
-        //startActivity(intent);
+    public void openConversation(ConversationEntity conversation) {
+        Intent intent = new Intent(getContext(), ConversationActivity.class);
+//        intent.putExtra(ConversationActivity.EXTRA_CONVERSATION_ID, conversation.getId());
+        startActivity(intent);
     }
 
     @Override

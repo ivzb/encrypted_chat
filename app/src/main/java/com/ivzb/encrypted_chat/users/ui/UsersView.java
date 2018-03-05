@@ -1,8 +1,7 @@
 package com.ivzb.encrypted_chat.users.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import com.ivzb.encrypted_chat._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.encrypted_chat._base.ui.prompt.DialogListener;
 import com.ivzb.encrypted_chat._base.ui.prompt.PromptDialogFragment;
+import com.ivzb.encrypted_chat.conversation.ui.ConversationActivity;
 import com.ivzb.encrypted_chat.users.data.UserEntity;
 
 public class UsersView
@@ -46,10 +46,10 @@ public class UsersView
     }
 
     @Override
-    public void openUi(UserEntity user) {
-        //Intent intent = new Intent(getContext(), UserActivity.class);
-        //intent.putExtra(UserActivity.EXTRA_USER_ID, user.getId());
-        //startActivity(intent);
+    public void openConversation(UserEntity user) {
+        Intent intent = new Intent(getContext(), ConversationActivity.class);
+//        intent.putExtra(ConversationActivity.EXTRA_USER_ID, user.getId());
+        startActivity(intent);
     }
 
     @Override

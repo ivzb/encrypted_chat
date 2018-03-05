@@ -12,13 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ivzb.encrypted_chat._base.data._contracts.entities.BaseEntity;
-import com.ivzb.encrypted_chat._base.data.config.DefaultConfig;
+import com.ivzb.encrypted_chat._base.ui.DefaultActionHandlerAdapter;
 import com.ivzb.encrypted_chat._base.ui.DefaultView;
 import com.ivzb.encrypted_chat._base.ui._contracts.BaseAdapter;
 import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollViewModel;
 import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollView;
-import com.ivzb.encrypted_chat._base.ui.DefaultActionHandlerAdapter;
+import com.ivzb.encrypted_chat._base.ui._contracts.endless.BaseEndlessScrollViewModel;
 import com.ivzb.encrypted_chat.utils.ui.SwipeRefreshLayoutUtils;
 
 import java.util.List;
@@ -87,11 +86,6 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
     public void clearEntities() {
         mAdapter.clear();
         mScrollListener.resetState();
-    }
-
-    @Override
-    public void openUi(M entity) {
-
     }
 
     @Override

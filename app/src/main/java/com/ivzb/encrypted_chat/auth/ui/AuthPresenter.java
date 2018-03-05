@@ -9,8 +9,6 @@ import com.ivzb.encrypted_chat._base.ui.DefaultPresenter;
 import com.ivzb.encrypted_chat.auth.data.AuthDataSource;
 import com.ivzb.encrypted_chat.auth.data.AuthEntity;
 
-import org.w3c.dom.UserDataHandler;
-
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
 public class AuthPresenter

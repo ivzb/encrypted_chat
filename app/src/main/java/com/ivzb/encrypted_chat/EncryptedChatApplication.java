@@ -8,7 +8,6 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.ivzb.encrypted_chat._base.data.DataSources;
 import com.ivzb.encrypted_chat._base.data.strategies.MockDataSourcesStrategy;
-import com.ivzb.encrypted_chat._base.data.strategies.RemoteDataSourcesStrategy;
 
 import okhttp3.OkHttpClient;
 

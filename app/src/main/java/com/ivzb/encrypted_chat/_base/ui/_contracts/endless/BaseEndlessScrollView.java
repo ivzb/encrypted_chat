@@ -23,8 +23,6 @@ public interface BaseEndlessScrollView<M, P extends BasePresenter, VM extends Ba
     void showNoEntities(boolean show);
     void clearEntities();
 
-    void openUi(M entity);
-
     int getPage();
     void setPage(int page);
 

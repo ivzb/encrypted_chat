@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollPresenter;
 import com.ivzb.encrypted_chat.conversation.data.MessageEntity;
-import com.ivzb.encrypted_chat.conversations.data.ConversationsDataSource;
+import com.ivzb.encrypted_chat.conversation.data.MessagesDataSource;
 
 public class ConversationPresenter
         extends DefaultEndlessScrollPresenter<MessageEntity, ConversationContract.View, MessagesDataSource>
@@ -14,7 +14,7 @@ public class ConversationPresenter
     protected static final int REQUEST_USER_SAVE = 301;
     protected static final int RESULT_OK = -1;
 
-    public UsersPresenter(
+    public ConversationPresenter(
             @NonNull Context context,
             @NonNull ConversationContract.View view,
             @NonNull MessagesDataSource dataSource) {

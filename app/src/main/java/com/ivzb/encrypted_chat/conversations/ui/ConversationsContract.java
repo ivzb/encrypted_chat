@@ -21,6 +21,8 @@ public class ConversationsContract {
         void onConversationClick(ConversationEntity conversation);
         void onRemoveConversationClick(ConversationEntity conversation);
         void onErrorClick();
+
+        void openConversation(ConversationEntity conversation);
     }
 
     public interface Presenter extends BaseEndlessScrollPresenter<ConversationEntity> {

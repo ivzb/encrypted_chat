@@ -3,11 +3,7 @@ package com.ivzb.encrypted_chat.user_search.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.ivzb.encrypted_chat._base.data.Result;
-import com.ivzb.encrypted_chat._base.data.callbacks.SaveCallback;
 import com.ivzb.encrypted_chat._base.data.config.DefaultConfig;
-import com.ivzb.encrypted_chat._base.ui.endless.DefaultEndlessScrollPresenter;
-import com.ivzb.encrypted_chat.users.data.UserEntity;
 import com.ivzb.encrypted_chat.users.data.UsersDataSource;
 import com.ivzb.encrypted_chat.users.ui.UsersPresenter;
 

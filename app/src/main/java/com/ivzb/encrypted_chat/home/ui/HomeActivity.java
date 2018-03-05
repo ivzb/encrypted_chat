@@ -18,7 +18,6 @@ import com.ivzb.encrypted_chat.conversations.ui.ConversationsPresenter;
 import com.ivzb.encrypted_chat.conversations.ui.ConversationsView;
 import com.ivzb.encrypted_chat.conversations.ui.ConversationsViewModel;
 import com.ivzb.encrypted_chat.user_search.ui.UserSearchActivity;
-import com.ivzb.encrypted_chat.users.ui.UsersContract;
 import com.ivzb.encrypted_chat.users.ui.UsersPresenter;
 import com.ivzb.encrypted_chat.users.ui.UsersView;
 import com.ivzb.encrypted_chat.users.ui.UsersViewModel;

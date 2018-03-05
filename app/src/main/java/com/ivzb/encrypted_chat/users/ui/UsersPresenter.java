@@ -34,7 +34,9 @@ public class UsersPresenter
 
     @Override
     public void clickUser(UserEntity user) {
-        // todo
+        if (!mView.isActive()) return;
+
+        mView.openConversation(user);
     }
 
     @Override

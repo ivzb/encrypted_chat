@@ -9,17 +9,16 @@ import com.ivzb.encrypted_chat._base.data._contracts.sources.BaseDataSource;
 import com.ivzb.encrypted_chat._base.data.callbacks.SaveCallback;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
-public abstract class MockBaseDataSource<T extends BaseEntity>
-        extends MockReceiveDataSource<T>
+public abstract class MockSaveDataSource<T extends BaseEntity>
+        extends MockLoadDataSource<T>
         implements BaseDataSource<T> {
 
     protected static String sNoEntityFailMessage = "No entity to save.";
 
-    public MockBaseDataSource(BaseGenerator<T> generator) {
+    public MockSaveDataSource(BaseGenerator<T> generator) {
         super(generator);
     }
 

@@ -61,19 +61,6 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
     }
 
     @Override
-    public void click(M entity) {
-        if (!mView.isActive()) return;
-
-        if (entity == null) {
-            mView.setErrorMessage("Missing entity.");
-            mView.showErrorMessage(true);
-            return;
-        }
-
-        mView.openUi(entity);
-    }
-
-    @Override
     public void clickError() {
         if (!mView.isActive()) return;
 

@@ -1,6 +1,7 @@
 package com.ivzb.encrypted_chat.user_search.ui;
 
 import android.widget.EditText;
+
 import com.ivzb.encrypted_chat.users.ui.UsersContract;
 
 class UserSearchContract {

@@ -15,14 +15,14 @@ import java.util.List;
 
 import static com.ivzb.encrypted_chat.utils.Preconditions.checkNotNull;
 
-public abstract class MockReceiveDataSource<T extends BaseEntity>
+public abstract class MockLoadDataSource<T extends BaseEntity>
         extends MockGetDataSource<T>
         implements ReceiveDataSource<T>, SeedDataSource<T> {
 
     protected static int sPageSize = 9;
     protected static String sInvalidPageFailMessage = "Please provide non negative page.";
 
-    public MockReceiveDataSource(BaseGenerator<T> generator) {
+    public MockLoadDataSource(BaseGenerator<T> generator) {
         super(generator);
     }
 

@@ -10,6 +10,7 @@ public class ConversationContract {
     public interface View extends BaseEndlessScrollView<MessageEntity, Presenter, ViewModel> {
 
         void onSendMessage(MessageEntity message);
+        void onClickMessage(MessageEntity message);
     }
 
     public interface Presenter extends BaseEndlessScrollPresenter<MessageEntity> {
