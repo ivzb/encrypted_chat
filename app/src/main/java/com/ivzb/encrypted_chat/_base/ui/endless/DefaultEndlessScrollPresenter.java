@@ -73,6 +73,14 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
         mView.openUi(entity);
     }
 
+    @Override
+    public void clickError() {
+        if (!mView.isActive()) return;
+
+        mView.showErrorMessage(false);
+        mView.setErrorMessage("");
+    }
+
     private LoadCallback<M> mLoadCallback = new LoadCallback<M>() {
         @Override
         public void onSuccess(Result<List<M>> result, int page) {

@@ -55,14 +55,6 @@ public class UsersPresenter
         mDataSource.remove(user.getId(), mUserSaveCallback);
     }
 
-    @Override
-    public void clickErrorMessage() {
-        if (!mView.isActive()) return;
-
-        mView.showErrorMessage(false);
-        mView.setErrorMessage("");
-    }
-
     private SaveCallback<Boolean> mUserSaveCallback = new SaveCallback<Boolean>() {
         @Override
         public void onSuccess(Result<Boolean> result) {

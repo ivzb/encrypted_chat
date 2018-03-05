@@ -16,6 +16,8 @@
     <string name="remove_conversation">Remove conversation.</string>
     <string name="no_conversations_found">No conversations found.</string>
 
+    <string name="conversation">Conversation</string>
+
     <string name="remove">Remove</string>
     <string name="cancel">Cancel</string>
 </resources>

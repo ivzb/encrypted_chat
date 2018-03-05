@@ -15,6 +15,7 @@ public interface BaseEndlessScrollView<M, P extends BasePresenter, VM extends Ba
 
     void onActivityResult(int requestCode, int resultCode, Intent data);
 
+    void initEndlessAdapter();
     void setLoadingIndicator(boolean active);
 
     void addEntities(List<M> entities);
@@ -28,6 +29,9 @@ public interface BaseEndlessScrollView<M, P extends BasePresenter, VM extends Ba
     void setPage(int page);
 
     void setMore(boolean more);
+
+    // todo: replace with self-closing error
+    void onClickError();
 
     RecyclerView.LayoutManager instantiateLayoutManager(Context context);
 }
