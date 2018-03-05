@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout
+    <com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,7 +16,7 @@
             android:id="@+id/rvConversations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </com.ivzb.encrypted_chat.utils.ui.ScrollChildSwipeRefreshLayout>
+    </com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/ivNoConversations"
