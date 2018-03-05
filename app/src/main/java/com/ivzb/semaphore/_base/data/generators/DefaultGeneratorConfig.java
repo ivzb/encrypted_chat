@@ -3,6 +3,7 @@ package com.ivzb.semaphore._base.data.generators;
 import com.ivzb.semaphore._base.data._contracts.generators.BaseGeneratorConfig;
 import com.ivzb.semaphore._base.data.config.MockConfig;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -57,6 +58,11 @@ public class DefaultGeneratorConfig implements BaseGeneratorConfig {
     @Override
     public String getAuthenticationToken() {
         return MockConfig.Token;
+    }
+
+    @Override
+    public Date getDate() {
+        return mFaker.date.backward();
     }
 
     @Override

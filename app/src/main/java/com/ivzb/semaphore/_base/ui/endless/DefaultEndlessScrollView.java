@@ -129,8 +129,7 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
         recyclerView.setLayoutManager(layoutManager);
 
         mScrollListener = new DefaultEndlessScrollListener(
-                layoutManager,
-                mViewModel.getPage()) {
+                layoutManager) {
 
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {

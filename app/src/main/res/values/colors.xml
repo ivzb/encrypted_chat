@@ -5,6 +5,9 @@
     <color name="accent">#FF4081</color>
     <color name="light">#e3f2fd</color>
 
+    <color name="me">#e3f2fd</color>
+    <color name="friend">#ede7f6</color>
+
     <color name="errorPrimary">#ffcdd2</color>
     <color name="errorPrimaryDark">#b61827</color>
 </resources>

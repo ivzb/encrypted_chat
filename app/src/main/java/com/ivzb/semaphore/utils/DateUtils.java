@@ -7,16 +7,17 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class DateUtils {
-    private static final String PATTERN = "EEEE, MMMM d, yyyy  HH:mm";
-    private static final String PATTERN_ISO = "yyyy-MM-dd'T'HH:mm:ssZ";
+
+    public static final String PATTERN = "EEEE, MMMM d, yyyy  HH:mm";
+    public static final String PATTERN_TIME = "HH:mm";
+    public static final String PATTERN_ISO = "yyyy-MM-dd'T'HH:mm:ssZ";
 
     public static String format(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN, Locale.getDefault());
-        return simpleDateFormat.format(date);
+        return format(date, PATTERN);
     }
 
-    public static String formatToISO(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(PATTERN_ISO, Locale.getDefault());
+    public static String format(Date date, String pattern) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
         return simpleDateFormat.format(date);
     }
 
