@@ -36,6 +36,12 @@ public class UsersPresenter
     public void clickUser(UserEntity user) {
         if (!mView.isActive()) return;
 
+        if (user == null) {
+            mView.setErrorMessage("Missing user.");
+            mView.showErrorMessage(true);
+            return;
+        }
+
         mView.openConversation(user);
     }
 

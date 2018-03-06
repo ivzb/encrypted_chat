@@ -51,7 +51,7 @@ public class MessagesRemoteDataSource
             final @NonNull LoadCallback<MessageEntity> callback) {
 
         final Call<Result<List<MessageEntity>>> call = mApiService.load(page);
-        call.enqueue(loadCallback(page, callback));
+        call.enqueue(loadCallback(callback));
     }
 
     @Override

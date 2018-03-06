@@ -12,8 +12,6 @@ class UserSearchViewModel
         implements UserSearchContract.ViewModel {
 
     private static final String EMAIL_TEXT_STATE = "email_text_state";
-    private static final String EMAIL_VISIBILITY_STATE = "email_visibility_state";
-
 
     private EditText mEtEmail;
 
@@ -34,9 +32,6 @@ class UserSearchViewModel
     private void saveEmailState(Bundle outState) {
         String emailText = mEtEmail.getText().toString();
         outState.putString(EMAIL_TEXT_STATE, emailText);
-
-        int emailVisibility = mEtEmail.getVisibility();
-        outState.putInt(EMAIL_VISIBILITY_STATE, emailVisibility);
     }
 
     @Override
@@ -52,11 +47,6 @@ class UserSearchViewModel
         if (state.containsKey(EMAIL_TEXT_STATE)) {
             String email = state.getString(EMAIL_TEXT_STATE);
             getEtEmail().setText(email);
-        }
-
-        if (state.containsKey(EMAIL_VISIBILITY_STATE)) {
-            int visibility = state.getInt(EMAIL_VISIBILITY_STATE);
-            getEtEmail().setVisibility(visibility);
         }
     }
 

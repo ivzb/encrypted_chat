@@ -3,6 +3,8 @@ package com.ivzb.semaphore.conversation.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.ivzb.semaphore._base.data.Result;
+import com.ivzb.semaphore._base.data.callbacks.SaveCallback;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollPresenter;
 import com.ivzb.semaphore.conversation.data.MessageEntity;
 import com.ivzb.semaphore.conversation.data.MessagesDataSource;
@@ -11,10 +13,7 @@ public class ConversationPresenter
         extends DefaultEndlessScrollPresenter<MessageEntity, ConversationContract.View, MessagesDataSource>
         implements ConversationContract.Presenter {
 
-    protected static final int REQUEST_USER_SAVE = 301;
-    protected static final int RESULT_OK = -1;
-
-    public ConversationPresenter(
+    ConversationPresenter(
             @NonNull Context context,
             @NonNull ConversationContract.View view,
             @NonNull MessagesDataSource dataSource) {
@@ -23,15 +22,29 @@ public class ConversationPresenter
     }
 
     @Override
-    public void result(int requestCode, int resultCode, String message) {
-        if (requestCode == REQUEST_USER_SAVE && resultCode == RESULT_OK) {
-            mView.setSuccessMessage(message);
-            mView.showSuccessMessage(true);
-        }
-    }
+    public void sendMessage(final MessageEntity message) {
+        if (!mView.isActive()) return;
 
-    @Override
-    public void sendMessage(MessageEntity message) {
-        // todo
+        mView.setLoadingIndicator(true);
+
+        mDataSource.save(message, new SaveCallback<String>() {
+            @Override
+            public void onSuccess(Result<String> data) {
+                    if (!mView.isActive()) return;
+
+                    mView.setLoadingIndicator(false);
+
+                    // nothing to do here, service should handle receive
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    if (!mView.isActive()) return;
+
+                    mView.setLoadingIndicator(false);
+                    mView.setErrorMessage(message);
+                    mView.showErrorMessage(true);
+                }
+            });
     }
 }

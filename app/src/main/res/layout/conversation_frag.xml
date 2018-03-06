@@ -2,27 +2,50 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clUserSearch"
+    android:id="@+id/clConversation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+    <com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/vDivider">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout>
+
+    <View
+        android:id="@+id/vDivider"
+        android:background="@color/light"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/etMessage" />
+
     <ImageView
-        android:id="@+id/ivEmail"
+        android:id="@+id/ivMessage"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_email"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:src="@drawable/ic_message"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/etEmail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/etMessage"
+        app:layout_constraintTop_toTopOf="@+id/etMessage" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
+        android:hint="@string/message"
         android:maxLines="1"
         android:inputType="textEmailAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -30,38 +53,30 @@
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginEnd="@dimen/spacing_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivEmail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/ivSendMessage"
+        app:layout_constraintStart_toEndOf="@+id/ivMessage"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout
-        android:id="@+id/refresh_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginStart="@dimen/spacing_medium"
+    <ImageView
+        android:id="@+id/ivSendMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
         android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:src="@drawable/ic_send"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-    </com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout>
+        app:layout_constraintBottom_toBottomOf="@+id/etMessage"
+        app:layout_constraintTop_toTopOf="@+id/etMessage" />
 
     <ImageView
         android:id="@+id/ivNoEntities"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_sad"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvNoEntities"
@@ -69,8 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textAlignment="center"
-        android:text="@string/no_users_found"
-        android:textSize="30sp"
+        android:text="@string/no_messages_found"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +97,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_large"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

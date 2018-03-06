@@ -7,6 +7,7 @@
     <string name="register">Register</string>
     <string name="save">Save</string>
     <string name="search">Search</string>
+    <string name="message">Message</string>
 
     <string name="search_user">Search user</string>
     <string name="add_user">Add user</string>
@@ -17,6 +18,7 @@
     <string name="no_conversations_found">No conversations found.</string>
 
     <string name="conversation">Conversation</string>
+    <string name="no_messages_found">No messages found.</string>
 
     <string name="remove">Remove</string>
     <string name="cancel">Cancel</string>

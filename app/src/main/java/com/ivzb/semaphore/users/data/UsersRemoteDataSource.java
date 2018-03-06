@@ -51,7 +51,7 @@ public class UsersRemoteDataSource
             final @NonNull LoadCallback<UserEntity> callback) {
 
         final Call<Result<List<UserEntity>>> call = mApiService.load(page);
-        call.enqueue(loadCallback(page, callback));
+        call.enqueue(loadCallback(callback));
     }
 
     @Override

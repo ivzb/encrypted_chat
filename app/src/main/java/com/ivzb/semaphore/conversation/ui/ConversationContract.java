@@ -1,5 +1,8 @@
 package com.ivzb.semaphore.conversation.ui;
 
+import android.widget.EditText;
+import android.widget.ImageView;
+
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
@@ -20,5 +23,7 @@ public class ConversationContract {
 
     public interface ViewModel extends BaseEndlessScrollViewModel<MessageEntity> {
 
+        EditText getEtMessage();
+        ImageView getIvSendMessage();
     }
 }

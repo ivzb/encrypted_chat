@@ -26,6 +26,12 @@ public class MessageEntity implements BaseEntity {
 
     }
 
+    public MessageEntity(String message) {
+        this.message = message;
+        this.isOwn = true;
+        this.createdAt = new Date();
+    }
+
     public MessageEntity(
             String id,
             String message,

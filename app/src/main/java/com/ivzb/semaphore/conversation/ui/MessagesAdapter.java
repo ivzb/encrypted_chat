@@ -1,10 +1,8 @@
 package com.ivzb.semaphore.conversation.ui;
 
 import android.content.Context;
-import android.opengl.Visibility;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,18 +43,15 @@ public class MessagesAdapter
 
         ConstraintLayout clMessage = binding.findViewById(R.id.clMessage);
 
-        CardView cvMessage = binding.findViewById(R.id.cvMessage);
-        cvMessage.invalidate();
-        cvMessage.setOnClickListener(
+        TextView tvMessage = binding.findViewById(R.id.tvMessage);
+        tvMessage.setText(message.getMessage());
+        tvMessage.setOnClickListener(
                 new View.OnClickListener() {
                      @Override
                      public void onClick(View view) {
                          mActionHandler.onAdapterEntityClick(message);
                      }
                  });
-
-        TextView tvMessage = binding.findViewById(R.id.tvMessage);
-        tvMessage.setText(message.getMessage());
 
         TextView tvCreatedAt = binding.findViewById(R.id.tvCreatedAt);
         String createdAt = DateUtils.format(message.getCreatedAt(), DateUtils.PATTERN_TIME);
@@ -84,13 +79,13 @@ public class MessagesAdapter
         tvMessage.setGravity(gravity);
         tvCreatedAt.setVisibility(createdAtVisibility);
         tvCreatedAt.setGravity(gravity);
-        cvMessage.setCardBackgroundColor(mContext.getResources().getColor(color));
+        tvMessage.setBackgroundColor(mContext.getResources().getColor(color));
 
         ConstraintSet set = new ConstraintSet();
         set.clone(clMessage);
-        set.clear(cvMessage.getId(), ConstraintSet.START);
-        set.clear(cvMessage.getId(), ConstraintSet.END);
-        set.connect(cvMessage.getId(), constraint, ConstraintSet.PARENT_ID, constraint,8);
+        set.clear(tvMessage.getId(), ConstraintSet.START);
+        set.clear(tvMessage.getId(), ConstraintSet.END);
+        set.connect(tvMessage.getId(), constraint, ConstraintSet.PARENT_ID, constraint,8);
         set.applyTo(clMessage);
 
         mIsPreviousOwn = message.isOwn();

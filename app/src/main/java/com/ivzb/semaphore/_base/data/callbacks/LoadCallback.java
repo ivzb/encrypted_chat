@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LoadCallback<T> {
 
-    void onSuccess(Result<List<T>> data, int page);
+    void onSuccess(Result<List<T>> data);
     void onNoMore();
     void onFailure(String message);
 }

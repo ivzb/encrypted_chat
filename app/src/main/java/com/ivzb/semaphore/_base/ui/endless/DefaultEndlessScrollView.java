@@ -28,9 +28,7 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
         extends DefaultView<P, VM>
         implements BaseEndlessScrollView<M, P, VM> {
 
-    protected BaseAdapter<M> mAdapter;
-
-    private DefaultEndlessScrollListener mScrollListener;
+    protected DefaultEndlessScrollListener mScrollListener;
 
     @Nullable
     @Override
@@ -42,9 +40,8 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
         mViewModel.setErrorClickListener(mErrorClickListener);
         mViewModel.restoreInstanceState(savedInstanceState);
 
-        initEndlessAdapter();
-
-        mViewModel.setAdapter(mAdapter);
+        BaseAdapter<M> adapter = initEndlessAdapter();
+        mViewModel.setAdapter(adapter);
 
         SwipeRefreshLayoutUtils.setup(
                 getContext(),
@@ -54,7 +51,7 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
 
         if (savedInstanceState != null) {
             Parcelable entitiesState = mViewModel.getEntitiesState();
-            mAdapter.onRestoreInstanceState(entitiesState);
+            mViewModel.getAdapter().onRestoreInstanceState(entitiesState);
 
             Parcelable layoutManagerState = mViewModel.getLayoutManagerState();
             mViewModel.getRecyclerView().getLayoutManager().onRestoreInstanceState(layoutManagerState);
@@ -79,12 +76,12 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
 
     @Override
     public void addEntities(List<M> entities) {
-        mAdapter.add(entities);
+        mViewModel.getAdapter().add(entities);
     }
 
     @Override
     public void clearEntities() {
-        mAdapter.clear();
+        mViewModel.getAdapter().clear();
         mScrollListener.resetState();
     }
 
@@ -107,30 +104,27 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
     public void setMore(boolean more) {
         mViewModel.setMore(more);
 
-        if (mAdapter.size() == 0) {
+        if (mViewModel.getAdapter().size() == 0) {
             showEntities(false);
         }
     }
 
     @Override
-    public RecyclerView.LayoutManager instantiateLayoutManager(Context context) {
+    public RecyclerView.LayoutManager initLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }
 
-    protected void initEndlessAdapter(
+    protected void setupEndlessAdapter(
             Context context,
             DefaultActionHandlerAdapter<M> adapter,
             final RecyclerView recyclerView) {
 
-        mAdapter = adapter;
-        LinearLayoutManager layoutManager = (LinearLayoutManager) instantiateLayoutManager(context);
+        LinearLayoutManager layoutManager = (LinearLayoutManager) initLayoutManager(context);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        mScrollListener = new DefaultEndlessScrollListener(
-                layoutManager) {
-
+        mScrollListener = new DefaultEndlessScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 if (!mViewModel.hasMore()) {

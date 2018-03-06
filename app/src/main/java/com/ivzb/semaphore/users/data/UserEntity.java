@@ -24,6 +24,10 @@ public class UserEntity implements BaseEntity {
 
     }
 
+    public UserEntity(String id) {
+        this.id = id;
+    }
+
     public UserEntity(
             String id,
             String email,

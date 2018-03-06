@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.data.config.DefaultConfig;
+import com.ivzb.semaphore._base.ui.DefaultActionHandlerAdapter;
+import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.semaphore._base.ui.prompt.DialogListener;
@@ -40,14 +42,19 @@ public class ConversationsView
     }
 
     @Override
-    public void initEndlessAdapter() {
-        initEndlessAdapter(
+    public BaseAdapter<ConversationEntity> initEndlessAdapter() {
+        DefaultActionHandlerAdapter<ConversationEntity> adapter =
+            new ConversationsAdapter(
+                    getContext(),
+                    mConversationClickListener,
+                    mRemoveConversationClickListener);
+
+        setupEndlessAdapter(
                 getContext(),
-                new ConversationsAdapter(
-                        getContext(),
-                        mConversationClickListener,
-                        mRemoveConversationClickListener),
+                adapter,
                 mViewModel.getRvConversations());
+
+        return adapter;
     }
 
     @Override

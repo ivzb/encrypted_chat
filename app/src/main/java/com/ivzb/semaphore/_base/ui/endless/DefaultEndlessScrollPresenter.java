@@ -44,8 +44,6 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
     @Override
     public void refresh(String id) {
         mView.clearEntities();
-        mView.setMore(true);
-        mView.setPage(0);
 
         load(id, INITIAL_PAGE);
     }
@@ -56,6 +54,7 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
 
         mView.setLoadingIndicator(true);
         mView.setMore(true);
+        mView.setPage(page);
 
         mDataSource.load(id, page, mLoadCallback);
     }
@@ -70,10 +69,9 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
 
     private LoadCallback<M> mLoadCallback = new LoadCallback<M>() {
         @Override
-        public void onSuccess(Result<List<M>> result, int page) {
+        public void onSuccess(Result<List<M>> result) {
             if (!mView.isActive()) return;
 
-            mView.setPage(page);
             mView.setLoadingIndicator(false);
 
             List<M> entities = result.getResults();

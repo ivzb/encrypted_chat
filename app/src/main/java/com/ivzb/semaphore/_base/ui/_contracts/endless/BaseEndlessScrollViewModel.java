@@ -23,6 +23,7 @@ public interface BaseEndlessScrollViewModel<T extends BaseEntity>
 
     void setErrorClickListener(View.OnClickListener listener);
 
+    BaseAdapter<T> getAdapter();
     void setAdapter(BaseAdapter<T> adapter);
 
     Parcelable getEntitiesState();

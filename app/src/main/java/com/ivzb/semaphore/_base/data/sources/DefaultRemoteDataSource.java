@@ -52,7 +52,6 @@ public class DefaultRemoteDataSource<M, API> {
     }
 
     protected Callback<Result<List<M>>> loadCallback(
-            final int page,
             final LoadCallback<M> callback) {
 
         return new Callback<Result<List<M>>>() {
@@ -72,7 +71,7 @@ public class DefaultRemoteDataSource<M, API> {
                     return;
                 }
 
-                callback.onSuccess(result, page);
+                callback.onSuccess(result);
             }
 
             @Override

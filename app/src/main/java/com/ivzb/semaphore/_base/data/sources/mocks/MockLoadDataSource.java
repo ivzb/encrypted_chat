@@ -63,6 +63,6 @@ public abstract class MockLoadDataSource<T extends BaseEntity>
 
         Result<List<T>> result = new Result<>(data, message);
 
-        callback.onSuccess(result, page);
+        callback.onSuccess(result);
     }
 }

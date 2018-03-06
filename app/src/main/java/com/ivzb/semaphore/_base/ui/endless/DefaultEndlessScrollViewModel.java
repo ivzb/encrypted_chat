@@ -59,9 +59,9 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
         mCvError = view.findViewById(R.id.cvError);
         mTvError = view.findViewById(R.id.tvError);
-        mRecyclerView = view.findViewById(R.id.rvUsers);
-        mIvNoEntities = view.findViewById(R.id.ivNoUsers);
-        mTvNoEntities = view.findViewById(R.id.tvNoUsers);
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        mIvNoEntities = view.findViewById(R.id.ivNoEntities);
+        mTvNoEntities = view.findViewById(R.id.tvNoEntities);
     }
 
     @Override
@@ -167,6 +167,11 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         if (mCvError == null) return;
 
         mCvError.setOnClickListener(listener);
+    }
+
+    @Override
+    public BaseAdapter<T> getAdapter() {
+        return mAdapter;
     }
 
     @Override

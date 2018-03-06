@@ -51,7 +51,7 @@ public class ConversationsRemoteDataSource
             final @NonNull LoadCallback<ConversationEntity> callback) {
 
         final Call<Result<List<ConversationEntity>>> call = mApiService.load(page);
-        call.enqueue(loadCallback(page, callback));
+        call.enqueue(loadCallback(callback));
     }
 
     @Override

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.data.config.DefaultConfig;
+import com.ivzb.semaphore._base.ui.DefaultActionHandlerAdapter;
+import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.semaphore._base.ui.prompt.DialogListener;
@@ -34,15 +36,20 @@ public class UsersView
     }
 
     @Override
-    public void initEndlessAdapter() {
-        initEndlessAdapter(
+    public BaseAdapter<UserEntity> initEndlessAdapter() {
+        DefaultActionHandlerAdapter<UserEntity> adapter =
+            new UsersAdapter(
+                    getContext(),
+                    mUserClickListener,
+                    mAddUserClickListener,
+                    mRemoveUserClickListener);
+
+        setupEndlessAdapter(
                 getContext(),
-                new UsersAdapter(
-                        getContext(),
-                        mUserClickListener,
-                        mAddUserClickListener,
-                        mRemoveUserClickListener),
+                adapter,
                 mViewModel.getRecyclerView());
+
+        return adapter;
     }
 
     @Override
