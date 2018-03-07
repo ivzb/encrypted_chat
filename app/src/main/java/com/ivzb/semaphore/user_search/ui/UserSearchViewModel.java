@@ -16,8 +16,8 @@ class UserSearchViewModel
     private EditText mEtEmail;
 
     @Override
-    public void init(View view) {
-        super.init(view);
+    public void initViews(View view) {
+        super.initViews(view);
 
         mEtEmail = view.findViewById(R.id.etEmail);
     }
@@ -35,7 +35,7 @@ class UserSearchViewModel
     }
 
     @Override
-    public void restoreInstanceState(Bundle savedInstanceState) {
+    protected void restoreInstanceState(Bundle savedInstanceState) {
         super.restoreInstanceState(savedInstanceState);
 
         if (savedInstanceState == null) return;

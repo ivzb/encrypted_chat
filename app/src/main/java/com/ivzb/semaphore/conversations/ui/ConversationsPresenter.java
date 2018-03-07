@@ -48,14 +48,6 @@ public class ConversationsPresenter
         mDataSource.remove(user.getId(), mConversationSaveCallback);
     }
 
-    @Override
-    public void clickErrorMessage() {
-        if (!mView.isActive()) return;
-
-        mView.showErrorMessage(false);
-        mView.setErrorMessage("");
-    }
-
     private SaveCallback<Boolean> mConversationSaveCallback = new SaveCallback<Boolean>() {
         @Override
         public void onSuccess(Result<Boolean> result) {

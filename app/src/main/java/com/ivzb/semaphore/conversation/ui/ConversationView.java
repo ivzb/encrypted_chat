@@ -16,6 +16,7 @@ import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollView;
 import com.ivzb.semaphore.conversation.data.MessageEntity;
+import com.ivzb.semaphore.conversations.data.ConversationEntity;
 
 public class ConversationView
         extends DefaultEndlessScrollView<MessageEntity, ConversationContract.Presenter, ConversationContract.ViewModel>
@@ -26,8 +27,8 @@ public class ConversationView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        // todo: get conversation id from bundle
-        mPresenter.refresh(DefaultConfig.NO_ID);
+        // todo: set containerId to id from bundle
+        mPresenter.refresh(mViewModel.getContainerId());
 
         mViewModel.getIvSendMessage().setOnClickListener(mSendMessageClickListener);
 
@@ -40,29 +41,17 @@ public class ConversationView
     }
 
     @Override
-    public RecyclerView.LayoutManager initLayoutManager(Context context) {
-        LinearLayoutManager layoutManager = (LinearLayoutManager) super.initLayoutManager(context);
+    public BaseAdapter<MessageEntity> initEndlessAdapter() {
+        return new MessagesAdapter(getContext(), mMessageClickListener);
+    }
+
+    @Override
+    public LinearLayoutManager initLayoutManager(Context context) {
+        LinearLayoutManager layoutManager = super.initLayoutManager(context);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
 
         return layoutManager;
-    }
-
-    @Override
-    public BaseAdapter<MessageEntity> initEndlessAdapter() {
-        DefaultActionHandlerAdapter<MessageEntity> adapter = new MessagesAdapter(getContext(), mMessageClickListener);
-
-        setupEndlessAdapter(
-                getContext(),
-                adapter,
-                mViewModel.getRecyclerView());
-
-        return adapter;
-    }
-
-    @Override
-    public void onRefresh() {
-        mPresenter.refresh(DefaultConfig.NO_ID);
     }
 
     @Override

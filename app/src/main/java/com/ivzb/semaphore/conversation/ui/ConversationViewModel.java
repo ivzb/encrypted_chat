@@ -19,8 +19,8 @@ public class ConversationViewModel
     private ImageView mIvSendMessage;
 
     @Override
-    public void init(View view) {
-        super.init(view);
+    protected void initViews(View view) {
+        super.initViews(view);
 
         mEtMessage = view.findViewById(R.id.etMessage);
         mIvSendMessage = view.findViewById(R.id.ivSendMessage);
@@ -39,7 +39,7 @@ public class ConversationViewModel
     }
 
     @Override
-    public void restoreInstanceState(Bundle savedInstanceState) {
+    protected void restoreInstanceState(Bundle savedInstanceState) {
         super.restoreInstanceState(savedInstanceState);
 
         if (savedInstanceState == null) return;

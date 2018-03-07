@@ -31,7 +31,7 @@ public class ConversationsView
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         // todo: refresh with conversation id
-        mPresenter.refresh(DefaultConfig.NO_ID);
+        mPresenter.refresh(mViewModel.getContainerId());
 
         return view;
     }
@@ -43,27 +43,10 @@ public class ConversationsView
 
     @Override
     public BaseAdapter<ConversationEntity> initEndlessAdapter() {
-        DefaultActionHandlerAdapter<ConversationEntity> adapter =
-            new ConversationsAdapter(
-                    getContext(),
-                    mConversationClickListener,
-                    mRemoveConversationClickListener);
-
-        setupEndlessAdapter(
+        return new ConversationsAdapter(
                 getContext(),
-                adapter,
-                mViewModel.getRvConversations());
-
-        return adapter;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        if (mViewModel != null) {
-            mViewModel.saveInstanceState(outState);
-        }
+                mConversationClickListener,
+                mRemoveConversationClickListener);
     }
 
     @Override
@@ -71,11 +54,6 @@ public class ConversationsView
         Intent intent = new Intent(getContext(), ConversationActivity.class);
 //        intent.putExtra(ConversationActivity.EXTRA_CONVERSATION_ID, conversation.getId());
         startActivity(intent);
-    }
-
-    @Override
-    public void onRefresh() {
-        mPresenter.refresh(DefaultConfig.NO_ID);
     }
 
     @Override
@@ -99,63 +77,20 @@ public class ConversationsView
         @Override
         public void onAdapterEntityClick(final ConversationEntity conversation) {
             PromptDialogFragment dialogFragment = new PromptDialogFragment()
-                .setTitle(getResources().getString(R.string.remove_conversation))
-                .setListener(new DialogListener() {
-                    @Override
-                    public void onDialogPositiveClick() {
-                                                              onRemoveConversationClick(conversation);
-                                                                                                      }
+                    .setTitle(getResources().getString(R.string.remove_conversation))
+                    .setListener(new DialogListener() {
+                        @Override
+                        public void onDialogPositiveClick() {
+                            onRemoveConversationClick(conversation);
+                        }
 
-                    @Override
-                    public void onDialogNegativeClick() {
-                        // no action needed
-                    }
-                });
+                        @Override
+                        public void onDialogNegativeClick() {
+                            // no action needed
+                        }
+                    });
 
             dialogFragment.show(getFragmentManager(), "remove_conversation_dialog");
         }
     };
-
-    @Override
-    public void onErrorClick() {
-        mPresenter.clickErrorMessage();
-    }
-
-    private View.OnClickListener mErrorClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            onErrorClick();
-        }
-    };
-
-    @Override
-    public void setLoadingIndicator(boolean active) {
-        if (!isActive()) return;
-
-        SwipeRefreshLayoutUtils.setLoading(mViewModel.getRefreshLayout(), active);
-    }
-
-    @Override
-    public void showEntities(boolean show) {
-        mViewModel.getRvConversations().setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void showNoEntities(boolean show) {
-        show &= !(mViewModel.getPage() > INITIAL_PAGE); // don't show "no conversations" if already loaded entities
-        int visibility = show ? View.VISIBLE : View.GONE;
-
-        mViewModel.getIvNoConversations().setVisibility(visibility);
-        mViewModel.getTvNoConversations().setVisibility(visibility);
-    }
-
-    @Override
-    public void showErrorMessage(boolean show) {
-        mViewModel.getCvError().setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void setErrorMessage(String message) {
-        mViewModel.getTvError().setText(message);
-    }
 }

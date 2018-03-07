@@ -1,8 +1,11 @@
 package com.ivzb.semaphore._base.ui.endless;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,9 +13,11 @@ import android.widget.TextView;
 
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
+import com.ivzb.semaphore._base.data.config.DefaultConfig;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
+import com.ivzb.semaphore.utils.ui.SwipeRefreshLayoutUtils;
 
 import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_PAGE;
 import static com.ivzb.semaphore.utils.Preconditions.checkNotNull;
@@ -32,8 +37,11 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
     private static final String ERROR_VISIBILITY_STATE = "error_visibility_state";
 
     private BaseAdapter<T> mAdapter;
+    private LinearLayoutManager mLayoutManager;
+
     private Parcelable mEntitiesState;
     private Parcelable mLayoutManagerState;
+    private DefaultEndlessScrollListener mRecyclerScrollListener;
 
     private ScrollChildSwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -53,7 +61,11 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
     }
 
     @Override
-    public void init(View view) {
+    public BaseEndlessScrollViewModel.Builder builder(Context context) {
+        return new Builder(context);
+    }
+
+    protected void initViews(View view) {
         checkNotNull(view);
 
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
@@ -107,8 +119,7 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         outState.putInt(ERROR_VISIBILITY_STATE, errorVisibility);
     }
 
-    @Override
-    public void restoreInstanceState(Bundle savedInstanceState) {
+    protected void restoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState == null) return;
 
         restorePageState(savedInstanceState);
@@ -162,8 +173,7 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         }
     }
 
-    @Override
-    public void setErrorClickListener(View.OnClickListener listener) {
+    private void setErrorClickListener(View.OnClickListener listener) {
         if (mCvError == null) return;
 
         mCvError.setOnClickListener(listener);
@@ -174,9 +184,25 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         return mAdapter;
     }
 
-    @Override
-    public void setAdapter(BaseAdapter<T> adapter) {
+    private void setAdapter(BaseAdapter<T> adapter) {
         mAdapter = adapter;
+    }
+
+    private LinearLayoutManager getLayoutManager() {
+        return mLayoutManager;
+    }
+
+    private void setLayoutManager(LinearLayoutManager layoutManager) {
+        mLayoutManager = layoutManager;
+    }
+
+    @Override
+    public DefaultEndlessScrollListener getRecyclerScrollListener() {
+        return mRecyclerScrollListener;
+    }
+
+    private void setRecyclerScrollListener(DefaultEndlessScrollListener scrollListener) {
+        mRecyclerScrollListener = scrollListener;
     }
 
     @Override
@@ -251,6 +277,96 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
     @Override
     public String getContainerId() {
-        return null;
+        return DefaultConfig.NO_ID;
+    }
+
+    public class Builder implements BaseEndlessScrollViewModel.Builder {
+
+        private Context mContext;
+        private View mView;
+        private View.OnClickListener mErrorClickListener;
+        private Bundle mSavedInstanceState;
+        private BaseAdapter mAdapter;
+        private LinearLayoutManager mLayoutManager;
+        private DefaultEndlessScrollListener mRecyclerScrollListener;
+        private SwipeRefreshLayout.OnRefreshListener mSwipeRefreshListener;
+
+        public Builder(Context context) {
+            mContext = context;
+        }
+
+        @Override
+        public Builder setView(View view) {
+            mView = view;
+            return this;
+        }
+
+        @Override
+        public Builder setErrorClickListener(View.OnClickListener listener) {
+            mErrorClickListener = listener;
+            return this;
+        }
+
+        @Override
+        public Builder setSavedInstanceState(Bundle savedInstanceState) {
+            mSavedInstanceState = savedInstanceState;
+            return this;
+        }
+
+        @Override
+        public Builder setAdapter(BaseAdapter adapter) {
+            mAdapter = adapter;
+            return this;
+        }
+
+        @Override
+        public Builder setLayoutManager(LinearLayoutManager layoutManager) {
+            mLayoutManager = layoutManager;
+            return this;
+        }
+
+        @Override
+        public Builder setRecyclerScrollListener(DefaultEndlessScrollListener listener) {
+            mRecyclerScrollListener = listener;
+            return this;
+        }
+
+        @Override
+        public Builder setSwipeRefreshListener(SwipeRefreshLayout.OnRefreshListener listener) {
+            mSwipeRefreshListener = listener;
+            return this;
+        }
+
+        @Override
+        public void build() {
+            DefaultEndlessScrollViewModel viewModel = DefaultEndlessScrollViewModel.this;
+
+            viewModel.initViews(mView);
+            viewModel.setErrorClickListener(mErrorClickListener);
+            viewModel.restoreInstanceState(mSavedInstanceState);
+            viewModel.setAdapter(mAdapter);
+            viewModel.setLayoutManager(mLayoutManager);
+            viewModel.setRecyclerScrollListener(mRecyclerScrollListener);
+
+            RecyclerView recyclerView = viewModel.getRecyclerView();
+
+            recyclerView.setAdapter((RecyclerView.Adapter) viewModel.getAdapter());
+            recyclerView.setLayoutManager(viewModel.getLayoutManager());
+            recyclerView.addOnScrollListener(viewModel.getRecyclerScrollListener());
+
+            SwipeRefreshLayoutUtils.setup(
+                    mContext,
+                    viewModel.getRefreshLayout(),
+                    viewModel.getRecyclerView(),
+                    mSwipeRefreshListener);
+
+            if (mSavedInstanceState != null) {
+                Parcelable entitiesState = viewModel.getEntitiesState();
+                getAdapter().onRestoreInstanceState(entitiesState);
+
+                Parcelable layoutManagerState = viewModel.getLayoutManagerState();
+                viewModel.getRecyclerView().getLayoutManager().onRestoreInstanceState(layoutManagerState);
+            }
+        }
     }
 }

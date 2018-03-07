@@ -25,7 +25,7 @@ public class UsersView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mPresenter.refresh(DefaultConfig.NO_ID);
+        mPresenter.refresh(mViewModel.getContainerId());
 
         return view;
     }
@@ -37,31 +37,23 @@ public class UsersView
 
     @Override
     public BaseAdapter<UserEntity> initEndlessAdapter() {
-        DefaultActionHandlerAdapter<UserEntity> adapter =
-            new UsersAdapter(
-                    getContext(),
-                    mUserClickListener,
-                    mAddUserClickListener,
-                    mRemoveUserClickListener);
-
-        setupEndlessAdapter(
-                getContext(),
-                adapter,
-                mViewModel.getRecyclerView());
-
-        return adapter;
+        return new UsersAdapter(
+                        getContext(),
+                        mUserClickListener,
+                        mAddUserClickListener,
+                        mRemoveUserClickListener);
     }
 
     @Override
     public void openConversation(UserEntity user) {
         Intent intent = new Intent(getContext(), ConversationActivity.class);
 //        intent.putExtra(ConversationActivity.EXTRA_USER_ID, user.getId());
-        startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     @Override
     public void onRefresh() {
-        mPresenter.refresh(DefaultConfig.NO_ID);
+        mPresenter.refresh(mViewModel.getContainerId());
     }
 
     @Override

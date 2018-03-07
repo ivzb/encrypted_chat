@@ -11,5 +11,6 @@ public interface BaseViewTest<E extends BaseEntity, V extends BaseEndlessScrollV
     P getPresenter();
     VM getViewModel();
 
-    E initEntity(int id);
+    E initEntity(String id);
+    V initView();
 }

@@ -20,7 +20,6 @@ public class ConversationsContract {
 
         void onConversationClick(ConversationEntity conversation);
         void onRemoveConversationClick(ConversationEntity conversation);
-        void onErrorClick();
 
         void openConversation(ConversationEntity conversation);
     }
@@ -29,34 +28,9 @@ public class ConversationsContract {
 
         void clickConversation(ConversationEntity conversation);
         void clickRemoveConversation(ConversationEntity conversation);
-
-        void clickErrorMessage();
     }
 
     public interface ViewModel extends BaseEndlessScrollViewModel<ConversationEntity> {
 
-        void init(android.view.View view);
-
-        void saveInstanceState(Bundle savedInstanceState);
-        void restoreInstanceState(Bundle savedInstanceState);
-
-        void setErrorClickListener(android.view.View.OnClickListener listener);
-
-        void setAdapter(BaseAdapter<ConversationEntity> adapter);
-
-        Parcelable getConversationsState();
-        void setConversationsState(Parcelable state);
-
-        Parcelable getLayoutManagerState();
-        void setLayoutManagerState(Parcelable state);
-
-        ScrollChildSwipeRefreshLayout getRefreshLayout();
-        RecyclerView getRvConversations();
-
-        TextView getTvNoConversations();
-        ImageView getIvNoConversations();
-
-        CardView getCvError();
-        TextView getTvError();
     }
 }

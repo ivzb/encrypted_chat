@@ -28,34 +28,28 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
         extends DefaultView<P, VM>
         implements BaseEndlessScrollView<M, P, VM> {
 
-    protected DefaultEndlessScrollListener mScrollListener;
+    protected Context mContext;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflateFragment(inflater, container);
-
-        mViewModel.init(view);
-        mViewModel.setErrorClickListener(mErrorClickListener);
-        mViewModel.restoreInstanceState(savedInstanceState);
+        mContext = container.getContext();
 
         BaseAdapter<M> adapter = initEndlessAdapter();
-        mViewModel.setAdapter(adapter);
+        LinearLayoutManager layoutManager = initLayoutManager(mContext);
+        DefaultEndlessScrollListener recyclerScrollListener = initEndlessScrollListener(layoutManager);
 
-        SwipeRefreshLayoutUtils.setup(
-                getContext(),
-                mViewModel.getRefreshLayout(),
-                mViewModel.getRecyclerView(),
-                this);
-
-        if (savedInstanceState != null) {
-            Parcelable entitiesState = mViewModel.getEntitiesState();
-            mViewModel.getAdapter().onRestoreInstanceState(entitiesState);
-
-            Parcelable layoutManagerState = mViewModel.getLayoutManagerState();
-            mViewModel.getRecyclerView().getLayoutManager().onRestoreInstanceState(layoutManagerState);
-        }
+        mViewModel.builder(mContext)
+                .setView(view)
+                .setErrorClickListener(mErrorClickListener)
+                .setSavedInstanceState(savedInstanceState)
+                .setAdapter(adapter)
+                .setSwipeRefreshListener(this)
+                .setLayoutManager(layoutManager)
+                .setRecyclerScrollListener(recyclerScrollListener)
+                .build();
 
         return view;
     }
@@ -82,7 +76,7 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
     @Override
     public void clearEntities() {
         mViewModel.getAdapter().clear();
-        mScrollListener.resetState();
+        mViewModel.getRecyclerScrollListener().resetState();
     }
 
     @Override
@@ -109,22 +103,13 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
         }
     }
 
-    @Override
-    public RecyclerView.LayoutManager initLayoutManager(Context context) {
+    protected LinearLayoutManager initLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }
 
-    protected void setupEndlessAdapter(
-            Context context,
-            DefaultActionHandlerAdapter<M> adapter,
-            final RecyclerView recyclerView) {
+    private DefaultEndlessScrollListener initEndlessScrollListener(LinearLayoutManager layoutManager) {
+        return new DefaultEndlessScrollListener(layoutManager, mViewModel.getPage()) {
 
-        LinearLayoutManager layoutManager = (LinearLayoutManager) initLayoutManager(context);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
-
-        mScrollListener = new DefaultEndlessScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 if (!mViewModel.hasMore()) {
@@ -134,8 +119,6 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
                 mPresenter.load(mViewModel.getContainerId(), page);
             }
         };
-
-        recyclerView.addOnScrollListener(mScrollListener);
     }
 
     @Override
@@ -152,8 +135,6 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
 
     @Override
     public void setLoadingIndicator(boolean active) {
-        if (!isActive()) return;
-
         SwipeRefreshLayoutUtils.setLoading(mViewModel.getRefreshLayout(), active);
     }
 
