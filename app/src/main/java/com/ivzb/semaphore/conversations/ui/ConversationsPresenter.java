@@ -26,26 +26,38 @@ public class ConversationsPresenter
 
     @Override
     public void result(int requestCode, int resultCode, String message) {
-        if (requestCode == REQUEST_USER_SAVE && resultCode == RESULT_OK) {
+        if (mView.isActive() && requestCode == REQUEST_USER_SAVE && resultCode == RESULT_OK) {
             mView.setSuccessMessage(message);
             mView.showSuccessMessage(true);
         }
     }
 
     @Override
-    public void clickConversation(ConversationEntity conversation) {
+    public void openConversation(ConversationEntity conversation) {
         if (!mView.isActive()) return;
+
+        if (conversation == null) {
+            mView.setErrorMessage("Missing conversation.");
+            mView.showErrorMessage(true);
+            return;
+        }
 
         mView.openConversation(conversation);
     }
 
     @Override
-    public void clickRemoveConversation(ConversationEntity user) {
+    public void removeConversation(ConversationEntity conversation) {
         if (!mView.isActive()) return;
+
+        if (conversation == null) {
+            mView.setErrorMessage("Missing conversation.");
+            mView.showErrorMessage(true);
+            return;
+        }
 
         mView.setLoadingIndicator(true);
 
-        mDataSource.remove(user.getId(), mConversationSaveCallback);
+        mDataSource.remove(conversation.getId(), mConversationSaveCallback);
     }
 
     private SaveCallback<Boolean> mConversationSaveCallback = new SaveCallback<Boolean>() {

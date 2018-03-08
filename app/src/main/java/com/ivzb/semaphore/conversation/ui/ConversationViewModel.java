@@ -18,6 +18,12 @@ public class ConversationViewModel
     private EditText mEtMessage;
     private ImageView mIvSendMessage;
 
+    private String mConversationId;
+
+    public ConversationViewModel(String conversationId) {
+        mConversationId = conversationId;
+    }
+
     @Override
     protected void initViews(View view) {
         super.initViews(view);
@@ -62,5 +68,10 @@ public class ConversationViewModel
     @Override
     public ImageView getIvSendMessage() {
         return mIvSendMessage;
+    }
+
+    @Override
+    public String getContainerId() {
+        return mConversationId;
     }
 }

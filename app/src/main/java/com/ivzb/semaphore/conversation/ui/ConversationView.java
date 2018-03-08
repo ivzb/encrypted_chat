@@ -27,7 +27,6 @@ public class ConversationView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        // todo: set containerId to id from bundle
         mPresenter.refresh(mViewModel.getContainerId());
 
         mViewModel.getIvSendMessage().setOnClickListener(mSendMessageClickListener);
@@ -55,7 +54,7 @@ public class ConversationView
     }
 
     @Override
-    public void onSendMessage(MessageEntity message) {
+    public void onClickSendMessage(MessageEntity message) {
         mPresenter.sendMessage(message);
     }
 
@@ -63,19 +62,19 @@ public class ConversationView
         @Override
         public void onClick(View view) {
             MessageEntity message = new MessageEntity(mViewModel.getEtMessage().getText().toString());
-            onSendMessage(message);
+            onClickSendMessage(message);
         }
     };
 
     @Override
-    public void onClickMessage(MessageEntity message) {
+    public void onClickShowMessageDetails(MessageEntity message) {
         // todo: show message details
     }
 
     private BaseEntityActionHandler<MessageEntity> mMessageClickListener = new BaseEntityActionHandler<MessageEntity>() {
         @Override
         public void onAdapterEntityClick(MessageEntity message) {
-            onClickMessage(message);
+            onClickShowMessageDetails(message);
         }
     };
 }

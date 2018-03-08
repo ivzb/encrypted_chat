@@ -15,6 +15,8 @@ import com.ivzb.semaphore._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.semaphore.conversation.data.MessageEntity;
 import com.ivzb.semaphore.utils.DateUtils;
 
+import java.util.Date;
+
 public class MessagesAdapter
         extends DefaultActionHandlerAdapter<MessageEntity> {
 
@@ -54,7 +56,7 @@ public class MessagesAdapter
                  });
 
         TextView tvCreatedAt = binding.findViewById(R.id.tvCreatedAt);
-        String createdAt = DateUtils.format(message.getCreatedAt(), DateUtils.PATTERN_TIME);
+        String createdAt = DateUtils.friendlyFormat(message.getCreatedAt(), new Date());
         tvCreatedAt.setText(createdAt);
 
         int gravity;

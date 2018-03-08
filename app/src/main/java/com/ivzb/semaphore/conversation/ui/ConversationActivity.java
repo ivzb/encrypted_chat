@@ -9,7 +9,11 @@ import com.ivzb.semaphore._base.data.DataSources;
 import com.ivzb.semaphore._base.ui.DefaultActivity;
 import com.ivzb.semaphore.utils.ActivityUtils;
 
+import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_ID;
+
 public class ConversationActivity extends DefaultActivity {
+
+    public static final String EXTRA_CONVERSATION_ID = "EXTRA_CONVERSATION_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,14 @@ public class ConversationActivity extends DefaultActivity {
                     R.id.contentFrame);
         }
 
-        view.setViewModel(new ConversationViewModel());
+        Bundle extras = getIntent().getExtras();
+        String conversationId = NO_ID;
+
+        if (extras != null && extras.containsKey(EXTRA_CONVERSATION_ID)) {
+            conversationId = extras.getString(EXTRA_CONVERSATION_ID, NO_ID);
+        }
+
+        view.setViewModel(new ConversationViewModel(conversationId));
         view.setPresenter(new ConversationPresenter(
                 this,
                 view,

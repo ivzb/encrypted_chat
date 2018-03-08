@@ -8,7 +8,5 @@ public class SemaphoreDebugApplication extends SemaphoreApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        DataSources.createInstance(new MockDataSourcesStrategy());
     }
 }

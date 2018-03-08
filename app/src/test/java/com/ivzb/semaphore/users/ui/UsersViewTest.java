@@ -3,7 +3,6 @@ package com.ivzb.semaphore.users.ui;
 
 import android.content.Intent;
 
-import com.ivzb.semaphore._base.ui._mocks.MockActivity;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollViewTest;
 import com.ivzb.semaphore.users.data.UserEntity;
 
@@ -65,7 +64,7 @@ public class UsersViewTest
         UserEntity entity = mock(UserEntity.class);
 
         // act
-        getView().onOpenConversation(entity);
+        getView().onClickOpenConversation(entity);
 
         // assert
         verify(getPresenter()).clickUser(eq(entity));

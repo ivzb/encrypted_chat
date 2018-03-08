@@ -21,6 +21,10 @@ public class ConversationEntity implements BaseEntity {
 
     }
 
+    public ConversationEntity(String id) {
+        this.id = id;
+    }
+
     public ConversationEntity(
             String id,
             String name) {

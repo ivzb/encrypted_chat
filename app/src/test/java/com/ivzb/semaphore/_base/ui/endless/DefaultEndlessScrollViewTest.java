@@ -22,7 +22,6 @@ import com.ivzb.semaphore._base.ui._contracts.BaseViewTest;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
-import com.ivzb.semaphore._base.ui._mocks.MockActivity;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
 
 import org.junit.After;

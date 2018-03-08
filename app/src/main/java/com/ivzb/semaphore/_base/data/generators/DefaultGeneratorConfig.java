@@ -62,7 +62,13 @@ public class DefaultGeneratorConfig implements BaseGeneratorConfig {
 
     @Override
     public Date getDate() {
-        return mFaker.date.backward();
+        Date date = mFaker.date.backward();
+
+        date.setHours(mRandom.nextInt(23));
+        date.setMinutes(mRandom.nextInt(59));
+        date.setSeconds(mRandom.nextInt(59));
+
+        return date;
     }
 
     @Override

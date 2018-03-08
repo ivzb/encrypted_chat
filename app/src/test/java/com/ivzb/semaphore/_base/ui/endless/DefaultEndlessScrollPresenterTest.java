@@ -18,6 +18,7 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_ID;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -32,8 +33,7 @@ import static org.mockito.Mockito.when;
 public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P extends BaseEndlessScrollPresenter, V extends BaseEndlessScrollView, DS extends ReceiveDataSource<M>>
         implements BasePresenterTest<M, P, V, DS> {
 
-    @Captor
-    protected ArgumentCaptor<List<M>> mAddEntitiesCaptor;
+    @Captor protected ArgumentCaptor<List<M>> mAddEntitiesCaptor;
 
     protected P mPresenter;
 
@@ -69,12 +69,12 @@ public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P 
     @Test
     public void start_shouldDoNothing() {
         mPresenter.start();
-        verifyNoMoreInteractions(getView());
     }
 
     @Test
     public void refresh() {
         // arrange
+        when(getView().isActive()).thenReturn(true);
         int page = 0;
 
         arrangeLoad(
@@ -214,8 +214,7 @@ public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P 
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                LoadCallback<M> callback =
-                        (LoadCallback<M>) invocation.getArguments()[2];
+                LoadCallback<M> callback = (LoadCallback<M>) invocation.getArguments()[2];
 
                 when(getView().isActive()).thenReturn(callbackInactiveView);
 
@@ -232,7 +231,9 @@ public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P 
                 return null;
             }
         }).when(getDataSource()).load(
-                eq(id), any(int.class), any(LoadCallback.class));
+                eq(id),
+                any(int.class),
+                any(LoadCallback.class));
     }
 
     protected void actLoad(String id, int page) {

@@ -57,31 +57,31 @@ public class UsersView
     }
 
     @Override
-    public void onOpenConversation(UserEntity user) {
+    public void onClickOpenConversation(UserEntity user) {
         mPresenter.clickUser(user);
     }
 
     private BaseEntityActionHandler<UserEntity> mUserClickListener = new BaseEntityActionHandler<UserEntity>() {
         @Override
         public void onAdapterEntityClick(UserEntity user) {
-            onOpenConversation(user);
+            onClickOpenConversation(user);
         }
     };
 
     @Override
-    public void onAddUser(UserEntity user) {
+    public void onClickAddUser(UserEntity user) {
         mPresenter.clickAddUser(user);
     }
 
     private BaseEntityActionHandler<UserEntity> mAddUserClickListener = new BaseEntityActionHandler<UserEntity>() {
         @Override
         public void onAdapterEntityClick(UserEntity user) {
-            onAddUser(user);
+            onClickAddUser(user);
         }
     };
 
     @Override
-    public void onRemoveUser(UserEntity user) {
+    public void onClickRemoveUser(UserEntity user) {
         mPresenter.clickRemoveUser(user);
     }
 
@@ -93,8 +93,8 @@ public class UsersView
                 .setListener(new DialogListener() {
                     @Override
                     public void onDialogPositiveClick() {
-                                                              onRemoveUser(user);
-                                                                                      }
+                        onClickRemoveUser(user);
+                    }
 
                     @Override
                     public void onDialogNegativeClick() {

@@ -18,16 +18,16 @@ public class ConversationsContract {
 
     public interface View extends BaseEndlessScrollView<ConversationEntity, Presenter, ViewModel> {
 
-        void onConversationClick(ConversationEntity conversation);
-        void onRemoveConversationClick(ConversationEntity conversation);
+        void onClickOpenConversation(ConversationEntity conversation);
+        void onClickRemoveConversation(ConversationEntity conversation);
 
         void openConversation(ConversationEntity conversation);
     }
 
     public interface Presenter extends BaseEndlessScrollPresenter<ConversationEntity> {
 
-        void clickConversation(ConversationEntity conversation);
-        void clickRemoveConversation(ConversationEntity conversation);
+        void openConversation(ConversationEntity conversation);
+        void removeConversation(ConversationEntity conversation);
     }
 
     public interface ViewModel extends BaseEndlessScrollViewModel<ConversationEntity> {

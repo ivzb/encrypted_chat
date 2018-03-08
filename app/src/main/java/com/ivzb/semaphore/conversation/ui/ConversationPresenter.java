@@ -25,6 +25,8 @@ public class ConversationPresenter
     public void sendMessage(final MessageEntity message) {
         if (!mView.isActive()) return;
 
+        if (message == null || message.getMessage() == null || message.getMessage().equals("")) return;
+
         mView.setLoadingIndicator(true);
 
         mDataSource.save(message, new SaveCallback<String>() {

@@ -71,7 +71,21 @@ public class UserSearchPresenterTest extends UsersPresenterTest {
     @Test
     @Override
     public void refresh() {
-        // todo: implement custom refresh for UserSearchPresenter implementation
+        mId = "some_id";
         super.refresh();
+    }
+
+    @Test
+    public void refresh_emptyId() {
+        // arrange
+        when(getView().isActive()).thenReturn(true);
+
+        // act
+        mPresenter.refresh(NO_ID);
+
+        // assert
+        verify(getView()).showEntities(eq(false));
+        verify(getView()).showErrorMessage(eq(false));
+        verify(getView()).showNoEntities(eq(false));
     }
 }

@@ -9,9 +9,9 @@ public class UsersContract {
 
     public interface View extends BaseEndlessScrollView<UserEntity, Presenter, ViewModel> {
 
-        void onOpenConversation(UserEntity user);
-        void onAddUser(UserEntity user);
-        void onRemoveUser(UserEntity user);
+        void onClickOpenConversation(UserEntity user);
+        void onClickAddUser(UserEntity user);
+        void onClickRemoveUser(UserEntity user);
 
         void openConversation(UserEntity user);
     }

@@ -27,6 +27,8 @@ public class SemaphoreApplication extends Application {
                 .build();
 
         Fresco.initialize(this, imagePipelineConfig);
+
+        DataSources.createInstance(new MockDataSourcesStrategy());
     }
 
     protected boolean isUnitTesting() {

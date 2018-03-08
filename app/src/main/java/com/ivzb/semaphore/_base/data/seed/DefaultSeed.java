@@ -25,6 +25,7 @@ public class DefaultSeed implements BaseSeed {
 
         ((SeedDataSource<ConversationEntity>) ConversationsMockDataSource.getInstance()).seed(null, mConfig.getNumber(30));
 
+        // todo: seed messages for all conversations
         ((SeedDataSource<MessageEntity>) MessagesMockDataSource.getInstance()).seed(null, mConfig.getNumber(30));
     }
 }

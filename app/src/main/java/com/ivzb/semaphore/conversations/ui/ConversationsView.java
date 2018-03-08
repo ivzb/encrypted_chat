@@ -30,7 +30,6 @@ public class ConversationsView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        // todo: refresh with conversation id
         mPresenter.refresh(mViewModel.getContainerId());
 
         return view;
@@ -52,25 +51,25 @@ public class ConversationsView
     @Override
     public void openConversation(ConversationEntity conversation) {
         Intent intent = new Intent(getContext(), ConversationActivity.class);
-//        intent.putExtra(ConversationActivity.EXTRA_CONVERSATION_ID, conversation.getId());
-        startActivity(intent);
+        intent.putExtra(ConversationActivity.EXTRA_CONVERSATION_ID, conversation.getId());
+        mContext.startActivity(intent);
     }
 
     @Override
-    public void onConversationClick(ConversationEntity conversation) {
-        mPresenter.clickConversation(conversation);
+    public void onClickOpenConversation(ConversationEntity conversation) {
+        mPresenter.openConversation(conversation);
     }
 
     private BaseEntityActionHandler<ConversationEntity> mConversationClickListener = new BaseEntityActionHandler<ConversationEntity>() {
         @Override
         public void onAdapterEntityClick(ConversationEntity conversation) {
-            onConversationClick(conversation);
+            onClickOpenConversation(conversation);
         }
     };
 
     @Override
-    public void onRemoveConversationClick(ConversationEntity conversation) {
-        mPresenter.clickRemoveConversation(conversation);
+    public void onClickRemoveConversation(ConversationEntity conversation) {
+        mPresenter.removeConversation(conversation);
     }
 
     private BaseEntityActionHandler<ConversationEntity> mRemoveConversationClickListener = new BaseEntityActionHandler<ConversationEntity>() {
@@ -81,7 +80,7 @@ public class ConversationsView
                     .setListener(new DialogListener() {
                         @Override
                         public void onDialogPositiveClick() {
-                            onRemoveConversationClick(conversation);
+                            onClickRemoveConversation(conversation);
                         }
 
                         @Override
