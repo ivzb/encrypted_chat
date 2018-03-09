@@ -27,6 +27,13 @@ public class AuthView
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflateFragment(inflater, container);
 
+        AuthContract.ViewModel.Builder builder = (AuthContract.ViewModel.Builder) mViewModel.builder(mContext);
+        builder.setView(view);
+        builder.setErrorClickListener(mErrorClickListener);
+        builder.setLoginClickListener(mLoginListener);
+        builder.setRegisterClickListener(mRegisterListener);
+        builder.setSavedInstanceState(savedInstanceState);
+        builder.build();
 
 //        if (savedInstanceState != null) {
 //            if (savedInstanceState.containsKey(EMAIL_STATE)) {
@@ -34,10 +41,6 @@ public class AuthView
 //                mEtEmail.setText(email);
 //            }
 //        }
-//
-//        mCvError.setOnClickListener(mErrorListener);
-//        mBtnLogin.setOnClickListener(mLoginListener);
-//        mBtnRegister.setOnClickListener(mRegisterListener);
 
         return view;
     }
@@ -60,9 +63,9 @@ public class AuthView
     public void showLoading(boolean loading) {
         if (!isActive()) return;
 
-        mPbLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
-        mBtnLogin.setVisibility(loading ? View.GONE : View.VISIBLE);
-        mBtnRegister.setVisibility(loading ? View.GONE : View.VISIBLE);
+        mViewModel.getPbLoading().setVisibility(loading ? View.VISIBLE : View.GONE);
+        mViewModel.getBtnLogin().setVisibility(loading ? View.GONE : View.VISIBLE);
+        mViewModel.getBtnRegister().setVisibility(loading ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -72,53 +75,21 @@ public class AuthView
         getActivity().finish();
     }
 
-    @Override
-    public void setErrorMessage(String message) {
-        mTvError.setText(message);
-    }
-
-    @Override
-    public void showErrorMessage(boolean show) {
-        mCvError.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void hideErrorMessage() {
-        mTvError.setText("");
-        mCvError.setVisibility(View.GONE);
-    }
-
-    private View.OnClickListener mErrorListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            hideErrorMessage();
-        }
-    };
-
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            bindViewModel();
-
             mPresenter.login(
-                    mViewModel.getEmail(),
-                    mViewModel.getPassword());
+                    mViewModel.getEtEmail().getText().toString(),
+                    mViewModel.getEtPassword().getText().toString());
         }
     };
 
     private View.OnClickListener mRegisterListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            bindViewModel();
-
             mPresenter.register(
-                    mViewModel.getEmail(),
-                    mViewModel.getPassword());
+                    mViewModel.getEtEmail().getText().toString(),
+                    mViewModel.getEtPassword().getText().toString());
         }
     };
-
-    private void bindViewModel() {
-        mViewModel.setEmail(mEtEmail.getText().toString());
-        mViewModel.setPassword(mEtPassword.getText().toString());
-    }
 }

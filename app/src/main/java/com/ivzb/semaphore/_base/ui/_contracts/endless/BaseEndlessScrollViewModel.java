@@ -20,7 +20,6 @@ public interface BaseEndlessScrollViewModel<E extends BaseEntity>
 
     interface Builder extends BaseViewModel.Builder {
 
-        Builder setErrorClickListener(View.OnClickListener listener);
         Builder setAdapter(BaseAdapter adapter);
         Builder setLayoutManager(LinearLayoutManager layoutManager);
         Builder setRecyclerScrollListener(DefaultEndlessScrollListener listener);
@@ -42,9 +41,6 @@ public interface BaseEndlessScrollViewModel<E extends BaseEntity>
 
     TextView getTvNoEntities();
     ImageView getIvNoEntities();
-
-    CardView getCvError();
-    TextView getTvError();
 
     int getPage();
     void setPage(int page);

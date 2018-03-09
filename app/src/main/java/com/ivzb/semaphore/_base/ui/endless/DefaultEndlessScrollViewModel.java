@@ -35,9 +35,6 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
     private static final String NO_ENTITIES_VISIBILITY_STATE = "no_entities_visibility_state";
 
-    private static final String ERROR_TEXT_STATE = "error_text_state";
-    private static final String ERROR_VISIBILITY_STATE = "error_visibility_state";
-
     private BaseAdapter<T> mAdapter;
     private LinearLayoutManager mLayoutManager;
 
@@ -50,9 +47,6 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
     private ImageView mIvNoEntities;
     private TextView mTvNoEntities;
-
-    private CardView mCvError;
-    private TextView mTvError;
 
     private int mPage;
     private boolean mHasMore;
@@ -67,12 +61,11 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         return new DefaultEndlessScrollViewModel.Builder(context);
     }
 
+    @Override
     protected void initViews(View view) {
-        checkNotNull(view);
+        super.initViews(view);
 
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
-        mCvError = view.findViewById(R.id.cvError);
-        mTvError = view.findViewById(R.id.tvError);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mIvNoEntities = view.findViewById(R.id.ivNoEntities);
         mTvNoEntities = view.findViewById(R.id.tvNoEntities);
@@ -80,10 +73,11 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
     @Override
     public void saveInstanceState(Bundle outState) {
+        super.saveInstanceState(outState);
+
         savePageState(outState);
         saveEntitiesState(outState);
         saveNoEntitiesState(outState);
-        saveErrorState(outState);
     }
 
     private void savePageState(Bundle outState) {
@@ -113,21 +107,15 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         outState.putInt(NO_ENTITIES_VISIBILITY_STATE, noEntitiesVisibility);
     }
 
-    private void saveErrorState(Bundle outState) {
-        String errorText = mTvError.getText().toString();
-        outState.putString(ERROR_TEXT_STATE, errorText);
-
-        int errorVisibility = mCvError.getVisibility();
-        outState.putInt(ERROR_VISIBILITY_STATE, errorVisibility);
-    }
-
+    @Override
     protected void restoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState == null) return;
+
+        super.restoreInstanceState(savedInstanceState);
 
         restorePageState(savedInstanceState);
         restoreEntitiesState(savedInstanceState);
         restoreNoEntitiesState(savedInstanceState);
-        restoreErrorState(savedInstanceState);
     }
 
     private void restorePageState(Bundle state) {
@@ -161,24 +149,6 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
             getIvNoEntities().setVisibility(visibility);
             getTvNoEntities().setVisibility(visibility);
         }
-    }
-
-    private void restoreErrorState(Bundle state) {
-        if (state.containsKey(ERROR_TEXT_STATE)) {
-            String error = state.getString(ERROR_TEXT_STATE);
-            getTvError().setText(error);
-        }
-
-        if (state.containsKey(ERROR_VISIBILITY_STATE)) {
-            int visibility = state.getInt(ERROR_VISIBILITY_STATE);
-            getCvError().setVisibility(visibility);
-        }
-    }
-
-    private void setErrorClickListener(View.OnClickListener listener) {
-        if (mCvError == null) return;
-
-        mCvError.setOnClickListener(listener);
     }
 
     @Override
@@ -248,16 +218,6 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
     }
 
     @Override
-    public CardView getCvError() {
-        return mCvError;
-    }
-
-    @Override
-    public TextView getTvError() {
-        return mTvError;
-    }
-
-    @Override
     public int getPage() {
         return mPage;
     }
@@ -286,7 +246,6 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
             extends DefaultViewModel.Builder
             implements BaseEndlessScrollViewModel.Builder {
 
-        private View.OnClickListener mErrorClickListener;
         private BaseAdapter mAdapter;
         private LinearLayoutManager mLayoutManager;
         private DefaultEndlessScrollListener mRecyclerScrollListener;
@@ -294,12 +253,6 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
         public Builder(Context context) {
             super(context);
-        }
-
-        @Override
-        public Builder setErrorClickListener(View.OnClickListener listener) {
-            mErrorClickListener = listener;
-            return this;
         }
 
         @Override

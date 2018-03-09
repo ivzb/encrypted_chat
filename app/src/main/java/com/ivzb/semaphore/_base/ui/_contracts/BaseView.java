@@ -13,6 +13,10 @@ public interface BaseView<P extends BasePresenter, VM extends BaseViewModel> {
 
     void showErrorMessage(boolean show);
     void setErrorMessage(String message);
+    void hideErrorMessage();
+
+    // todo: replace with self-closing error
+    void onClickError();
 
     void showSuccessMessage(boolean show);
     void setSuccessMessage(String message);

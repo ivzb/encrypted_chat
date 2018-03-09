@@ -28,8 +28,6 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
         extends DefaultView<P, VM>
         implements BaseEndlessScrollView<M, P, VM> {
 
-    protected Context mContext;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,18 +108,6 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
             }
         };
     }
-
-    @Override
-    public void onClickError() {
-        mPresenter.clickError();
-    }
-
-    private View.OnClickListener mErrorClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            onClickError();
-        }
-    };
 
     @Override
     public void setLoadingIndicator(boolean active) {

@@ -9,7 +9,5 @@ public interface BaseEndlessScrollPresenter<M>
 
     void load(String id, int page);
 
-    void clickError();
-
     void result(int requestCode, int resultCode, String message);
 }

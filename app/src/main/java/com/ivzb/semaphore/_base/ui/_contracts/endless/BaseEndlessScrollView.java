@@ -27,7 +27,4 @@ public interface BaseEndlessScrollView<M, P extends BasePresenter, VM extends Ba
     void setPage(int page);
 
     void setMore(boolean more);
-
-    // todo: replace with self-closing error
-    void onClickError();
 }

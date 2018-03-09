@@ -86,6 +86,24 @@ public abstract class DefaultView<P extends BasePresenter, VM extends BaseViewMo
     }
 
     @Override
+    public void hideErrorMessage() {
+        mViewModel.getTvError().setText("");
+        mViewModel.getCvError().setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onClickError() {
+        mPresenter.clickError();
+    }
+
+    protected View.OnClickListener mErrorClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onClickError();
+        }
+    };
+
+    @Override
     public void setSuccessMessage(String message) {
         if (getView() == null || !isActive()) return;
 
