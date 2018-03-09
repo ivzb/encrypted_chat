@@ -35,32 +35,22 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflateFragment(inflater, container);
-        mContext = container.getContext();
 
         BaseAdapter<M> adapter = initEndlessAdapter();
         LinearLayoutManager layoutManager = initLayoutManager(mContext);
         DefaultEndlessScrollListener recyclerScrollListener = initEndlessScrollListener(layoutManager);
 
-        mViewModel.builder(mContext)
-                .setView(view)
-                .setErrorClickListener(mErrorClickListener)
-                .setSavedInstanceState(savedInstanceState)
-                .setAdapter(adapter)
-                .setSwipeRefreshListener(this)
-                .setLayoutManager(layoutManager)
-                .setRecyclerScrollListener(recyclerScrollListener)
-                .build();
+        BaseEndlessScrollViewModel.Builder builder = (BaseEndlessScrollViewModel.Builder) mViewModel.builder(mContext);
+        builder.setView(view);
+        builder.setErrorClickListener(mErrorClickListener);
+        builder.setSavedInstanceState(savedInstanceState);
+        builder.setAdapter(adapter);
+        builder.setSwipeRefreshListener(this);
+        builder.setLayoutManager(layoutManager);
+        builder.setRecyclerScrollListener(recyclerScrollListener);
+        builder.build();
 
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        if (mViewModel != null) {
-            mViewModel.saveInstanceState(outState);
-        }
     }
 
     @Override

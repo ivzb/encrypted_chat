@@ -1,7 +1,5 @@
 package com.ivzb.semaphore._base.ui._contracts.endless;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
@@ -17,27 +15,19 @@ import com.ivzb.semaphore._base.ui._contracts.BaseViewModel;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollListener;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
 
-public interface BaseEndlessScrollViewModel<T extends BaseEntity>
+public interface BaseEndlessScrollViewModel<E extends BaseEntity>
         extends BaseViewModel {
 
-    interface Builder {
+    interface Builder extends BaseViewModel.Builder {
 
-        Builder setView(View view);
         Builder setErrorClickListener(View.OnClickListener listener);
-        Builder setSavedInstanceState(Bundle savedInstanceState);
         Builder setAdapter(BaseAdapter adapter);
         Builder setLayoutManager(LinearLayoutManager layoutManager);
         Builder setRecyclerScrollListener(DefaultEndlessScrollListener listener);
         Builder setSwipeRefreshListener(SwipeRefreshLayout.OnRefreshListener listener);
-
-        void build();
     }
 
-    Builder builder(Context context);
-
-    void saveInstanceState(Bundle savedInstanceState);
-
-    BaseAdapter<T> getAdapter();
+    BaseAdapter<E> getAdapter();
 
     Parcelable getEntitiesState();
     void setEntitiesState(Parcelable state);

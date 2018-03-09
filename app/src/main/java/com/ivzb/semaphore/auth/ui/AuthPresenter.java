@@ -22,8 +22,7 @@ public class AuthPresenter
             @NonNull AuthContract.View view,
             @NonNull AuthDataSource dataSource) {
 
-        mContext = checkNotNull(context, "context cannot be null");
-        mView = checkNotNull(view, "view cannot be null");
+        super(context, view);
         mDataSource = checkNotNull(dataSource, "dataSource cannot be null");
     }
 

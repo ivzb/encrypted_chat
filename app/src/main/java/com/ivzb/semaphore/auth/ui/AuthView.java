@@ -21,46 +21,23 @@ public class AuthView
         extends DefaultView<AuthContract.Presenter, AuthContract.ViewModel>
         implements AuthContract.View {
 
-    private static final String EMAIL_STATE = "email_state";
-
-    private EditText mEtEmail;
-    private EditText mEtPassword;
-
-    private CardView mCvError;
-    private TextView mTvError;
-
-    private Button mBtnLogin;
-    private Button mBtnRegister;
-
-    private ProgressBar mPbLoading;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflateFragment(inflater, container);
 
-        mEtEmail = view.findViewById(R.id.etEmail);
-        mEtPassword = view.findViewById(R.id.etPassword);
 
-        mCvError = view.findViewById(R.id.cvError);
-        mTvError = view.findViewById(R.id.tvError);
-
-        mBtnLogin = view.findViewById(R.id.btnLogin);
-        mBtnRegister = view.findViewById(R.id.btnRegister);
-
-        mPbLoading = view.findViewById(R.id.pbLoading);
-
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(EMAIL_STATE)) {
-                String email = savedInstanceState.getString(EMAIL_STATE);
-                mEtEmail.setText(email);
-            }
-        }
-
-        mCvError.setOnClickListener(mErrorListener);
-        mBtnLogin.setOnClickListener(mLoginListener);
-        mBtnRegister.setOnClickListener(mRegisterListener);
+//        if (savedInstanceState != null) {
+//            if (savedInstanceState.containsKey(EMAIL_STATE)) {
+//                String email = savedInstanceState.getString(EMAIL_STATE);
+//                mEtEmail.setText(email);
+//            }
+//        }
+//
+//        mCvError.setOnClickListener(mErrorListener);
+//        mBtnLogin.setOnClickListener(mLoginListener);
+//        mBtnRegister.setOnClickListener(mRegisterListener);
 
         return view;
     }
@@ -75,7 +52,7 @@ public class AuthView
         super.onSaveInstanceState(outState);
 
         if (mViewModel != null) {
-            outState.putString(EMAIL_STATE, mEtEmail.getText().toString());
+            mViewModel.saveInstanceState(outState);
         }
     }
 

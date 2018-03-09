@@ -1,5 +1,6 @@
 package com.ivzb.semaphore._base.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -17,15 +18,18 @@ public abstract class DefaultView<P extends BasePresenter, VM extends BaseViewMo
         extends Fragment
         implements BaseView<P, VM> {
 
+    protected Context mContext;
+
     protected P mPresenter;
     protected VM mViewModel;
 
     private Snackbar mErrorMessage;
-    private Snackbar mSuccessMessage;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mContext = container.getContext();
+
         setHasOptionsMenu(true);
         setRetainInstance(true);
 
@@ -36,6 +40,15 @@ public abstract class DefaultView<P extends BasePresenter, VM extends BaseViewMo
     public void onResume() {
         super.onResume();
         mPresenter.start();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mViewModel != null) {
+            mViewModel.saveInstanceState(outState);
+        }
     }
 
     @Override

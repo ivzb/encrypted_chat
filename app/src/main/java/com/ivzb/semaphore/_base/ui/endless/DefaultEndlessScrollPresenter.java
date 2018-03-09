@@ -26,8 +26,7 @@ public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScro
             @NonNull V view,
             @NonNull DS dataSource) {
 
-        mContext = checkNotNull(context, "context cannot be null");
-        mView = checkNotNull(view, "view cannot be null");
+        super(context, view);
         mDataSource = checkNotNull(dataSource, "dataSource cannot be null");
     }
 

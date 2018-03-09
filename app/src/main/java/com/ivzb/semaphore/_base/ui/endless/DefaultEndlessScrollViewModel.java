@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.data.config.DefaultConfig;
+import com.ivzb.semaphore._base.ui.DefaultViewModel;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
@@ -23,6 +24,7 @@ import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_PAGE;
 import static com.ivzb.semaphore.utils.Preconditions.checkNotNull;
 
 public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
+        extends DefaultViewModel
         implements BaseEndlessScrollViewModel<T> {
 
     private static final String PAGE_STATE = "page_state";
@@ -62,7 +64,7 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
     @Override
     public BaseEndlessScrollViewModel.Builder builder(Context context) {
-        return new Builder(context);
+        return new DefaultEndlessScrollViewModel.Builder(context);
     }
 
     protected void initViews(View view) {
@@ -280,36 +282,23 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         return DefaultConfig.NO_ID;
     }
 
-    public class Builder implements BaseEndlessScrollViewModel.Builder {
+    public class Builder
+            extends DefaultViewModel.Builder
+            implements BaseEndlessScrollViewModel.Builder {
 
-        private Context mContext;
-        private View mView;
         private View.OnClickListener mErrorClickListener;
-        private Bundle mSavedInstanceState;
         private BaseAdapter mAdapter;
         private LinearLayoutManager mLayoutManager;
         private DefaultEndlessScrollListener mRecyclerScrollListener;
         private SwipeRefreshLayout.OnRefreshListener mSwipeRefreshListener;
 
         public Builder(Context context) {
-            mContext = context;
-        }
-
-        @Override
-        public Builder setView(View view) {
-            mView = view;
-            return this;
+            super(context);
         }
 
         @Override
         public Builder setErrorClickListener(View.OnClickListener listener) {
             mErrorClickListener = listener;
-            return this;
-        }
-
-        @Override
-        public Builder setSavedInstanceState(Bundle savedInstanceState) {
-            mSavedInstanceState = savedInstanceState;
             return this;
         }
 
