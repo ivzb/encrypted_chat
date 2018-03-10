@@ -33,6 +33,8 @@ public class AuthPresenter
 
     @Override
     public void login(String email, String password) {
+        if (!mView.isActive()) return;
+
         mView.hideErrorMessage();
         mView.showLoading(true);
 
@@ -40,28 +42,13 @@ public class AuthPresenter
 
         AuthEntity auth = new AuthEntity(email, password);
 
-        mDataSource.login(auth, new SaveCallback<String>() {
-            @Override
-            public void onSuccess(Result<String> data) {
-                if (!mView.isActive()) return;
-
-                mView.navigateToHome();
-                mView.showLoading(false);
-            }
-
-            @Override
-            public void onFailure(String message) {
-                if (!mView.isActive()) return;
-
-                mView.showLoading(false);
-                mView.setErrorMessage(message);
-                mView.showErrorMessage(true);
-            }
-        });
+        mDataSource.login(auth, mAuthCallback);
     }
 
     @Override
     public void register(String email, String password) {
+        if (!mView.isActive()) return;
+
         mView.hideErrorMessage();
         mView.showLoading(true);
 
@@ -69,23 +56,25 @@ public class AuthPresenter
 
         AuthEntity auth = new AuthEntity(email, password);
 
-        mDataSource.register(auth, new SaveCallback<String>() {
-            @Override
-            public void onSuccess(Result<String> data) {
-                if (!mView.isActive()) return;
-
-                mView.navigateToHome();
-                mView.showLoading(false);
-            }
-
-            @Override
-            public void onFailure(String message) {
-                if (!mView.isActive()) return;
-
-                mView.showLoading(false);
-                mView.setErrorMessage(message);
-                mView.showErrorMessage(true);
-            }
-        });
+        mDataSource.register(auth, mAuthCallback);
     }
+
+    private SaveCallback<String> mAuthCallback = new SaveCallback<String>() {
+        @Override
+        public void onSuccess(Result<String> data) {
+            if (!mView.isActive()) return;
+
+            mView.navigateToHome();
+            mView.showLoading(false);
+        }
+
+        @Override
+        public void onFailure(String message) {
+            if (!mView.isActive()) return;
+
+            mView.showLoading(false);
+            mView.setErrorMessage(message);
+            mView.showErrorMessage(true);
+        }
+    };
 }

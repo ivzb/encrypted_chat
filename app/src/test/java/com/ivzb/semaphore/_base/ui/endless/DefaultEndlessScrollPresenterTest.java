@@ -4,8 +4,10 @@ import com.ivzb.semaphore._base.data.Result;
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.data._contracts.sources.ReceiveDataSource;
 import com.ivzb.semaphore._base.data.callbacks.LoadCallback;
+import com.ivzb.semaphore._base.ui.DefaultPresenterTest;
 import com.ivzb.semaphore._base.ui._contracts.BasePresenterTest;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
+import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenterTest;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
 
 import org.junit.After;
@@ -30,46 +32,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P extends BaseEndlessScrollPresenter, V extends BaseEndlessScrollView, DS extends ReceiveDataSource<M>>
-        implements BasePresenterTest<M, P, V, DS> {
+public abstract class DefaultEndlessScrollPresenterTest<E extends BaseEntity, P extends BaseEndlessScrollPresenter, V extends BaseEndlessScrollView, DS extends ReceiveDataSource<E>>
+        extends DefaultPresenterTest<P, V, DS>
+        implements BaseEndlessScrollPresenterTest<E, P, V, DS> {
 
-    @Captor protected ArgumentCaptor<List<M>> mAddEntitiesCaptor;
-
-    protected P mPresenter;
+    @Captor protected ArgumentCaptor<List<E>> mAddEntitiesCaptor;
 
     protected String mId;
 
-    protected List<M> mExpectedAddEntities;
+    protected List<E> mExpectedAddEntities;
     protected boolean mExpectedShowEntities;
 
     protected static final String sLoadFailure = "Could not load entities";
-
-    @After
-    public void after() {
-        verifyNoMoreInteractions(getContext());
-        verifyNoMoreInteractions(getView());
-        verifyNoMoreInteractions(getDataSource());
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void nullContext_shouldThrow() {
-        initPresenter(null, getView(), getDataSource());
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void nullView_shouldThrow() {
-        initPresenter(getContext(), null, getDataSource());
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void nullDataSource_shouldThrow() {
-        initPresenter(getContext(), getView(), null);
-    }
-
-    @Test
-    public void start_shouldDoNothing() {
-        mPresenter.start();
-    }
 
     @Test
     public void refresh() {
@@ -214,13 +188,13 @@ public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P 
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                LoadCallback<M> callback = (LoadCallback<M>) invocation.getArguments()[2];
+                LoadCallback<E> callback = (LoadCallback<E>) invocation.getArguments()[2];
 
                 when(getView().isActive()).thenReturn(callbackInactiveView);
 
                 if (isSuccessful) {
                     mExpectedAddEntities = generate(page);
-                    Result<List<M>> result = new Result<>(mExpectedAddEntities, "message here");
+                    Result<List<E>> result = new Result<>(mExpectedAddEntities, "message here");
                     callback.onSuccess(result);
 
                     mExpectedShowEntities = true;
@@ -257,7 +231,7 @@ public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P 
         verify(getView(), times(2)).isActive();
         verifyNoMoreInteractions(getView());
 
-        List<M> actualAddEntities = mAddEntitiesCaptor.getValue();
+        List<E> actualAddEntities = mAddEntitiesCaptor.getValue();
         assertTrue(mExpectedAddEntities == actualAddEntities);
     }
 
@@ -281,12 +255,12 @@ public abstract class DefaultEndlessScrollPresenterTest<M extends BaseEntity, P 
         verifyNoMoreInteractions(getView());
     }
 
-    protected List<M> generate(int page) {
-        List<M> entities = new ArrayList<>();
+    protected List<E> generate(int page) {
+        List<E> entities = new ArrayList<>();
         int end = 9 * page;
 
         for (int id = 0; id < end; id++) {
-            M entity = initEntity(String.valueOf(id));
+            E entity = initEntity(String.valueOf(id));
             entities.add(entity);
         }
 

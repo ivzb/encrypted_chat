@@ -38,7 +38,7 @@ public class UsersView
     @Override
     public BaseAdapter<UserEntity> initEndlessAdapter() {
         return new UsersAdapter(
-                        getContext(),
+                        mContext,
                         mUserClickListener,
                         mAddUserClickListener,
                         mRemoveUserClickListener);
@@ -46,7 +46,7 @@ public class UsersView
 
     @Override
     public void openConversation(UserEntity user) {
-        Intent intent = new Intent(getContext(), ConversationActivity.class);
+        Intent intent = new Intent(mContext, ConversationActivity.class);
 //        intent.putExtra(ConversationActivity.EXTRA_USER_ID, user.getId());
         mContext.startActivity(intent);
     }

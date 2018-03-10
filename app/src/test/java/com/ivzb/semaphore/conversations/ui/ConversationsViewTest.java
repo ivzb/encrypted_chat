@@ -16,8 +16,7 @@ import static org.mockito.Mockito.verify;
 public class ConversationsViewTest
         extends DefaultEndlessScrollViewTest<ConversationEntity, ConversationsContract.View, ConversationsContract.Presenter, ConversationsContract.ViewModel> {
 
-    private @Mock
-    ConversationsContract.Presenter mPresenter;
+    private @Mock ConversationsContract.Presenter mPresenter;
     private @Mock ConversationsContract.ViewModel mViewModel;
 
     @Override

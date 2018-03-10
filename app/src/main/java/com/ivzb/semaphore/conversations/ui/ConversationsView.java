@@ -43,14 +43,14 @@ public class ConversationsView
     @Override
     public BaseAdapter<ConversationEntity> initEndlessAdapter() {
         return new ConversationsAdapter(
-                getContext(),
+                mContext,
                 mConversationClickListener,
                 mRemoveConversationClickListener);
     }
 
     @Override
     public void openConversation(ConversationEntity conversation) {
-        Intent intent = new Intent(getContext(), ConversationActivity.class);
+        Intent intent = new Intent(mContext, ConversationActivity.class);
         intent.putExtra(ConversationActivity.EXTRA_CONVERSATION_ID, conversation.getId());
         mContext.startActivity(intent);
     }

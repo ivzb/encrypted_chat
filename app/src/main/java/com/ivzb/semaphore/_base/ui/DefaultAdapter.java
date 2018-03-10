@@ -20,6 +20,7 @@ public abstract class DefaultAdapter<T>
     protected List<T> mEntities;
 
     public DefaultAdapter(Context context) {
+        super();
         mContext = context;
         mEntities = new ArrayList<>();
     }

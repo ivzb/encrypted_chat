@@ -41,7 +41,7 @@ public class ConversationView
 
     @Override
     public BaseAdapter<MessageEntity> initEndlessAdapter() {
-        return new MessagesAdapter(getContext(), mMessageClickListener);
+        return new MessagesAdapter(mContext, mMessageClickListener);
     }
 
     @Override

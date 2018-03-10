@@ -35,13 +35,6 @@ public class AuthView
         builder.setSavedInstanceState(savedInstanceState);
         builder.build();
 
-//        if (savedInstanceState != null) {
-//            if (savedInstanceState.containsKey(EMAIL_STATE)) {
-//                String email = savedInstanceState.getString(EMAIL_STATE);
-//                mEtEmail.setText(email);
-//            }
-//        }
-
         return view;
     }
 
@@ -70,7 +63,7 @@ public class AuthView
 
     @Override
     public void navigateToHome() {
-        Intent intent = new Intent(getContext(), HomeActivity.class);
+        Intent intent = new Intent(mContext, HomeActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

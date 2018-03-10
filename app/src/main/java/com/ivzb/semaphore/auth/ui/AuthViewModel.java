@@ -20,6 +20,7 @@ public class AuthViewModel
         implements AuthContract.ViewModel {
 
     private static final String EMAIL_STATE = "email_state";
+    private static final String PASSWORD_STATE = "password_state";
 
     private EditText mEtEmail;
     private EditText mEtPassword;
@@ -51,7 +52,18 @@ public class AuthViewModel
 
     @Override
     public void saveInstanceState(Bundle savedInstanceState) {
-//        outState.putString(EMAIL_STATE, mEtEmail.getText().toString());
+        super.saveInstanceState(savedInstanceState);
+
+        saveEmailState(savedInstanceState);
+        savePasswordState(savedInstanceState);
+    }
+
+    private void saveEmailState(Bundle outState) {
+        outState.putString(EMAIL_STATE, mEtEmail.getText().toString());
+    }
+
+    private void savePasswordState(Bundle outState) {
+        outState.putString(PASSWORD_STATE, mEtPassword.getText().toString());
     }
 
     protected void restoreInstanceState(Bundle savedInstanceState) {
@@ -59,7 +71,22 @@ public class AuthViewModel
 
         super.restoreInstanceState(savedInstanceState);
 
-        // todo: restore
+        restoreEmailState(savedInstanceState);
+        restorePasswordState(savedInstanceState);
+    }
+
+    private void restoreEmailState(Bundle state) {
+        if (state.containsKey(EMAIL_STATE)) {
+            String email = state.getString(EMAIL_STATE);
+            mEtEmail.setText(email);
+        }
+    }
+
+    private void restorePasswordState(Bundle state) {
+        if (state.containsKey(PASSWORD_STATE)) {
+            String password = state.getString(PASSWORD_STATE);
+            mEtPassword.setText(password);
+        }
     }
 
     @Override
