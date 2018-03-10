@@ -32,29 +32,25 @@ public class AuthPresenter
     }
 
     @Override
-    public void login(String email, String password) {
+    public void login(AuthEntity auth) {
         if (!mView.isActive()) return;
 
         mView.hideErrorMessage();
         mView.showLoading(true);
 
         // todo: add validation
-
-        AuthEntity auth = new AuthEntity(email, password);
 
         mDataSource.login(auth, mAuthCallback);
     }
 
     @Override
-    public void register(String email, String password) {
+    public void register(AuthEntity auth) {
         if (!mView.isActive()) return;
 
         mView.hideErrorMessage();
         mView.showLoading(true);
 
         // todo: add validation
-
-        AuthEntity auth = new AuthEntity(email, password);
 
         mDataSource.register(auth, mAuthCallback);
     }

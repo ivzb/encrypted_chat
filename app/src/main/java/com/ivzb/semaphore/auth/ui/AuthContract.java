@@ -7,6 +7,7 @@ import android.widget.ProgressBar;
 import com.ivzb.semaphore._base.ui._contracts.BasePresenter;
 import com.ivzb.semaphore._base.ui._contracts.BaseView;
 import com.ivzb.semaphore._base.ui._contracts.BaseViewModel;
+import com.ivzb.semaphore.auth.data.AuthEntity;
 
 public class AuthContract {
 
@@ -19,8 +20,8 @@ public class AuthContract {
 
     public interface Presenter extends BasePresenter {
 
-        void login(String email, String password);
-        void register(String email, String password);
+        void login(AuthEntity auth);
+        void register(AuthEntity auth);
     }
 
     public interface ViewModel extends BaseViewModel {

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.ui.DefaultView;
+import com.ivzb.semaphore.auth.data.AuthEntity;
 import com.ivzb.semaphore.home.ui.HomeActivity;
 
 public class AuthView
@@ -71,18 +72,22 @@ public class AuthView
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mPresenter.login(
+            AuthEntity auth = new AuthEntity(
                     mViewModel.getEtEmail().getText().toString(),
                     mViewModel.getEtPassword().getText().toString());
+
+            mPresenter.login(auth);
         }
     };
 
     private View.OnClickListener mRegisterListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mPresenter.register(
+            AuthEntity auth = new AuthEntity(
                     mViewModel.getEtEmail().getText().toString(),
                     mViewModel.getEtPassword().getText().toString());
+
+            mPresenter.register(auth);
         }
     };
 }
