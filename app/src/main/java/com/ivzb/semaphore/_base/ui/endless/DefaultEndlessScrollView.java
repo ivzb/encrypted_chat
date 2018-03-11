@@ -3,7 +3,6 @@ package com.ivzb.semaphore._base.ui.endless;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
-import com.ivzb.semaphore._base.ui.DefaultActionHandlerAdapter;
 import com.ivzb.semaphore._base.ui.DefaultView;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;

@@ -1,90 +1,61 @@
 package com.ivzb.semaphore._base.ui.endless;
 
 import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.test.ActivityInstrumentationTestCase2;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.ui.DefaultActionHandlerAdapter;
 import com.ivzb.semaphore._base.ui.DefaultAdapter;
+import com.ivzb.semaphore._base.ui.DefaultViewTest;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
+import com.ivzb.semaphore._base.ui._contracts.BaseViewModel;
 import com.ivzb.semaphore._base.ui._contracts.BaseViewTest;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_ID;
 import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 public abstract class DefaultEndlessScrollViewTest<E extends BaseEntity, V extends BaseEndlessScrollView, P extends BaseEndlessScrollPresenter, VM extends BaseEndlessScrollViewModel>
+        extends DefaultViewTest<E, V, P, VM>
         implements BaseViewTest<E, V, P, VM> {
-
-    protected BaseEndlessScrollView mFragment;
-    protected Context mContext;
 
     @Before
     public void before() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        super.before();
 
-        BaseEndlessScrollPresenter presenter = getPresenter();
-        BaseEndlessScrollViewModel viewModel = getViewModel();
+        verify(getViewModel()).getPage();
+        verify(getViewModel()).getContainerId();
 
-        mFragment = initView();
-        mFragment.setPresenter(presenter);
-        mFragment.setViewModel(viewModel);
-
-        setupViewModel(viewModel);
-        setupView();
-
-        verify(viewModel).builder(isA(Context.class));
-
-        verify(viewModel).getPage();
-        verify(viewModel).getContainerId();
-
-        verify(presenter).start();
-        verify(presenter).refresh(eq(NO_ID));
+        verify(getPresenter()).refresh(eq(NO_ID));
     }
 
-    private void setupViewModel(BaseEndlessScrollViewModel viewModel) {
-        BaseEndlessScrollViewModel.Builder builder = mock(BaseEndlessScrollViewModel.Builder.class);
-        when(viewModel.builder(isA(Context.class))).thenReturn(builder);
+    @Override
+    protected void setupViewModel(BaseViewModel vm) {
+        super.setupViewModel(vm);
 
-        when(builder.setView(isA(View.class))).thenReturn(builder);
-        when(builder.setErrorClickListener(isA(View.OnClickListener.class))).thenReturn(builder);
-
-        when(builder.setSavedInstanceState(isA(Bundle.class))).thenReturn(builder);
-        when(builder.setSavedInstanceState(null)).thenReturn(builder);
+        BaseEndlessScrollViewModel viewModel = (BaseEndlessScrollViewModel) vm;
+        BaseEndlessScrollViewModel.Builder builder = (BaseEndlessScrollViewModel.Builder) mViewModelBuilder;
 
         when(builder.setAdapter(isA(BaseAdapter.class))).thenReturn(builder);
         when(builder.setSwipeRefreshListener(isA(SwipeRefreshLayout.OnRefreshListener.class))).thenReturn(builder);
@@ -100,39 +71,9 @@ public abstract class DefaultEndlessScrollViewTest<E extends BaseEntity, V exten
         when(viewModel.getContainerId()).thenReturn(NO_ID);
     }
 
-    private void setupView() {
-        LayoutInflater layoutInflater = mock(LayoutInflater.class);
-
-        View view = mock(View.class);
-        when(layoutInflater.inflate(anyInt(), isA(ViewGroup.class), anyBoolean())).thenReturn(view);
-
-        ViewGroup viewGroup = mock(ViewGroup.class);
-
-        mContext = mock(Context.class);
-        when(viewGroup.getContext()).thenReturn(mContext);
-
-        ((Fragment)mFragment).onCreateView(layoutInflater, viewGroup, null);
-        ((Fragment)mFragment).onResume();
-    }
-
-    @After
-    public void after() {
-        verifyNoMoreInteractions(getViewModel());
-        verifyNoMoreInteractions(getPresenter());
-    }
-
-    @Test
-    public void shouldNotBeNull() throws Exception {
-        assertNotNull(getView());
-    }
-
-    @Test
-    public void onSaveInstanceState() {
-        // act
-        ((Fragment) getView()).onSaveInstanceState(null);
-
-        // assert
-        verify(getViewModel()).saveInstanceState(null);
+    @Override
+    public BaseViewModel.Builder initViewModelBuilder() {
+        return mock(BaseEndlessScrollViewModel.Builder.class);
     }
 
     @Test
@@ -343,15 +284,6 @@ public abstract class DefaultEndlessScrollViewTest<E extends BaseEntity, V exten
         // assert
         verify(getViewModel()).setMore(eq(false));
         verify(getViewModel()).getAdapter();
-    }
-
-    @Test
-    public void onClickError() {
-        // act
-        getView().onClickError();
-
-        // assert
-        verify(getPresenter()).clickError();
     }
 
     @Test

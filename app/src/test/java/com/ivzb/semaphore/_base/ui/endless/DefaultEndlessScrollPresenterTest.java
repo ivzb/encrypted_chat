@@ -5,12 +5,10 @@ import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.data._contracts.sources.ReceiveDataSource;
 import com.ivzb.semaphore._base.data.callbacks.LoadCallback;
 import com.ivzb.semaphore._base.ui.DefaultPresenterTest;
-import com.ivzb.semaphore._base.ui._contracts.BasePresenterTest;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenterTest;
 import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
 
-import org.junit.After;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -20,7 +18,6 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_ID;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;

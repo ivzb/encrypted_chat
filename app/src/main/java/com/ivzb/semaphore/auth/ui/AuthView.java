@@ -1,17 +1,12 @@
 package com.ivzb.semaphore.auth.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.ui.DefaultView;
@@ -45,28 +40,30 @@ public class AuthView
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        if (mViewModel != null) {
-            mViewModel.saveInstanceState(outState);
-        }
-    }
-
-    @Override
     public void showLoading(boolean loading) {
-        if (!isActive()) return;
-
         mViewModel.getPbLoading().setVisibility(loading ? View.VISIBLE : View.GONE);
         mViewModel.getBtnLogin().setVisibility(loading ? View.GONE : View.VISIBLE);
         mViewModel.getBtnRegister().setVisibility(loading ? View.GONE : View.VISIBLE);
     }
 
     @Override
+    public void onClickLogin(AuthEntity auth) {
+        mPresenter.login(auth);
+    }
+
+    @Override
+    public void onClickRegister(AuthEntity auth) {
+        mPresenter.register(auth);
+    }
+
+    @Override
     public void navigateToHome() {
         Intent intent = new Intent(mContext, HomeActivity.class);
-        startActivity(intent);
-        getActivity().finish();
+        mContext.startActivity(intent);
+
+        if (mContext instanceof Activity) {
+            ((Activity) mContext).finish();
+        }
     }
 
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
@@ -76,7 +73,7 @@ public class AuthView
                     mViewModel.getEtEmail().getText().toString(),
                     mViewModel.getEtPassword().getText().toString());
 
-            mPresenter.login(auth);
+            onClickLogin(auth);
         }
     };
 
@@ -87,7 +84,7 @@ public class AuthView
                     mViewModel.getEtEmail().getText().toString(),
                     mViewModel.getEtPassword().getText().toString());
 
-            mPresenter.register(auth);
+            onClickRegister(auth);
         }
     };
 }

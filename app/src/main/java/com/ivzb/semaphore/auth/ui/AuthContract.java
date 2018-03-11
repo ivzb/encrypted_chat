@@ -15,6 +15,10 @@ public class AuthContract {
             extends BaseView<Presenter, ViewModel> {
 
         void showLoading(boolean loading);
+
+        void onClickLogin(AuthEntity auth);
+        void onClickRegister(AuthEntity auth);
+
         void navigateToHome();
     }
 

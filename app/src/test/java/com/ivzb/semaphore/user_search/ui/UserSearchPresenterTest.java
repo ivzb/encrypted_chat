@@ -1,18 +1,11 @@
 package com.ivzb.semaphore.user_search.ui;
 
-import android.content.Context;
-import android.view.View;
-
 import com.ivzb.semaphore._base.data.callbacks.LoadCallback;
-import com.ivzb.semaphore._base.data.config.DefaultConfig;
 import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
-import com.ivzb.semaphore.users.data.UsersDataSource;
-import com.ivzb.semaphore.users.ui.UsersContract;
 import com.ivzb.semaphore.users.ui.UsersPresenterTest;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Random;

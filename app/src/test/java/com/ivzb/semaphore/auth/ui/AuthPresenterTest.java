@@ -3,23 +3,17 @@ package com.ivzb.semaphore.auth.ui;
 import android.content.Context;
 
 import com.ivzb.semaphore._base.data.Result;
-import com.ivzb.semaphore._base.data.callbacks.LoadCallback;
 import com.ivzb.semaphore._base.data.callbacks.SaveCallback;
-import com.ivzb.semaphore._base.data.generators.DefaultGenerator;
 import com.ivzb.semaphore._base.ui.DefaultPresenterTest;
 import com.ivzb.semaphore.auth.data.AuthDataSource;
 import com.ivzb.semaphore.auth.data.AuthEntity;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
 
-import static org.hamcrest.core.IsInstanceOf.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;

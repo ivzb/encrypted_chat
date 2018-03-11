@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ivzb.semaphore.R;
-import com.ivzb.semaphore._base.data.config.DefaultConfig;
-import com.ivzb.semaphore._base.ui.DefaultActionHandlerAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseEntityActionHandler;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollView;
@@ -17,9 +15,6 @@ import com.ivzb.semaphore._base.ui.prompt.DialogListener;
 import com.ivzb.semaphore._base.ui.prompt.PromptDialogFragment;
 import com.ivzb.semaphore.conversation.ui.ConversationActivity;
 import com.ivzb.semaphore.conversations.data.ConversationEntity;
-import com.ivzb.semaphore.utils.ui.SwipeRefreshLayoutUtils;
-
-import static com.ivzb.semaphore._base.data.config.DefaultConfig.INITIAL_PAGE;
 
 public class ConversationsView
         extends DefaultEndlessScrollView<ConversationEntity, ConversationsContract.Presenter, ConversationsContract.ViewModel>

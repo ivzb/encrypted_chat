@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ivzb.semaphore.auth.ui.AuthActivity;
-import com.ivzb.semaphore.conversation.ui.ConversationActivity;
-import com.ivzb.semaphore.home.ui.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

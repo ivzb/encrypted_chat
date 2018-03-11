@@ -7,13 +7,12 @@ import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollViewTest;
 import com.ivzb.semaphore.users.data.UserEntity;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.ArgumentMatchers.isA;
 
 public class UsersViewTest
         extends DefaultEndlessScrollViewTest<UserEntity, UsersContract.View, UsersContract.Presenter, UsersContract.ViewModel> {

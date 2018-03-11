@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
 import com.ivzb.semaphore.utils.ui.SwipeRefreshLayoutUtils;
 
 import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_PAGE;
-import static com.ivzb.semaphore.utils.Preconditions.checkNotNull;
 
 public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         extends DefaultViewModel

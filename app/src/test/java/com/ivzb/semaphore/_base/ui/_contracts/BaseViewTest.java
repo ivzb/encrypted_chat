@@ -1,11 +1,6 @@
 package com.ivzb.semaphore._base.ui._contracts;
 
-import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
-
-public interface BaseViewTest<E extends BaseEntity, V extends BaseEndlessScrollView, P extends BaseEndlessScrollPresenter, VM extends BaseEndlessScrollViewModel> {
+public interface BaseViewTest<E, V extends BaseView, P extends BasePresenter, VM extends BaseViewModel> {
 
     V getView();
     P getPresenter();
@@ -13,4 +8,5 @@ public interface BaseViewTest<E extends BaseEntity, V extends BaseEndlessScrollV
 
     E initEntity(String id);
     V initView();
+    VM.Builder initViewModelBuilder();
 }

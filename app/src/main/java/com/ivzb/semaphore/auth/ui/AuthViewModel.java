@@ -2,16 +2,13 @@ package com.ivzb.semaphore.auth.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.ui.DefaultViewModel;
-import com.ivzb.semaphore._base.ui._contracts.BaseViewModel;
 
 import static com.ivzb.semaphore.utils.Preconditions.checkNotNull;
 

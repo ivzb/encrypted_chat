@@ -8,7 +8,6 @@ import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
 import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollPresenterTest;
 import com.ivzb.semaphore.conversation.data.MessageEntity;
 import com.ivzb.semaphore.conversation.data.MessagesDataSource;
-import com.ivzb.semaphore.conversations.data.ConversationEntity;
 
 import org.junit.Before;
 import org.junit.Test;

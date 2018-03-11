@@ -2,14 +2,10 @@ package com.ivzb.semaphore._base.ui;
 
 import android.content.Context;
 
-import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
-import com.ivzb.semaphore._base.data._contracts.sources.BaseDataSource;
 import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
 import com.ivzb.semaphore._base.ui._contracts.BasePresenter;
 import com.ivzb.semaphore._base.ui._contracts.BasePresenterTest;
 import com.ivzb.semaphore._base.ui._contracts.BaseView;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
 
 import org.junit.After;
 import org.junit.Before;
