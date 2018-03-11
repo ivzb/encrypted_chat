@@ -27,6 +27,7 @@ public class ConversationPresenter
 
         if (message == null || message.getMessage() == null || message.getMessage().equals("")) return;
 
+        mView.showErrorMessage(false);
         mView.setLoadingIndicator(true);
 
         mDataSource.save(message, new SaveCallback<String>() {
@@ -35,6 +36,7 @@ public class ConversationPresenter
                     if (!mView.isActive()) return;
 
                     mView.setLoadingIndicator(false);
+                    mView.clearMessage();
 
                     // nothing to do here, service should handle receive
                 }

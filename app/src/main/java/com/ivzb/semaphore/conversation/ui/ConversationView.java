@@ -50,6 +50,11 @@ public class ConversationView
     }
 
     @Override
+    public void clearMessage() {
+        mViewModel.getEtMessage().setText("");
+    }
+
+    @Override
     public void onClickSendMessage(MessageEntity message) {
         mPresenter.sendMessage(message);
     }

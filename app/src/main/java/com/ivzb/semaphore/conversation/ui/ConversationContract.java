@@ -12,6 +12,8 @@ public class ConversationContract {
 
     public interface View extends BaseEndlessScrollView<MessageEntity, Presenter, ViewModel> {
 
+        void clearMessage();
+
         void onClickSendMessage(MessageEntity message);
         void onClickShowMessageDetails(MessageEntity message);
     }

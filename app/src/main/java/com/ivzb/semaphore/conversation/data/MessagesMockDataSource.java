@@ -9,7 +9,6 @@ public class MessagesMockDataSource
         implements MessagesDataSource {
 
     private static MessagesDataSource sINSTANCE;
-    private BaseGeneratorConfig mGeneratorConfig;
 
     public static MessagesDataSource getInstance() {
         if (sINSTANCE == null) {
@@ -25,7 +24,5 @@ public class MessagesMockDataSource
 
     private MessagesMockDataSource() {
         super(new MessagesGenerator(DefaultGeneratorConfig.getInstance()));
-
-        mGeneratorConfig = DefaultGeneratorConfig.getInstance();
     }
 }

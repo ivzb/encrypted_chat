@@ -7,6 +7,7 @@ import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.data._contracts.generators.BaseGenerator;
 import com.ivzb.semaphore._base.data._contracts.sources.BaseDataSource;
 import com.ivzb.semaphore._base.data.callbacks.SaveCallback;
+import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,13 @@ public abstract class MockSaveDataSource<T extends BaseEntity>
 
         if (entity == null) {
             callback.onFailure(sNoEntityFailMessage);
+            return;
+        }
+
+        Boolean succeeded = DefaultGeneratorConfig.getInstance().getBoolean();
+
+        if (!succeeded) {
+            callback.onFailure("Couldn't save entity.");
             return;
         }
 
