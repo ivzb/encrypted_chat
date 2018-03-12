@@ -42,7 +42,7 @@ public class RESTClient {
                 .create();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                //.addNetworkInterceptor(new StethoInterceptor()) // add Stetho when needed
+                //.addNetworkInterceptor(new StethoInterceptor()) // append Stetho when needed
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()

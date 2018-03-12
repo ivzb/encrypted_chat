@@ -38,7 +38,7 @@ public class UsersMockDataSource
         checkNotNull(callback);
 
         Boolean added = mGeneratorConfig.getBoolean();
-        String message = added ? "User added." : "Couldn't add user.";
+        String message = added ? "User added." : "Couldn't append user.";
 
         Result<Boolean> result = new Result<>(added, message);
         callback.onSuccess(result);

@@ -28,5 +28,9 @@
         <activity android:name="com.ivzb.semaphore.home.ui.HomeActivity" />
         <activity android:name="com.ivzb.semaphore.user_search.ui.UserSearchActivity" />
         <activity android:name="com.ivzb.semaphore.conversation.ui.ConversationActivity" />
+
+        <service
+            android:name=".messaging.service.MessagingService"
+            android:exported="false" />
     </application>
 </manifest>

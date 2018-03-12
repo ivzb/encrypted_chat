@@ -141,6 +141,7 @@ public class ConversationPresenterTest
         mPresenter.sendMessage(entity);
 
         // assert
+        verify(getView()).showErrorMessage(eq(false));
         verify(getDataSource()).save(eq(entity), isA(SaveCallback.class));
         verify(getView(), times(2)).isActive();
         verify(getView()).setLoadingIndicator(eq(true));
@@ -161,6 +162,7 @@ public class ConversationPresenterTest
         mPresenter.sendMessage(entity);
 
         // assert
+        verify(getView()).showErrorMessage(eq(false));
         verify(getDataSource()).save(eq(entity), isA(SaveCallback.class));
         verify(getView(), times(2)).isActive();
         verify(getView()).setLoadingIndicator(eq(true));
@@ -181,6 +183,7 @@ public class ConversationPresenterTest
         mPresenter.sendMessage(entity);
 
         // assert
+        verify(getView()).showErrorMessage(eq(false));
         verify(getDataSource()).save(eq(entity), isA(SaveCallback.class));
         verify(getView(), times(2)).isActive();
         verify(getView()).setLoadingIndicator(eq(true));
@@ -206,9 +209,11 @@ public class ConversationPresenterTest
 
         // assert
         verify(getDataSource()).save(eq(entity), isA(SaveCallback.class));
+        verify(getView()).showErrorMessage(eq(false));
         verify(getView(), times(2)).isActive();
         verify(getView()).setLoadingIndicator(eq(true));
         verify(getView()).setLoadingIndicator(eq(false));
+        verify(getView()).clearMessage();
     }
 
     protected void arrangeSaveMessage(

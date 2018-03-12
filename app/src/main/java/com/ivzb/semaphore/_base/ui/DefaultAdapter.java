@@ -26,8 +26,17 @@ public abstract class DefaultAdapter<T>
     }
 
     @Override
-    public void add(List<T> entities) {
-        if (entities == null) return;
+    public void prepend(List<T> entities) {
+        if (entities == null || entities.size() == 0) return;
+
+        mEntities.addAll(0, entities);
+        notifyItemRangeInserted(0, entities.size());
+//        notifyDataSetChanged();
+    }
+
+    @Override
+    public void append(List<T> entities) {
+        if (entities == null || entities.size() == 0) return;
 
         int start = getItemCount();
         mEntities.addAll(entities);
@@ -53,7 +62,7 @@ public abstract class DefaultAdapter<T>
     @Override
     public void onRestoreInstanceState(Parcelable parcelable) {
         List<T> entities = Parcels.unwrap(parcelable);
-        add(entities);
+        append(entities);
     }
 
     @Override

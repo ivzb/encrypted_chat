@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface BaseAdapter<T> {
 
-    void add(List<T> entities);
+    void prepend(List<T> entities);
+    void append(List<T> entities);
     void clear();
     int size();
 

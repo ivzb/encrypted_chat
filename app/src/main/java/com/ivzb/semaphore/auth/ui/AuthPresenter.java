@@ -38,7 +38,7 @@ public class AuthPresenter
         mView.hideErrorMessage();
         mView.showLoading(true);
 
-        // todo: add validation
+        // todo: append validation
 
         mDataSource.login(auth, mAuthCallback);
     }
@@ -50,7 +50,7 @@ public class AuthPresenter
         mView.hideErrorMessage();
         mView.showLoading(true);
 
-        // todo: add validation
+        // todo: append validation
 
         mDataSource.register(auth, mAuthCallback);
     }

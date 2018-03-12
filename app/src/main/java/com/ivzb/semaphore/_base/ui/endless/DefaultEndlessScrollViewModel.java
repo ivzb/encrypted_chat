@@ -158,7 +158,8 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         mAdapter = adapter;
     }
 
-    private LinearLayoutManager getLayoutManager() {
+    @Override
+    public LinearLayoutManager getLayoutManager() {
         return mLayoutManager;
     }
 

@@ -56,7 +56,7 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
 
     @Override
     public void addEntities(List<M> entities) {
-        mViewModel.getAdapter().add(entities);
+        mViewModel.getAdapter().append(entities);
     }
 
     @Override

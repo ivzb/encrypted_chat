@@ -36,6 +36,7 @@ public interface BaseEndlessScrollViewModel<E extends BaseEntity>
 
     ScrollChildSwipeRefreshLayout getRefreshLayout();
     RecyclerView getRecyclerView();
+    LinearLayoutManager getLayoutManager();
 
     TextView getTvNoEntities();
     ImageView getIvNoEntities();

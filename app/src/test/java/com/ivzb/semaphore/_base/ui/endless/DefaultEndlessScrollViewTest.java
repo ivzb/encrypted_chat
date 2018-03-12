@@ -101,7 +101,7 @@ public abstract class DefaultEndlessScrollViewTest<E extends BaseEntity, V exten
 
         // assert
         verify(getViewModel()).getAdapter();
-        verify(adapter).add(eq(entities));
+        verify(adapter).append(eq(entities));
     }
 
     @Test

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId "com.ivzb.encrypted_chat"
+        applicationId "com.ivzb.semaphore"
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
@@ -52,38 +52,41 @@ dependencies {
 
     // tests
     androidTestImplementation 'junit:junit:4.12'
-    androidTestImplementation "org.mockito:mockito-core:2.7.19"
-    androidTestImplementation "com.android.support:support-annotations:27.1.0"
+    androidTestImplementation 'org.mockito:mockito-core:2.7.19'
+    androidTestImplementation 'com.android.support:support-annotations:27.1.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestUtil 'com.android.support.test:orchestrator:1.0.1'
 
     // tests
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.mockito:mockito-core:2.7.19"
+    testImplementation 'org.mockito:mockito-core:2.7.19'
 
     testCompile 'com.github.gmazzo:okhttp-mock:1.0.3'
 
     // GSON
-    implementation "com.google.code.gson:gson:2.8.0"
+    implementation 'com.google.code.gson:gson:2.8.0'
+
+    // OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.8.0'
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.3.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     // Stetho
-    implementation "com.facebook.stetho:stetho:1.5.0"
-    implementation "com.facebook.stetho:stetho-okhttp3:1.5.0"
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
     // Parcelar
-    implementation "org.parceler:parceler-api:1.1.9"
-    annotationProcessor "org.parceler:parceler:1.1.9"
+    implementation 'org.parceler:parceler-api:1.1.9'
+    annotationProcessor 'org.parceler:parceler:1.1.9'
 
     // Faker
-    implementation "com.github.blocoio:faker:1.2.5"
+    implementation 'com.github.blocoio:faker:1.2.5'
 
     // Fresco
-    implementation "com.facebook.fresco:fresco:1.5.0"
-    implementation "com.facebook.fresco:imagepipeline-okhttp3:1.5.0"
+    implementation 'com.facebook.fresco:fresco:1.5.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp3:1.5.0'
     androidTestImplementation 'com.google.dexmaker:dexmaker:1.2'
     androidTestImplementation 'com.google.dexmaker:dexmaker-mockito:1.2'
 }

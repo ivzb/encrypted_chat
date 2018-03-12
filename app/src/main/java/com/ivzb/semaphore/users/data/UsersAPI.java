@@ -20,7 +20,7 @@ public interface UsersAPI {
     @GET(BuildConfig.API_VERSION + "/user/{id}")
     Call<Result<UserEntity>> get(@Path("id") String id);
 
-    @POST(BuildConfig.API_VERSION + "/users/add")
+    @POST(BuildConfig.API_VERSION + "/users/append")
     Call<Result<Boolean>> add(@Field("id") String id);
 
     @POST(BuildConfig.API_VERSION + "/users/remove")

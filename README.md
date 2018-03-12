@@ -1,1 +1,1 @@
-# encrypted_chat
+# Semaphore
