@@ -73,15 +73,11 @@ public abstract class DefaultView<P extends BasePresenter, VM extends BaseViewMo
 
     @Override
     public void setErrorMessage(String message) {
-//        if (getView() == null || !isActive()) return;
-
         mErrorMessage = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG);
     }
 
     @Override
     public void showErrorMessage(boolean show) {
-//        if (getView() == null || !isActive() || mErrorMessage == null) return;
-
         mErrorMessage.show();
     }
 
@@ -105,15 +101,11 @@ public abstract class DefaultView<P extends BasePresenter, VM extends BaseViewMo
 
     @Override
     public void setSuccessMessage(String message) {
-//        if (getView() == null || !isActive()) return;
-
         mErrorMessage = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG);
     }
 
     @Override
     public void showSuccessMessage(boolean show) {
-//        if (getView() == null || !isActive() || mErrorMessage == null) return;
-
         mErrorMessage.show();
     }
 }

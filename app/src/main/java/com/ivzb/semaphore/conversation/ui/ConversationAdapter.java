@@ -17,12 +17,12 @@ import com.ivzb.semaphore.utils.DateUtils;
 
 import java.util.Date;
 
-public class MessagesAdapter
+public class ConversationAdapter
         extends DefaultActionHandlerAdapter<MessageEntity> {
 
     private boolean mIsPreviousOwn;
 
-    public MessagesAdapter(
+    public ConversationAdapter(
             Context context,
             BaseEntityActionHandler<MessageEntity> actionHandler) {
 
@@ -30,10 +30,10 @@ public class MessagesAdapter
     }
 
     @Override
-    public MessagesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ConversationAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.messages_recycler_item, parent, false);
+                .inflate(R.layout.conversation_recycler_item, parent, false);
 
         return new ViewHolder<>(v);
     }
@@ -62,10 +62,10 @@ public class MessagesAdapter
         int gravity;
         int constraint;
         int color;
-        int createdAtVisibility = View.VISIBLE;
+        int createdAtVisibility = View.GONE;
 
-        if (mIsPreviousOwn == message.isOwn() && position > 0) {
-            createdAtVisibility = View.GONE;
+        if (mIsPreviousOwn != message.isOwn()) {
+            createdAtVisibility = View.VISIBLE;
         }
 
         if (message.isOwn()) {

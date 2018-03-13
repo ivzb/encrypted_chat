@@ -1,6 +1,5 @@
 package com.ivzb.semaphore.conversation.data;
 
-import com.ivzb.semaphore._base.data._contracts.generators.BaseGeneratorConfig;
 import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
 import com.ivzb.semaphore._base.data.sources.mocks.MockSaveDataSource;
 

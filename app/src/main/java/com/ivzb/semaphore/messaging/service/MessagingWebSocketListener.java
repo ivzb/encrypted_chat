@@ -1,13 +1,13 @@
 package com.ivzb.semaphore.messaging.service;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ivzb.semaphore._base.data._contracts.generators.BaseGeneratorConfig;
 import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -29,12 +29,13 @@ class MessagingWebSocketListener extends WebSocketListener {
     @Override
     public void onOpen(final WebSocket webSocket, Response response) {
         final BaseGeneratorConfig config = DefaultGeneratorConfig.getInstance();
+        final AtomicInteger ai = new AtomicInteger();
 
         Thread thread = new Thread() {
             @Override
             public void run() {
                 try {
-                    while (true) {
+                    while (ai.incrementAndGet() < 30) {
                         String message = TextUtils.join(" ", config.getWords(config.getNumber(15)));
                         webSocket.send(message);
                         int timeout = config.getNumber(1500);

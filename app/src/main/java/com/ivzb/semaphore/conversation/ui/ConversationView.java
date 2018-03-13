@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -59,7 +58,7 @@ public class ConversationView
 
     @Override
     public BaseAdapter<MessageEntity> initEndlessAdapter() {
-        return new MessagesAdapter(mContext, mMessageClickListener);
+        return new ConversationAdapter(mContext, mMessageClickListener);
     }
 
     @Override
