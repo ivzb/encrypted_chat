@@ -1,4 +1,4 @@
-package com.ivzb.semaphore._base.ui.endless;
+package com.ivzb.semaphore._base.ui.endless_scroll;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,13 +15,13 @@ import java.util.List;
 import static com.ivzb.semaphore._base.data.config.DefaultConfig.INITIAL_PAGE;
 import static com.ivzb.semaphore.utils.Preconditions.checkNotNull;
 
-public abstract class DefaultEndlessScrollPresenter<M, V extends BaseEndlessScrollView, DS extends ReceiveDataSource<M>>
+public abstract class EndlessScrollPresenter<M, V extends BaseEndlessScrollView, DS extends ReceiveDataSource<M>>
         extends DefaultPresenter<V>
         implements BaseEndlessScrollPresenter<M> {
 
     protected final DS mDataSource;
 
-    public DefaultEndlessScrollPresenter(
+    public EndlessScrollPresenter(
             @NonNull Context context,
             @NonNull V view,
             @NonNull DS dataSource) {

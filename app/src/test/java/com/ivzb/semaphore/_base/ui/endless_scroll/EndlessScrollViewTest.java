@@ -1,4 +1,4 @@
-package com.ivzb.semaphore._base.ui.endless;
+package com.ivzb.semaphore._base.ui.endless_scroll;
 
 import android.app.Activity;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -36,7 +36,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public abstract class DefaultEndlessScrollViewTest<E extends BaseEntity, V extends BaseEndlessScrollView, P extends BaseEndlessScrollPresenter, VM extends BaseEndlessScrollViewModel>
+public abstract class EndlessScrollViewTest<E extends BaseEntity, V extends BaseEndlessScrollView, P extends BaseEndlessScrollPresenter, VM extends BaseEndlessScrollViewModel>
         extends DefaultViewTest<E, V, P, VM>
         implements BaseViewTest<E, V, P, VM> {
 
@@ -60,7 +60,7 @@ public abstract class DefaultEndlessScrollViewTest<E extends BaseEntity, V exten
         when(builder.setAdapter(isA(BaseAdapter.class))).thenReturn(builder);
         when(builder.setSwipeRefreshListener(isA(SwipeRefreshLayout.OnRefreshListener.class))).thenReturn(builder);
         when(builder.setLayoutManager(isA(LinearLayoutManager.class))).thenReturn(builder);
-        when(builder.setRecyclerScrollListener(isA(DefaultEndlessScrollListener.class))).thenReturn(builder);
+        when(builder.setRecyclerScrollListener(isA(EndlessScrollListener.class))).thenReturn(builder);
 
         RecyclerView recyclerView = mock(RecyclerView.class);
         when(viewModel.getRecyclerView()).thenReturn(recyclerView);
@@ -174,7 +174,7 @@ public abstract class DefaultEndlessScrollViewTest<E extends BaseEntity, V exten
         BaseAdapter adapter = mock(BaseAdapter.class);
         when(getViewModel().getAdapter()).thenReturn(adapter);
 
-        DefaultEndlessScrollListener recyclerScrollListener = mock(DefaultEndlessScrollListener.class);
+        EndlessScrollListener recyclerScrollListener = mock(EndlessScrollListener.class);
         when(getViewModel().getRecyclerScrollListener()).thenReturn(recyclerScrollListener);
 
         // act

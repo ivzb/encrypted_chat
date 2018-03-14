@@ -5,7 +5,7 @@ import android.content.Context;
 import com.ivzb.semaphore._base.data.Result;
 import com.ivzb.semaphore._base.data.callbacks.SaveCallback;
 import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollPresenterTest;
+import com.ivzb.semaphore._base.ui.endless_scroll.DefaultEndlessScrollPresenterTest;
 import com.ivzb.semaphore.conversation.data.MessageEntity;
 import com.ivzb.semaphore.conversation.data.MessagesDataSource;
 

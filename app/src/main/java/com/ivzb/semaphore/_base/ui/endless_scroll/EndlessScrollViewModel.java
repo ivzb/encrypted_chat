@@ -1,4 +1,4 @@
-package com.ivzb.semaphore._base.ui.endless;
+package com.ivzb.semaphore._base.ui.endless_scroll;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import com.ivzb.semaphore.utils.ui.SwipeRefreshLayoutUtils;
 
 import static com.ivzb.semaphore._base.data.config.DefaultConfig.NO_PAGE;
 
-public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
+public abstract class EndlessScrollViewModel<T extends BaseEntity>
         extends DefaultViewModel
         implements BaseEndlessScrollViewModel<T> {
 
@@ -38,7 +38,7 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
     private Parcelable mEntitiesState;
     private Parcelable mLayoutManagerState;
-    private DefaultEndlessScrollListener mRecyclerScrollListener;
+    private EndlessScrollListener mRecyclerScrollListener;
 
     private ScrollChildSwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -49,14 +49,14 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
     private int mPage;
     private boolean mHasMore;
 
-    public DefaultEndlessScrollViewModel() {
+    public EndlessScrollViewModel() {
         mPage = NO_PAGE;
         mHasMore = true;
     }
 
     @Override
     public BaseEndlessScrollViewModel.Builder builder(Context context) {
-        return new DefaultEndlessScrollViewModel.Builder(context);
+        return new EndlessScrollViewModel.Builder(context);
     }
 
     @Override
@@ -168,11 +168,11 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
     }
 
     @Override
-    public DefaultEndlessScrollListener getRecyclerScrollListener() {
+    public EndlessScrollListener getRecyclerScrollListener() {
         return mRecyclerScrollListener;
     }
 
-    private void setRecyclerScrollListener(DefaultEndlessScrollListener scrollListener) {
+    private void setRecyclerScrollListener(EndlessScrollListener scrollListener) {
         mRecyclerScrollListener = scrollListener;
     }
 
@@ -247,7 +247,7 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
         private BaseAdapter mAdapter;
         private LinearLayoutManager mLayoutManager;
-        private DefaultEndlessScrollListener mRecyclerScrollListener;
+        private EndlessScrollListener mRecyclerScrollListener;
         private SwipeRefreshLayout.OnRefreshListener mSwipeRefreshListener;
 
         public Builder(Context context) {
@@ -267,7 +267,7 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
         }
 
         @Override
-        public Builder setRecyclerScrollListener(DefaultEndlessScrollListener listener) {
+        public Builder setRecyclerScrollListener(EndlessScrollListener listener) {
             mRecyclerScrollListener = listener;
             return this;
         }
@@ -280,7 +280,7 @@ public abstract class DefaultEndlessScrollViewModel<T extends BaseEntity>
 
         @Override
         public void build() {
-            DefaultEndlessScrollViewModel viewModel = DefaultEndlessScrollViewModel.this;
+            EndlessScrollViewModel viewModel = EndlessScrollViewModel.this;
 
             viewModel.initViews(mView);
             viewModel.setErrorClickListener(mErrorClickListener);

@@ -1,4 +1,4 @@
-package com.ivzb.semaphore._base.ui.endless;
+package com.ivzb.semaphore._base.ui.endless_scroll;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +22,7 @@ import java.util.List;
 
 import static com.ivzb.semaphore._base.data.config.DefaultConfig.INITIAL_PAGE;
 
-public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends BaseEndlessScrollPresenter<M>, VM extends BaseEndlessScrollViewModel<M>>
+public abstract class EndlessScrollView<M extends BaseEntity, P extends BaseEndlessScrollPresenter<M>, VM extends BaseEndlessScrollViewModel<M>>
         extends DefaultView<P, VM>
         implements BaseEndlessScrollView<M, P, VM> {
 
@@ -34,7 +34,7 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
 
         BaseAdapter<M> adapter = initEndlessAdapter();
         LinearLayoutManager layoutManager = initLayoutManager(mContext);
-        DefaultEndlessScrollListener recyclerScrollListener = initEndlessScrollListener(layoutManager);
+        EndlessScrollListener recyclerScrollListener = initEndlessScrollListener(layoutManager);
 
         BaseEndlessScrollViewModel.Builder builder = (BaseEndlessScrollViewModel.Builder) mViewModel.builder(mContext);
         builder.setView(view);
@@ -93,8 +93,8 @@ public abstract class DefaultEndlessScrollView<M extends BaseEntity, P extends B
         return new LinearLayoutManager(context);
     }
 
-    private DefaultEndlessScrollListener initEndlessScrollListener(LinearLayoutManager layoutManager) {
-        return new DefaultEndlessScrollListener(layoutManager, mViewModel.getPage()) {
+    private EndlessScrollListener initEndlessScrollListener(LinearLayoutManager layoutManager) {
+        return new EndlessScrollListener(layoutManager, mViewModel.getPage()) {
 
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {

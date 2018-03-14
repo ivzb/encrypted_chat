@@ -1,11 +1,11 @@
-package com.ivzb.semaphore._base.ui.endless;
+package com.ivzb.semaphore._base.ui.endless_scroll;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-public abstract class DefaultEndlessScrollListener extends RecyclerView.OnScrollListener {
+public abstract class EndlessScrollListener extends RecyclerView.OnScrollListener {
     // The minimum amount of items to have below your current scroll position
     // before loading more.
     private int visibleThreshold = 5;
@@ -20,11 +20,11 @@ public abstract class DefaultEndlessScrollListener extends RecyclerView.OnScroll
 
     RecyclerView.LayoutManager mLayoutManager;
 
-    public DefaultEndlessScrollListener(LinearLayoutManager layoutManager) {
+    public EndlessScrollListener(LinearLayoutManager layoutManager) {
         this.mLayoutManager = layoutManager;
     }
 
-    public DefaultEndlessScrollListener(LinearLayoutManager layoutManager, int startingPageIndex) {
+    public EndlessScrollListener(LinearLayoutManager layoutManager, int startingPageIndex) {
         this(layoutManager);
         this.currentPage = startingPageIndex;
         this.startingPageIndex = startingPageIndex;

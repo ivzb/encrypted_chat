@@ -1,4 +1,4 @@
-package com.ivzb.semaphore._base.ui.endless;
+package com.ivzb.semaphore._base.ui.endless_scroll;
 
 import com.ivzb.semaphore._base.data.Result;
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;

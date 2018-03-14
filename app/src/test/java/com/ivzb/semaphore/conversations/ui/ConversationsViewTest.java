@@ -2,7 +2,7 @@ package com.ivzb.semaphore.conversations.ui;
 
 import android.content.Intent;
 
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollViewTest;
+import com.ivzb.semaphore._base.ui.endless_scroll.EndlessScrollViewTest;
 import com.ivzb.semaphore.conversations.data.ConversationEntity;
 
 import org.junit.Test;
@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class ConversationsViewTest
-        extends DefaultEndlessScrollViewTest<ConversationEntity, ConversationsContract.View, ConversationsContract.Presenter, ConversationsContract.ViewModel> {
+        extends EndlessScrollViewTest<ConversationEntity, ConversationsContract.View, ConversationsContract.Presenter, ConversationsContract.ViewModel> {
 
     private @Mock ConversationsContract.Presenter mPresenter;
     private @Mock ConversationsContract.ViewModel mViewModel;

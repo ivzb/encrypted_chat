@@ -6,11 +6,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.ivzb.semaphore.R;
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollViewModel;
+import com.ivzb.semaphore._base.ui.endless_scroll.EndlessScrollViewModel;
 import com.ivzb.semaphore.conversation.data.MessageEntity;
 
 public class ConversationViewModel
-        extends DefaultEndlessScrollViewModel<MessageEntity>
+        extends EndlessScrollViewModel<MessageEntity>
         implements ConversationContract.ViewModel {
 
     private static final String MESSAGE_TEXT_STATE = "message_text_state";

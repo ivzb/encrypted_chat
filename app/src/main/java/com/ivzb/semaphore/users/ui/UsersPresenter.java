@@ -5,12 +5,12 @@ import android.support.annotation.NonNull;
 
 import com.ivzb.semaphore._base.data.Result;
 import com.ivzb.semaphore._base.data.callbacks.SaveCallback;
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollPresenter;
+import com.ivzb.semaphore._base.ui.endless_scroll.EndlessScrollPresenter;
 import com.ivzb.semaphore.users.data.UserEntity;
 import com.ivzb.semaphore.users.data.UsersDataSource;
 
 public class UsersPresenter
-        extends DefaultEndlessScrollPresenter<UserEntity, UsersContract.View, UsersDataSource>
+        extends EndlessScrollPresenter<UserEntity, UsersContract.View, UsersDataSource>
         implements UsersContract.Presenter {
 
     protected static final int REQUEST_USER_SAVE = 301;

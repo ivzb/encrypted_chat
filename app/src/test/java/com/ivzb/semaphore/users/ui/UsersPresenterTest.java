@@ -3,7 +3,7 @@ package com.ivzb.semaphore.users.ui;
 import android.content.Context;
 
 import com.ivzb.semaphore._base.data.generators.DefaultGeneratorConfig;
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollPresenterTest;
+import com.ivzb.semaphore._base.ui.endless_scroll.DefaultEndlessScrollPresenterTest;
 import com.ivzb.semaphore.users.data.UserEntity;
 import com.ivzb.semaphore.users.data.UsersDataSource;
 

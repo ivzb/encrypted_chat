@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseEntityActionHandler;
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollView;
+import com.ivzb.semaphore._base.ui.endless_scroll.EndlessScrollView;
 import com.ivzb.semaphore._base.ui.prompt.DialogListener;
 import com.ivzb.semaphore._base.ui.prompt.PromptDialogFragment;
 import com.ivzb.semaphore.conversation.ui.ConversationActivity;
 import com.ivzb.semaphore.users.data.UserEntity;
 
 public class UsersView
-        extends DefaultEndlessScrollView<UserEntity, UsersContract.Presenter, UsersContract.ViewModel>
+        extends EndlessScrollView<UserEntity, UsersContract.Presenter, UsersContract.ViewModel>
         implements UsersContract.View {
 
     @Override

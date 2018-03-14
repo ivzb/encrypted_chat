@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseViewModel;
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollListener;
+import com.ivzb.semaphore._base.ui.endless_scroll.EndlessScrollListener;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
 
 public interface BaseEndlessScrollViewModel<E extends BaseEntity>
@@ -20,7 +20,7 @@ public interface BaseEndlessScrollViewModel<E extends BaseEntity>
 
         Builder setAdapter(BaseAdapter adapter);
         Builder setLayoutManager(LinearLayoutManager layoutManager);
-        Builder setRecyclerScrollListener(DefaultEndlessScrollListener listener);
+        Builder setRecyclerScrollListener(EndlessScrollListener listener);
         Builder setSwipeRefreshListener(SwipeRefreshLayout.OnRefreshListener listener);
     }
 
@@ -32,7 +32,7 @@ public interface BaseEndlessScrollViewModel<E extends BaseEntity>
     Parcelable getLayoutManagerState();
     void setLayoutManagerState(Parcelable state);
 
-    DefaultEndlessScrollListener getRecyclerScrollListener();
+    EndlessScrollListener getRecyclerScrollListener();
 
     ScrollChildSwipeRefreshLayout getRefreshLayout();
     RecyclerView getRecyclerView();

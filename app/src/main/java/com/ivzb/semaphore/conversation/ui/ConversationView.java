@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.ivzb.semaphore.R;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseEntityActionHandler;
-import com.ivzb.semaphore._base.ui.endless.DefaultEndlessScrollView;
+import com.ivzb.semaphore._base.ui.endless_scroll.EndlessScrollView;
 import com.ivzb.semaphore.conversation.data.MessageEntity;
 import com.ivzb.semaphore.messaging.service.MessagingService;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ConversationView
-        extends DefaultEndlessScrollView<MessageEntity, ConversationContract.Presenter, ConversationContract.ViewModel>
+        extends EndlessScrollView<MessageEntity, ConversationContract.Presenter, ConversationContract.ViewModel>
         implements ConversationContract.View {
 
     private Toast mToast;
