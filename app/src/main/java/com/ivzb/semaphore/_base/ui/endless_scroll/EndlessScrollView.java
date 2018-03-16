@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.ui.DefaultView;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollPresenter;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollView;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollViewModel;
 import com.ivzb.semaphore.utils.ui.SwipeRefreshLayoutUtils;
 
 import java.util.List;
@@ -32,6 +32,13 @@ public abstract class EndlessScrollView<M extends BaseEntity, P extends BaseEndl
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflateFragment(inflater, container);
 
+        buildViewModel(view, savedInstanceState).build();
+
+        return view;
+    }
+
+    @Override
+    public BaseEndlessScrollViewModel.Builder buildViewModel(View view, Bundle savedInstanceState) {
         BaseAdapter<M> adapter = initEndlessAdapter();
         LinearLayoutManager layoutManager = initLayoutManager(mContext);
         EndlessScrollListener recyclerScrollListener = initEndlessScrollListener(layoutManager);
@@ -44,9 +51,8 @@ public abstract class EndlessScrollView<M extends BaseEntity, P extends BaseEndl
         builder.setSwipeRefreshListener(this);
         builder.setLayoutManager(layoutManager);
         builder.setRecyclerScrollListener(recyclerScrollListener);
-        builder.build();
 
-        return view;
+        return builder;
     }
 
     @Override

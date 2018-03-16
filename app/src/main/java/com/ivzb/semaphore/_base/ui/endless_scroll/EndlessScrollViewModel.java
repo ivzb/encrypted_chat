@@ -15,7 +15,7 @@ import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.data.config.DefaultConfig;
 import com.ivzb.semaphore._base.ui.DefaultViewModel;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollViewModel;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
 import com.ivzb.semaphore.utils.ui.SwipeRefreshLayoutUtils;
 

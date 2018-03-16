@@ -1,8 +1,8 @@
 package com.ivzb.semaphore.conversations.ui;
 
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollPresenter;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollView;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollViewModel;
 import com.ivzb.semaphore.conversations.data.ConversationEntity;
 
 public class ConversationsContract {

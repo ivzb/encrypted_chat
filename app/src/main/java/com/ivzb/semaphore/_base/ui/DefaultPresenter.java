@@ -22,6 +22,11 @@ public abstract class DefaultPresenter<V extends BaseView> implements BasePresen
     }
 
     @Override
+    public void start() {
+        // nothing to do
+    }
+
+    @Override
     public void clickError() {
         if (!mView.isActive()) return;
 

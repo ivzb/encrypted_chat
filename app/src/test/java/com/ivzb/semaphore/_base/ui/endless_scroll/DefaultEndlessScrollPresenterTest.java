@@ -5,9 +5,9 @@ import com.ivzb.semaphore._base.data._contracts.entities.BaseEntity;
 import com.ivzb.semaphore._base.data._contracts.sources.ReceiveDataSource;
 import com.ivzb.semaphore._base.data.callbacks.LoadCallback;
 import com.ivzb.semaphore._base.ui.DefaultPresenterTest;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenterTest;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollPresenter;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollPresenterTest;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollView;
 
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;

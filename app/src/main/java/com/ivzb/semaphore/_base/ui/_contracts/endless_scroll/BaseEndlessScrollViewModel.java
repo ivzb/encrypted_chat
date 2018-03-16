@@ -1,4 +1,4 @@
-package com.ivzb.semaphore._base.ui._contracts.endless;
+package com.ivzb.semaphore._base.ui._contracts.endless_scroll;
 
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;

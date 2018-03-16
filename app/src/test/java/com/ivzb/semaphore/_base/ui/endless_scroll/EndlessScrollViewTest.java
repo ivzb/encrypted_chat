@@ -15,9 +15,9 @@ import com.ivzb.semaphore._base.ui.DefaultViewTest;
 import com.ivzb.semaphore._base.ui._contracts.BaseAdapter;
 import com.ivzb.semaphore._base.ui._contracts.BaseViewModel;
 import com.ivzb.semaphore._base.ui._contracts.BaseViewTest;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollViewModel;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollPresenter;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollView;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollViewModel;
 import com.ivzb.semaphore.utils.ui.ScrollChildSwipeRefreshLayout;
 
 import org.junit.Before;

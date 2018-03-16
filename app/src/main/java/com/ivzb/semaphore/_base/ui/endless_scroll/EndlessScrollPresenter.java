@@ -7,8 +7,8 @@ import com.ivzb.semaphore._base.data.Result;
 import com.ivzb.semaphore._base.data._contracts.sources.ReceiveDataSource;
 import com.ivzb.semaphore._base.data.callbacks.LoadCallback;
 import com.ivzb.semaphore._base.ui.DefaultPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollPresenter;
-import com.ivzb.semaphore._base.ui._contracts.endless.BaseEndlessScrollView;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollPresenter;
+import com.ivzb.semaphore._base.ui._contracts.endless_scroll.BaseEndlessScrollView;
 
 import java.util.List;
 
@@ -28,11 +28,6 @@ public abstract class EndlessScrollPresenter<M, V extends BaseEndlessScrollView,
 
         super(context, view);
         mDataSource = checkNotNull(dataSource, "dataSource cannot be null");
-    }
-
-    @Override
-    public void start() {
-
     }
 
     @Override

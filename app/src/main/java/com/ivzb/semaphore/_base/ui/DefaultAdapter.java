@@ -31,7 +31,6 @@ public abstract class DefaultAdapter<T>
 
         mEntities.addAll(0, entities);
         notifyItemRangeInserted(0, entities.size());
-//        notifyDataSetChanged();
     }
 
     @Override
